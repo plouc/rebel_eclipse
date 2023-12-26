@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm0ybbeitifoy"]
+
+[ext_resource type="Script" path="res://enemies/enemy_generator.gd" id="1_c0ktn"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="1_skxi0"]
+[ext_resource type="PackedScene" uid="uid://kdjydaya8lf5" path="res://enemies/green_enemy.tscn" id="2_6rb1h"]
+[ext_resource type="PackedScene" uid="uid://dg2sn41g1hepu" path="res://enemies/yellow_enemy.tscn" id="3_qi7mi"]
+[ext_resource type="PackedScene" uid="uid://ch15urdf6yliv" path="res://enemies/pink_enemy.tscn" id="4_ayslk"]
+[ext_resource type="PackedScene" uid="uid://rfl3jjj7fcrr" path="res://enemies/turret.tscn" id="5_ff4av"]
+
+[node name="EnemyGenerator" type="Node2D"]
+script = ExtResource("1_c0ktn")
+GreenEnemyScene = ExtResource("2_6rb1h")
+YellowEnemyScene = ExtResource("3_qi7mi")
+PinkEnemyScene = ExtResource("4_ayslk")
+TurretScene = ExtResource("5_ff4av")
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("1_skxi0")
+
+[node name="GreenEnemySpawnTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="YellowEnemySpawnTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="PinkEnemySpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="TurretSpawnTimer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true

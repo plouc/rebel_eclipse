@@ -1,0 +1,43 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Rebel Eclipse"
+config/version="0.1"
+run/main_scene="res://ui/main_menu.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+ResourceStash="*res://resource_stash.gd"
+SoundPlayer="*res://sounds/sound_player.tscn"
+
+[display]
+
+window/size/viewport_width=576
+window/size/viewport_height=576
+window/size/window_width_override=1600
+window/size/window_height_override=1600
+window/stretch/mode="viewport"
+
+[layer_names]
+
+2d_physics/layer_1="player_hurtbox"
+2d_physics/layer_2="enemy_hurtbox"
+2d_physics/layer_3="player_pickbox"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

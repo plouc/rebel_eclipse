@@ -1,0 +1,155 @@
+[gd_scene load_steps=16 format=3 uid="uid://kdjydaya8lf5"]
+
+[ext_resource type="PackedScene" uid="uid://bqyn70ae8kf1g" path="res://enemies/enemy.tscn" id="1_7qnid"]
+[ext_resource type="Texture2D" uid="uid://ds7wcwljqrm4h" path="res://assets/enemy_green.png" id="2_81m4b"]
+[ext_resource type="Texture2D" uid="uid://cmqpfmy1whu3r" path="res://assets/enemy_green_thruster.png" id="3_6w77v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq86p"]
+atlas = ExtResource("2_81m4b")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tngnt"]
+atlas = ExtResource("2_81m4b")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbwvv"]
+atlas = ExtResource("2_81m4b")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wfpse"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yq86p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tngnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbwvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tngnt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6t66"]
+atlas = ExtResource("3_6w77v")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kbno"]
+atlas = ExtResource("3_6w77v")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwdgt"]
+atlas = ExtResource("3_6w77v")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhsga"]
+atlas = ExtResource("3_6w77v")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2ayq"]
+atlas = ExtResource("3_6w77v")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iv8tu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6t66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kbno")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwdgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhsga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2ayq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8pb4i"]
+radius = 23.0217
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f5ds6"]
+radius = 17.0
+
+[node name="GreenEnemy" instance=ExtResource("1_7qnid")]
+show_health_bar = false
+
+[node name="AnimatedSprite2D" parent="Anchor" index="0"]
+sprite_frames = SubResource("SpriteFrames_wfpse")
+autoplay = "default"
+frame_progress = 0.31053
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Anchor" index="1"]
+position = Vector2(0, -35)
+sprite_frames = SubResource("SpriteFrames_iv8tu")
+autoplay = "default"
+frame_progress = 0.120332
+
+[node name="ProgressBar" parent="." index="1"]
+offset_top = -30.0
+offset_bottom = -27.0
+
+[node name="StatsComponent" parent="." index="2"]
+max_health = 6
+health = 6
+
+[node name="MoveComponent" parent="." index="3"]
+velocity = Vector2(2.08165e-12, 140)
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="4"]
+visible = false
+position = Vector2(7.15256e-07, 5.5)
+scale = Vector2(2.1, 1.55)
+
+[node name="ScaleComponent" parent="." index="5"]
+sprite = NodePath("")
+scale_amount = Vector2(1, 1)
+
+[node name="ShakeComponent" parent="." index="7" node_paths=PackedStringArray("node")]
+node = NodePath("../Anchor")
+shake_amount = 4.0
+
+[node name="HurtboxComponent" parent="." index="8"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+shape = SubResource("CircleShape2D_8pb4i")
+
+[node name="HitboxComponent" parent="." index="9"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+shape = SubResource("CircleShape2D_f5ds6")
+
+[node name="Marker2D" type="Marker2D" parent="CoinGrid" index="0"]
+position = Vector2(-21, 0)
+
+[node name="Marker2D5" type="Marker2D" parent="CoinGrid" index="1"]
+position = Vector2(0, 20)
+
+[node name="Marker2D2" type="Marker2D" parent="CoinGrid" index="2"]
+position = Vector2(21, 0)
+
+[node name="Marker2D3" type="Marker2D" parent="CoinGrid" index="3"]
+position = Vector2(5, 4)
+
+[node name="Marker2D4" type="Marker2D" parent="CoinGrid" index="4"]
+position = Vector2(-13, 7)
+
+[node name="HealthBarComponent" parent="." index="15"]
+position = Vector2(13, 7)
+color = Color(0.466667, 0.8, 0.164706, 1)

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SatellitesConfig" load_steps=2 format=3 uid="uid://bg5wjew7hopbf"]
+
+[ext_resource type="Script" path="res://weapons/satellites/satellites_config.gd" id="1_xhh0s"]
+
+[resource]
+script = ExtResource("1_xhh0s")
+level = 0

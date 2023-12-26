@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://diuwk3m0hpgl"]
+
+[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullet_spawner.tscn" id="1_s2hrc"]
+[ext_resource type="PackedScene" uid="uid://d03bpn14pl2wc" path="res://projectiles/player_bullet.tscn" id="2_ojjby"]
+[ext_resource type="PackedScene" uid="uid://36fid7fd3mho" path="res://projectiles/bullet_firing_effect.tscn" id="3_bjmks"]
+[ext_resource type="Texture2D" uid="uid://bsc4njaq247xd" path="res://assets/satellite.png" id="4_1bov2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhr26"]
+atlas = ExtResource("4_1bov2")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oavug"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhr26")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ShipSatellite" type="Node2D"]
+
+[node name="BulletSpawner" parent="." instance=ExtResource("1_s2hrc")]
+position = Vector2(0, -13)
+rotation = -1.5708
+bullet_scene = ExtResource("2_ojjby")
+layer_name = "%PlayerBullets"
+interval = 0.2
+firing_effect_scene = ExtResource("3_bjmks")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_oavug")

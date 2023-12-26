@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://xuwlolvnfcpb"]
+
+[ext_resource type="Script" path="res://player_ship/ship_bullet_spawner.gd" id="1_626rp"]
+[ext_resource type="Texture2D" uid="uid://dnn8jvd30ioqs" path="res://assets/player_bullet_fire_fx.png" id="2_846h7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f2tc"]
+atlas = ExtResource("2_846h7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ky1xx"]
+atlas = ExtResource("2_846h7")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ap3q"]
+atlas = ExtResource("2_846h7")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_akrd2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f2tc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ky1xx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ap3q")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 14.0
+}]
+
+[node name="ShipBulletSpawner" type="Node2D"]
+script = ExtResource("1_626rp")
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 0.14
+autostart = true
+
+[node name="FiringEffect" type="AnimatedSprite2D" parent="."]
+position = Vector2(5, 0)
+sprite_frames = SubResource("SpriteFrames_akrd2")
+frame_progress = 0.207014

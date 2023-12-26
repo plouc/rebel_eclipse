@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://75dk8wvt787l"]
+
+[ext_resource type="Script" path="res://projectiles/enemy_projectiles/enemy_bullet_00.gd" id="1_ba28i"]
+[ext_resource type="Texture2D" uid="uid://bfbbtumyxcnsn" path="res://assets/pink_enemy_projectile.png" id="2_5id0e"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="3_n5hef"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awo0u"]
+atlas = ExtResource("2_5id0e")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82lyd"]
+atlas = ExtResource("2_5id0e")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pkvc"]
+atlas = ExtResource("2_5id0e")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3fw6"]
+atlas = ExtResource("2_5id0e")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ylccv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awo0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82lyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pkvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3fw6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jyg1u"]
+radius = 7.0
+
+[node name="EnemyBullet00" type="Node2D"]
+script = ExtResource("1_ba28i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_ylccv")
+autoplay = "default"
+frame = 3
+frame_progress = 0.317915
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-8.9407e-08, -8.9407e-08)
+scale = Vector2(0.9, 0.9)
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("3_n5hef")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_jyg1u")

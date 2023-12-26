@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://ckk0sm33s6n1w"]
+
+[ext_resource type="Texture2D" uid="uid://dotjgkldfqar" path="res://assets/laser_red_fire_effect.png" id="2_0at70"]
+[ext_resource type="Script" path="res://projectiles/laser_red_impact_effect.gd" id="2_u353d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsk1e"]
+atlas = ExtResource("2_0at70")
+region = Rect2(0, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47wke"]
+atlas = ExtResource("2_0at70")
+region = Rect2(14, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l011s"]
+atlas = ExtResource("2_0at70")
+region = Rect2(28, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0gbn"]
+atlas = ExtResource("2_0at70")
+region = Rect2(42, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7037"]
+atlas = ExtResource("2_0at70")
+region = Rect2(56, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5333j"]
+atlas = ExtResource("2_0at70")
+region = Rect2(70, 0, 14, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5g574"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsk1e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47wke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l011s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0gbn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7037")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5333j")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="LaserRedFireEffect" type="Node2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("2_u353d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_5g574")
+autoplay = "default"
+frame = 5
+frame_progress = 1.0

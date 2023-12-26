@@ -1,0 +1,696 @@
+[gd_scene load_steps=30 format=3 uid="uid://u7ggr5h1i34d"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_c4p4s"]
+[ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_314oq"]
+[ext_resource type="Resource" uid="uid://bmm531rtxr18" path="res://weapons/bullets/bullets_config.tres" id="3_bwg6c"]
+[ext_resource type="Resource" uid="uid://bg5wjew7hopbf" path="res://weapons/satellites/satellites_config.tres" id="4_dvqy5"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="5_eac26"]
+[ext_resource type="PackedScene" uid="uid://bs80j75gclh7s" path="res://levels/first_level.tscn" id="6_4ttpv"]
+[ext_resource type="PackedScene" uid="uid://cb6paql0x7iq5" path="res://player_ship/ship.tscn" id="7_oaau0"]
+[ext_resource type="PackedScene" uid="uid://che2n2xlysax4" path="res://camera_velocity_screen_enter_adjuster.tscn" id="7_xgwsv"]
+[ext_resource type="Texture2D" uid="uid://b58e3oyjb33s" path="res://assets/weapon_icon_bullets.png" id="8_ynh51"]
+[ext_resource type="FontFile" uid="uid://kr1cdn3t5a0o" path="res://fonts/kenney_mini_square.ttf" id="9_ya62o"]
+[ext_resource type="AudioStream" uid="uid://v8v7ddlmjmh7" path="res://sounds/99sounds loop_094.wav" id="10_1o2lp"]
+[ext_resource type="Texture2D" uid="uid://cpeetsw6x8swq" path="res://assets/weapon_progress_bullets_background.png" id="10_rx45a"]
+[ext_resource type="Texture2D" uid="uid://curtditydvr42" path="res://assets/weapon_progress_bullets_fill.png" id="11_snk8b"]
+[ext_resource type="Texture2D" uid="uid://bmymugw3nv01p" path="res://assets/weapon_icon_satellites.png" id="12_v3ndf"]
+[ext_resource type="Texture2D" uid="uid://c7meaelotprwf" path="res://assets/weapon_progress_satellites_background.png" id="13_d0xd4"]
+[ext_resource type="Texture2D" uid="uid://cgktnncik748c" path="res://assets/weapon_progress_satellites_fill.png" id="14_f1ue5"]
+[ext_resource type="Texture2D" uid="uid://cydlpjymttyk" path="res://assets/health_bar_icon.png" id="15_e2cbg"]
+[ext_resource type="Texture2D" uid="uid://c5hunysctda6" path="res://assets/health_bar_background.png" id="16_swck7"]
+[ext_resource type="Texture2D" uid="uid://d3i7bupphpccg" path="res://assets/health_bar_fill.png" id="17_8xv71"]
+[ext_resource type="Texture2D" uid="uid://bx6500eaohqxh" path="res://assets/combo_bar_background.png" id="18_g3f5r"]
+[ext_resource type="Texture2D" uid="uid://dn77pihvmj63u" path="res://assets/combo_bar_fill.png" id="19_cq6ob"]
+[ext_resource type="Script" path="res://components/chained_kills_timer_component.gd" id="21_nsdcx"]
+[ext_resource type="PackedScene" uid="uid://ojduxsns45mh" path="res://ui/pause_menu.tscn" id="22_ecp6w"]
+[ext_resource type="LabelSettings" uid="uid://da3ylqj7ctn0q" path="res://fonts/default_label_settings.tres" id="23_gcrt7"]
+
+[sub_resource type="Environment" id="Environment_wn7o4"]
+background_mode = 3
+glow_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfbyd"]
+bg_color = Color(0.0745098, 0.0784314, 0.0901961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xwc4w"]
+bg_color = Color(0.505882, 0.772549, 0.847059, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apiq1"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pheon"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Game" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_c4p4s")
+game_stats = ExtResource("2_314oq")
+bullets_config = ExtResource("3_bwg6c")
+satellites_config = ExtResource("4_dvqy5")
+
+[node name="Level" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="CameraMoveComponent" type="Node" parent="Level" node_paths=PackedStringArray("actor")]
+script = ExtResource("5_eac26")
+actor = NodePath("../../Camera2D")
+velocity = Vector2(2.08165e-12, -40)
+
+[node name="ColorRect" type="ColorRect" parent="Level"]
+offset_top = -6000.0
+offset_right = 576.0
+color = Color(0, 0, 0, 1)
+
+[node name="FirstLevel" parent="Level" instance=ExtResource("6_4ttpv")]
+
+[node name="CameraAdjusters" type="Node2D" parent="Level"]
+
+[node name="CameraVelocityScreenEnterAdjuster" parent="Level/CameraAdjusters" node_paths=PackedStringArray("move_component") instance=ExtResource("7_xgwsv")]
+position = Vector2(0, -1127)
+move_component = NodePath("../../CameraMoveComponent")
+velocity_y = -20
+
+[node name="CameraVelocityScreenEnterAdjuster3" parent="Level/CameraAdjusters" node_paths=PackedStringArray("move_component") instance=ExtResource("7_xgwsv")]
+position = Vector2(0, -573)
+move_component = NodePath("../../CameraMoveComponent")
+velocity_y = -80
+
+[node name="CameraVelocityScreenEnterAdjuster2" parent="Level/CameraAdjusters" node_paths=PackedStringArray("move_component") instance=ExtResource("7_xgwsv")]
+position = Vector2(0, -1285)
+move_component = NodePath("../../CameraMoveComponent")
+velocity_y = -80
+
+[node name="CameraVelocityScreenEnterAdjuster4" parent="Level/CameraAdjusters" node_paths=PackedStringArray("move_component") instance=ExtResource("7_xgwsv")]
+position = Vector2(0, -1588)
+move_component = NodePath("../../CameraMoveComponent")
+velocity_y = -40
+
+[node name="CameraVelocityScreenEnterAdjuster5" parent="Level/CameraAdjusters" node_paths=PackedStringArray("move_component") instance=ExtResource("7_xgwsv")]
+position = Vector2(0, -1884)
+move_component = NodePath("../../CameraMoveComponent")
+velocity_y = -100
+
+[node name="CameraVelocityScreenEnterAdjuster6" parent="Level/CameraAdjusters" node_paths=PackedStringArray("move_component") instance=ExtResource("7_xgwsv")]
+position = Vector2(0, -2548)
+move_component = NodePath("../../CameraMoveComponent")
+velocity_y = -60
+
+[node name="CameraVelocityScreenEnterAdjuster7" parent="Level/CameraAdjusters" node_paths=PackedStringArray("move_component") instance=ExtResource("7_xgwsv")]
+position = Vector2(0, -2724)
+move_component = NodePath("../../CameraMoveComponent")
+velocity_y = -100
+
+[node name="CameraVelocityScreenEnterAdjuster8" parent="Level/CameraAdjusters" node_paths=PackedStringArray("move_component") instance=ExtResource("7_xgwsv")]
+position = Vector2(0, -3388)
+move_component = NodePath("../../CameraMoveComponent")
+velocity_y = -40
+
+[node name="CameraVelocityScreenEnterAdjuster9" parent="Level/CameraAdjusters" node_paths=PackedStringArray("move_component") instance=ExtResource("7_xgwsv")]
+position = Vector2(0, -3588)
+move_component = NodePath("../../CameraMoveComponent")
+velocity_y = -120
+
+[node name="CameraVelocityScreenEnterAdjuster10" parent="Level/CameraAdjusters" node_paths=PackedStringArray("move_component") instance=ExtResource("7_xgwsv")]
+position = Vector2(0, -4380)
+move_component = NodePath("../../CameraMoveComponent")
+velocity_y = -40
+
+[node name="TerrestrialEnemies" type="Node2D" parent="Level"]
+unique_name_in_owner = true
+
+[node name="Coins" type="Node2D" parent="Level"]
+unique_name_in_owner = true
+
+[node name="Enemies" type="Node2D" parent="Level"]
+unique_name_in_owner = true
+
+[node name="AerialEnemies" type="Node2D" parent="Level"]
+unique_name_in_owner = true
+
+[node name="PlayerBullets" type="Node2D" parent="Level"]
+unique_name_in_owner = true
+
+[node name="Explosions" type="Node2D" parent="Level"]
+unique_name_in_owner = true
+
+[node name="Bonuses" type="Node2D" parent="Level"]
+unique_name_in_owner = true
+
+[node name="EnemiesBullets" type="Node2D" parent="Level"]
+unique_name_in_owner = true
+
+[node name="Ship" parent="Level" node_paths=PackedStringArray("camera") instance=ExtResource("7_oaau0")]
+unique_name_in_owner = true
+position = Vector2(288, 530)
+camera = NodePath("../../Camera2D")
+
+[node name="ProjectilesEffects" type="Node2D" parent="Level"]
+unique_name_in_owner = true
+
+[node name="ChainedKillsTimerComponent" type="Node" parent="Level" node_paths=PackedStringArray("progress_bar")]
+script = ExtResource("21_nsdcx")
+game_stats = ExtResource("2_314oq")
+progress_bar = NodePath("../../CanvasLayer/Control/MarginContainer/TopUI/RightSide/ChainedKillsContainer/ChainedKillResetGauge")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wn7o4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 578.0
+offset_bottom = 576.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TopUI" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="WeaponsIndicators" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/TopUI"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="Laser" type="Control" parent="CanvasLayer/Control/MarginContainer/TopUI/WeaponsIndicators"]
+custom_minimum_size = Vector2(128, 30)
+layout_mode = 2
+
+[node name="LaserIcon" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/TopUI/WeaponsIndicators/Laser"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+offset_right = 28.0
+offset_bottom = 28.0
+size_flags_horizontal = 0
+texture = ExtResource("8_ynh51")
+stretch_mode = 2
+
+[node name="LaserLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/TopUI/WeaponsIndicators/Laser"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 3.0
+offset_right = 72.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0.243137, 0.482353, 0.552941, 1)
+theme_override_colors/font_shadow_color = Color(0.0745098, 0.0784314, 0.0901961, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ya62o")
+theme_override_font_sizes/font_size = 8
+text = "Laser"
+
+[node name="BulletsLevelLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/TopUI/WeaponsIndicators/Laser"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+offset_left = 93.0
+offset_top = 3.0
+offset_right = 125.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0.505882, 0.772549, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.0745098, 0.0784314, 0.0901961, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ya62o")
+theme_override_font_sizes/font_size = 8
+text = "0/0
+"
+horizontal_alignment = 2
+
+[node name="BulletsLevelProgressBar" type="TextureProgressBar" parent="CanvasLayer/Control/MarginContainer/TopUI/WeaponsIndicators/Laser"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 12)
+layout_mode = 2
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 128.0
+offset_bottom = 28.0
+max_value = 1.0
+step = 0.01
+value = 0.1
+texture_under = ExtResource("10_rx45a")
+texture_progress = ExtResource("11_snk8b")
+texture_progress_offset = Vector2(1, 3)
+
+[node name="SatellitesIndicator" type="Control" parent="CanvasLayer/Control/MarginContainer/TopUI/WeaponsIndicators"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="SatellitesIcon" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/TopUI/WeaponsIndicators/SatellitesIndicator"]
+layout_mode = 0
+offset_right = 28.0
+offset_bottom = 28.0
+texture = ExtResource("12_v3ndf")
+
+[node name="SatellitesLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/TopUI/WeaponsIndicators/SatellitesIndicator"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 3.0
+offset_right = 75.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0.603922, 0.419608, 0.227451, 1)
+theme_override_colors/font_shadow_color = Color(0.145098, 0.129412, 0.113725, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ya62o")
+theme_override_font_sizes/font_size = 8
+text = "Satellites"
+
+[node name="SatellitesLevelLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/TopUI/WeaponsIndicators/SatellitesIndicator"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+offset_left = 93.0
+offset_top = 3.0
+offset_right = 125.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0.807843, 0.564706, 0.301961, 1)
+theme_override_colors/font_shadow_color = Color(0.145098, 0.129412, 0.113725, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ya62o")
+theme_override_font_sizes/font_size = 8
+text = "0/0
+"
+horizontal_alignment = 2
+
+[node name="SatellitesLevelProgressBar" type="TextureProgressBar" parent="CanvasLayer/Control/MarginContainer/TopUI/WeaponsIndicators/SatellitesIndicator"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 128.0
+offset_bottom = 30.0
+max_value = 1.0
+step = 0.01
+value = 0.1
+texture_under = ExtResource("13_d0xd4")
+texture_progress = ExtResource("14_f1ue5")
+texture_progress_offset = Vector2(1, 3)
+
+[node name="RightSide" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/TopUI"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="HealthContainer" type="Control" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide"]
+custom_minimum_size = Vector2(186, 21)
+layout_mode = 2
+
+[node name="HealthIcon" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide/HealthContainer"]
+layout_mode = 0
+offset_right = 22.0
+offset_bottom = 21.0
+texture = ExtResource("15_e2cbg")
+
+[node name="HealthProgressBar" type="TextureProgressBar" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide/HealthContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 22.0
+offset_top = 4.0
+offset_right = 186.0
+offset_bottom = 18.0
+max_value = 1.0
+step = 0.05
+value = 1.0
+texture_under = ExtResource("16_swck7")
+texture_progress = ExtResource("17_8xv71")
+texture_progress_offset = Vector2(1, 3)
+
+[node name="ScoreContainer" type="Control" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide"]
+custom_minimum_size = Vector2(2.08165e-12, 16)
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide/ScoreContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = -16.0
+offset_top = -2.0
+offset_right = 170.0
+offset_bottom = 18.0
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.505882, 0.772549, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.0745098, 0.0784314, 0.0901961, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ya62o")
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide/ScoreContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 8)
+layout_mode = 0
+offset_left = 172.0
+offset_top = 6.0
+offset_right = 186.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.243137, 0.482353, 0.552941, 1)
+theme_override_colors/font_shadow_color = Color(0.0745098, 0.0784314, 0.0901961, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ya62o")
+theme_override_font_sizes/font_size = 8
+text = "pts"
+
+[node name="ChainedKillsContainer" type="Control" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide/ChainedKillsContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+offset_left = 4.0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 9.0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.243137, 0.482353, 0.552941, 1)
+theme_override_colors/font_shadow_color = Color(0.0745098, 0.0784314, 0.0901961, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ya62o")
+theme_override_font_sizes/font_size = 8
+text = "Combo"
+
+[node name="ChainedKillsLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide/ChainedKillsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+offset_left = -135.0
+offset_top = 7.0
+offset_right = 32.0
+offset_bottom = 37.0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.505882, 0.772549, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.0745098, 0.0784314, 0.0901961, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ya62o")
+theme_override_font_sizes/font_size = 24
+text = "000"
+horizontal_alignment = 2
+
+[node name="ChainedKillResetGauge" type="TextureProgressBar" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide/ChainedKillsContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 36.0
+offset_right = 48.0
+offset_bottom = 50.0
+value = 10.0
+fill_mode = 3
+texture_under = ExtResource("18_g3f5r")
+texture_progress = ExtResource("19_cq6ob")
+texture_progress_offset = Vector2(3, 3)
+
+[node name="BestChainedKillsLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide/ChainedKillsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = -117.0
+offset_top = 38.0
+offset_right = 30.0
+offset_bottom = 48.0
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.243137, 0.482353, 0.552941, 1)
+theme_override_colors/font_shadow_color = Color(0.0745098, 0.0784314, 0.0901961, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ya62o")
+theme_override_font_sizes/font_size = 8
+text = "Best: 0"
+horizontal_alignment = 2
+
+[node name="AnnihilationContainer" type="Control" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide"]
+custom_minimum_size = Vector2(106, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide/AnnihilationContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+offset_right = 49.0
+offset_bottom = 10.0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.243137, 0.482353, 0.552941, 1)
+theme_override_colors/font_shadow_color = Color(0.0745098, 0.0784314, 0.0901961, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ya62o")
+theme_override_font_sizes/font_size = 8
+text = "Annihilation"
+
+[node name="KilledEnemiesCompletionLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide/AnnihilationContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+anchor_right = 0.642
+offset_left = 68.0
+offset_top = 18.0
+offset_right = 37.948
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0.505882, 0.772549, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.0745098, 0.0784314, 0.0901961, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ya62o")
+theme_override_font_sizes/font_size = 8
+text = "100%"
+horizontal_alignment = 2
+
+[node name="KilledEnemiesCompletionProgressBar" type="ProgressBar" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide/AnnihilationContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(106, 4)
+layout_mode = 2
+offset_top = 13.0
+offset_right = 106.0
+offset_bottom = 17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_dfbyd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xwc4w")
+show_percentage = false
+
+[node name="KilledEnemyCountLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/TopUI/RightSide/AnnihilationContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_top = 18.0
+offset_right = 89.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(0.505882, 0.772549, 0.847059, 1)
+theme_override_colors/font_shadow_color = Color(0.0745098, 0.0784314, 0.0901961, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ya62o")
+theme_override_font_sizes/font_size = 8
+text = "0/10"
+
+[node name="ObjectsStats" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/separation = 3
+
+[node name="PlayerBulletsStats" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/ObjectsStats"]
+layout_mode = 2
+
+[node name="PlayerBulletsStatsLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/PlayerBulletsStats"]
+layout_mode = 2
+text = "Player bullets"
+label_settings = ExtResource("23_gcrt7")
+
+[node name="PlayerBulletsStatsCount" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/PlayerBulletsStats"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = ExtResource("23_gcrt7")
+horizontal_alignment = 2
+
+[node name="EnemyBulletsStats" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/ObjectsStats"]
+layout_mode = 2
+
+[node name="EnemyBulletsStatsLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/EnemyBulletsStats"]
+layout_mode = 2
+text = "Enemy Bullets"
+label_settings = ExtResource("23_gcrt7")
+
+[node name="EnemyBulletsStatsCount" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/EnemyBulletsStats"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = ExtResource("23_gcrt7")
+horizontal_alignment = 2
+
+[node name="TerrestrialEnemiesStats" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/ObjectsStats"]
+layout_mode = 2
+
+[node name="TerrestrialEnemiesStatsLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/TerrestrialEnemiesStats"]
+layout_mode = 2
+text = "Terrestrial Enemies"
+label_settings = ExtResource("23_gcrt7")
+
+[node name="TerrestrialEnemiesStatsCount" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/TerrestrialEnemiesStats"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0
+"
+label_settings = ExtResource("23_gcrt7")
+horizontal_alignment = 2
+
+[node name="EnemiesStats" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/ObjectsStats"]
+layout_mode = 2
+
+[node name="EnemiesStatsLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/EnemiesStats"]
+layout_mode = 2
+text = "Enemies"
+label_settings = ExtResource("23_gcrt7")
+
+[node name="EnemiesStatsCount" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/EnemiesStats"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = ExtResource("23_gcrt7")
+horizontal_alignment = 2
+
+[node name="AerialEnemiesStats" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/ObjectsStats"]
+layout_mode = 2
+
+[node name="AerialEnemiesStatsLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/AerialEnemiesStats"]
+layout_mode = 2
+text = "Aerial Enemies"
+label_settings = ExtResource("23_gcrt7")
+
+[node name="AerialEnemiesStatsCount" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/AerialEnemiesStats"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = ExtResource("23_gcrt7")
+horizontal_alignment = 2
+
+[node name="BonusesStats" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/ObjectsStats"]
+layout_mode = 2
+
+[node name="BonusesStatsLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/BonusesStats"]
+layout_mode = 2
+text = "Bonuses"
+label_settings = ExtResource("23_gcrt7")
+
+[node name="BonusesStatsCount" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/BonusesStats"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = ExtResource("23_gcrt7")
+horizontal_alignment = 2
+
+[node name="CoinsStats" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/ObjectsStats"]
+layout_mode = 2
+
+[node name="CoinsStatsLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/CoinsStats"]
+layout_mode = 2
+text = "Coins"
+label_settings = ExtResource("23_gcrt7")
+
+[node name="CoinsStatsCount" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/CoinsStats"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = ExtResource("23_gcrt7")
+horizontal_alignment = 2
+
+[node name="ExplosionsStats" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/ObjectsStats"]
+layout_mode = 2
+
+[node name="ExplosionsStatsLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/ExplosionsStats"]
+layout_mode = 2
+text = "Explosions"
+label_settings = ExtResource("23_gcrt7")
+
+[node name="ExplosionsStatsCount" type="Label" parent="CanvasLayer/Control/MarginContainer/ObjectsStats/ExplosionsStats"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = ExtResource("23_gcrt7")
+horizontal_alignment = 2
+
+[node name="HyperContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/HyperContainer"]
+layout_mode = 2
+
+[node name="HyperLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/HyperContainer/HBoxContainer"]
+layout_mode = 2
+text = "Hyper"
+label_settings = ExtResource("23_gcrt7")
+
+[node name="HyperLevelLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/HyperContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0/0"
+label_settings = ExtResource("23_gcrt7")
+horizontal_alignment = 2
+
+[node name="HyperLevelProgressBar" type="ProgressBar" parent="CanvasLayer/Control/MarginContainer/HyperContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 6)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_apiq1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pheon")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="PauseMenu" parent="CanvasLayer" node_paths=PackedStringArray("game") instance=ExtResource("22_ecp6w")]
+visible = false
+game = NodePath("../..")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(2.08165e-12, 2.08165e-12)
+anchor_mode = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 4
+stream = ExtResource("10_1o2lp")
+autoplay = true

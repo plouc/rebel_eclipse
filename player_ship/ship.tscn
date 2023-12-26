@@ -1,0 +1,286 @@
+[gd_scene load_steps=36 format=3 uid="uid://cb6paql0x7iq5"]
+
+[ext_resource type="Script" path="res://player_ship/ship.gd" id="1_eoin8"]
+[ext_resource type="PackedScene" uid="uid://xuwlolvnfcpb" path="res://player_ship/ship_bullet_spawner.tscn" id="2_4h0rv"]
+[ext_resource type="Texture2D" uid="uid://cwjxcj4tplgy3" path="res://assets/ship_00.png" id="2_8np4s"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="2_r0cmk"]
+[ext_resource type="Script" path="res://components/move_input_component.gd" id="3_3t6mj"]
+[ext_resource type="Resource" uid="uid://bmm531rtxr18" path="res://weapons/bullets/bullets_config.tres" id="3_ei5v1"]
+[ext_resource type="Resource" uid="uid://mkkv7u3ygbf7" path="res://player_ship/ship_move_stats.tres" id="4_jbioj"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="7_krfut"]
+[ext_resource type="Script" path="res://components/scale_component.gd" id="9_5l5ce"]
+[ext_resource type="Script" path="res://player_ship/ship_bullets_spawners.gd" id="9_22opm"]
+[ext_resource type="Texture2D" uid="uid://bevvf0coi8763" path="res://assets/ship_flame.png" id="10_6ooyi"]
+[ext_resource type="Script" path="res://components/stats_component.gd" id="11_qjrxx"]
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="12_gi3iu"]
+[ext_resource type="PackedScene" uid="uid://k4h04hchwd3r" path="res://effects/explosion_effect.tscn" id="13_64yjw"]
+[ext_resource type="Script" path="res://components/hurt_component.gd" id="13_tq8xb"]
+[ext_resource type="Script" path="res://components/destroyed_component.gd" id="15_rrc1k"]
+[ext_resource type="Texture2D" uid="uid://sx8m6i0fuwh8" path="res://assets/ship_thruster.png" id="16_onkmb"]
+[ext_resource type="PackedScene" uid="uid://d03bpn14pl2wc" path="res://projectiles/player_bullet.tscn" id="18_pefko"]
+[ext_resource type="Script" path="res://components/flash_component.gd" id="20_kfysw"]
+[ext_resource type="Script" path="res://components/shake_component.gd" id="21_akh5v"]
+[ext_resource type="PackedScene" uid="uid://b8517avovf7lk" path="res://player_ship/ship_satellites.tscn" id="21_bms77"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojbgt"]
+atlas = ExtResource("2_8np4s")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_51tqv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojbgt")
+}],
+"loop": true,
+"name": &"bank_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojbgt")
+}],
+"loop": true,
+"name": &"bank_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojbgt")
+}],
+"loop": true,
+"name": &"center",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge3uo"]
+atlas = ExtResource("10_6ooyi")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yj8a8"]
+atlas = ExtResource("10_6ooyi")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bly7r"]
+atlas = ExtResource("10_6ooyi")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5o2h"]
+atlas = ExtResource("10_6ooyi")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7jlm"]
+atlas = ExtResource("16_onkmb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6khco"]
+atlas = ExtResource("16_onkmb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y83w4"]
+atlas = ExtResource("16_onkmb")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77lts"]
+atlas = ExtResource("16_onkmb")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huigx"]
+atlas = ExtResource("16_onkmb")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ioc6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge3uo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj8a8")
+}],
+"loop": true,
+"name": &"bank_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bly7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5o2h")
+}],
+"loop": true,
+"name": &"bank_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7jlm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6khco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y83w4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77lts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_huigx")
+}],
+"loop": true,
+"name": &"center",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1iid"]
+size = Vector2(11, 10.75)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tjl0n"]
+radius = 18.0
+height = 54.0
+
+[node name="Ship" type="Node2D" groups=["player"]]
+script = ExtResource("1_eoin8")
+
+[node name="Movement" type="Node" parent="."]
+
+[node name="MoveComponent" type="Node" parent="Movement" node_paths=PackedStringArray("actor")]
+script = ExtResource("2_r0cmk")
+actor = NodePath("../..")
+velocity = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="MoveInputComponent" type="Node" parent="Movement" node_paths=PackedStringArray("move_component")]
+script = ExtResource("3_3t6mj")
+move_stats = ExtResource("4_jbioj")
+move_component = NodePath("../MoveComponent")
+
+[node name="Effects" type="Node" parent="."]
+
+[node name="FlashComponent" type="Node" parent="Effects" node_paths=PackedStringArray("sprite")]
+script = ExtResource("20_kfysw")
+sprite = NodePath("../../Anchor/AnimatedSprite2D")
+
+[node name="ShakeComponent" type="Node" parent="Effects" node_paths=PackedStringArray("node")]
+script = ExtResource("21_akh5v")
+node = NodePath("../../Anchor")
+shake_amount = 6.0
+shake_duration = 0.6
+
+[node name="ScaleComponent" type="Node" parent="Effects" node_paths=PackedStringArray("sprite")]
+script = ExtResource("9_5l5ce")
+sprite = NodePath("../../Anchor")
+
+[node name="ShipSatellites" parent="." instance=ExtResource("21_bms77")]
+position = Vector2(0, -11)
+
+[node name="Anchor" type="Node2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Anchor"]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_51tqv")
+animation = &"bank_left"
+autoplay = "center"
+
+[node name="FlameAnimatedSprite" type="AnimatedSprite2D" parent="Anchor"]
+position = Vector2(0, 37)
+rotation = 3.14159
+sprite_frames = SubResource("SpriteFrames_0ioc6")
+animation = &"center"
+autoplay = "center"
+frame_progress = 0.633065
+
+[node name="ShipBulletsSpawners" type="Node2D" parent="."]
+script = ExtResource("9_22opm")
+config = ExtResource("3_ei5v1")
+
+[node name="LeftBulletSpawner" parent="ShipBulletsSpawners" instance=ExtResource("2_4h0rv")]
+position = Vector2(-17, 9)
+rotation = -2.35619
+bullet_scene = ExtResource("18_pefko")
+
+[node name="TopLeftDiagonalBulletSpawner" parent="ShipBulletsSpawners" instance=ExtResource("2_4h0rv")]
+position = Vector2(-21, -11)
+rotation = -1.8326
+bullet_scene = ExtResource("18_pefko")
+
+[node name="TopLeftBulletSpawner" parent="ShipBulletsSpawners" instance=ExtResource("2_4h0rv")]
+position = Vector2(-15, -27)
+rotation = -1.5708
+bullet_scene = ExtResource("18_pefko")
+
+[node name="TopBulletSpawner" parent="ShipBulletsSpawners" instance=ExtResource("2_4h0rv")]
+position = Vector2(0, -11)
+rotation = -1.5708
+bullet_scene = ExtResource("18_pefko")
+
+[node name="TopRightBulletSpawner" parent="ShipBulletsSpawners" instance=ExtResource("2_4h0rv")]
+position = Vector2(15, -27)
+rotation = -1.5708
+bullet_scene = ExtResource("18_pefko")
+
+[node name="TopRightDiagonalBulletSpawner" parent="ShipBulletsSpawners" instance=ExtResource("2_4h0rv")]
+position = Vector2(21, -11)
+rotation = -1.309
+bullet_scene = ExtResource("18_pefko")
+
+[node name="RightBulletSpawner" parent="ShipBulletsSpawners" instance=ExtResource("2_4h0rv")]
+position = Vector2(17, 9)
+rotation = -0.785398
+bullet_scene = ExtResource("18_pefko")
+
+[node name="BottomRightBulletSpawner" parent="ShipBulletsSpawners" instance=ExtResource("2_4h0rv")]
+position = Vector2(13, 18)
+rotation = 1.5708
+bullet_scene = ExtResource("18_pefko")
+
+[node name="BottomBulletSpawner" parent="ShipBulletsSpawners" instance=ExtResource("2_4h0rv")]
+position = Vector2(0, 27)
+rotation = 1.5708
+bullet_scene = ExtResource("18_pefko")
+
+[node name="BottomLeftBulletSpawner" parent="ShipBulletsSpawners" instance=ExtResource("2_4h0rv")]
+position = Vector2(-13, 17)
+rotation = 1.5708
+bullet_scene = ExtResource("18_pefko")
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("11_qjrxx")
+max_health = 12
+health = 12
+
+[node name="ExplosionSpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("7_krfut")
+scene = ExtResource("13_64yjw")
+
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hurtbox_component")]
+script = ExtResource("13_tq8xb")
+stats_component = NodePath("../StatsComponent")
+hurtbox_component = NodePath("../Collision/HurtboxComponent")
+
+[node name="DestroyedComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "stats_component", "destroy_effect_spawner_component")]
+script = ExtResource("15_rrc1k")
+actor = NodePath("..")
+stats_component = NodePath("../StatsComponent")
+destroy_effect_spawner_component = NodePath("../ExplosionSpawnerComponent")
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="HurtboxComponent" type="Area2D" parent="Collision"]
+collision_layer = 5
+collision_mask = 4
+script = ExtResource("12_gi3iu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/HurtboxComponent"]
+position = Vector2(0, 5.375)
+shape = SubResource("RectangleShape2D_w1iid")
+
+[node name="Area2D" type="Area2D" parent="Collision"]
+visible = false
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Area2D"]
+shape = SubResource("CapsuleShape2D_tjl0n")

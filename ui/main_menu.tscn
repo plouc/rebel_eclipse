@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2lfwf1eq2fb"]
+
+[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_j6klq"]
+[ext_resource type="PackedScene" uid="uid://sdydv6n8gl2j" path="res://effects/space_background.tscn" id="2_heaty"]
+[ext_resource type="LabelSettings" uid="uid://i4b0m1n6dv1y" path="res://fonts/title_label_settings.tres" id="3_q0grm"]
+[ext_resource type="LabelSettings" uid="uid://da3ylqj7ctn0q" path="res://fonts/default_label_settings.tres" id="4_2r0b5"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j6klq")
+
+[node name="SpaceBackground" parent="." instance=ExtResource("2_heaty")]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Rebel Eclipse"
+label_settings = ExtResource("3_q0grm")
+horizontal_alignment = 1
+
+[node name="StartLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Press 'space' to play"
+label_settings = ExtResource("4_2r0b5")
+horizontal_alignment = 1

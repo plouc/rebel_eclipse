@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4bje70uaiq8x"]
+
+[ext_resource type="PackedScene" uid="uid://ch15urdf6yliv" path="res://enemies/pink_enemy.tscn" id="1_nei83"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="2_s0cv6"]
+[ext_resource type="Script" path="res://components/screen_enter_spawner_component.gd" id="3_5mlq6"]
+
+[node name="PinkEnemyScreenEnterSpawner" type="Node2D"]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 7.5)
+scale = Vector2(2.2, 6.25)
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("2_s0cv6")
+scene = ExtResource("1_nei83")
+layer_name = "%AerialEnemies"
+
+[node name="ScreenEnterSpawnerComponent" type="Node2D" parent="." node_paths=PackedStringArray("notifier", "spawner")]
+script = ExtResource("3_5mlq6")
+notifier = NodePath("../VisibleOnScreenNotifier2D")
+spawner = NodePath("../SpawnerComponent")

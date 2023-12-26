@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://36fid7fd3mho"]
+
+[ext_resource type="Texture2D" uid="uid://dnn8jvd30ioqs" path="res://assets/player_bullet_fire_fx.png" id="1_xdv8m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avnnj"]
+atlas = ExtResource("1_xdv8m")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nj7w"]
+atlas = ExtResource("1_xdv8m")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1smd"]
+atlas = ExtResource("1_xdv8m")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hew7m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avnnj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nj7w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1smd")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="BulletFiringEffect" type="AnimatedSprite2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+sprite_frames = SubResource("SpriteFrames_hew7m")
+autoplay = "default"
+frame = 3
+frame_progress = 1.0

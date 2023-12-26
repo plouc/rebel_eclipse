@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7wfunuogdhvf"]
+
+[ext_resource type="Script" path="res://bonuses/power_up_enter_screen_spawner.gd" id="1_ds1ru"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="3_nfxbh"]
+
+[node name="PowerUpEnterScreenSpawner" type="Node2D"]
+script = ExtResource("1_ds1ru")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -9.53674e-07)
+scale = Vector2(2.2, 2.1)
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("3_nfxbh")
+layer_name = "%Bonuses"
