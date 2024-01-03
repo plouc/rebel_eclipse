@@ -20,7 +20,7 @@ func _ready():
 	stats_component.no_health.connect(func():
 		SoundPlayer.play_sound(SoundPlayer.PLAYER_EXPLOSION)
 	)
-	hurtbox_component.hurt.connect(hit)
+	hurtbox_component.hurt.connect(_hit.unbind(1))
 
 func _process(_delta: float) -> void:
 	var edge_left = camera.global_position.x + position_margin
@@ -33,7 +33,7 @@ func _process(_delta: float) -> void:
 
 	animate_the_ship()
 
-func hit(_hitbox_component: HitboxComponent):
+func _hit():
 	SoundPlayer.play_sound(SoundPlayer.PLAYER_HIT)
 	
 	flash_component.flash()

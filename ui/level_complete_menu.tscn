@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://cwmabteaaurpv"]
+
+[ext_resource type="Script" path="res://ui/level_complete_menu.gd" id="1_2257c"]
+[ext_resource type="LabelSettings" uid="uid://i4b0m1n6dv1y" path="res://fonts/title_label_settings.tres" id="1_sk4e6"]
+[ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_33cv0"]
+[ext_resource type="Theme" uid="uid://b52id50jxytwb" path="res://ui/default_theme.tres" id="4_m3a06"]
+[ext_resource type="LabelSettings" uid="uid://da3ylqj7ctn0q" path="res://fonts/default_label_settings.tres" id="4_oovcc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prak1"]
+bg_color = Color(0, 0, 0, 0.494118)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="InputEventKey" id="InputEventKey_35w6c"]
+keycode = 77
+
+[sub_resource type="Shortcut" id="Shortcut_t3vye"]
+events = [SubResource("InputEventKey_35w6c")]
+
+[node name="LevelCompleteMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2257c")
+game_stats = ExtResource("2_33cv0")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_prak1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+text = "LEVEL COMPLETE"
+label_settings = ExtResource("1_sk4e6")
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(240, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Congratulations on completing this first level, this game is under development, and this is the only level available for now. Stay tuned!"
+label_settings = ExtResource("4_oovcc")
+autowrap_mode = 2
+
+[node name="MainMenuButton" type="Button" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_m3a06")
+shortcut = SubResource("Shortcut_t3vye")
+text = " [M] Main Menu"

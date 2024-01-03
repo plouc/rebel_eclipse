@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2lfwf1eq2fb"]
+[gd_scene load_steps=7 format=3 uid="uid://d2lfwf1eq2fb"]
 
 [ext_resource type="Script" path="res://ui/main_menu.gd" id="1_j6klq"]
 [ext_resource type="PackedScene" uid="uid://sdydv6n8gl2j" path="res://effects/space_background.tscn" id="2_heaty"]
+[ext_resource type="Texture2D" uid="uid://dvlql7ya2vdot" path="res://assets/logo.png" id="3_oktdo"]
 [ext_resource type="LabelSettings" uid="uid://i4b0m1n6dv1y" path="res://fonts/title_label_settings.tres" id="3_q0grm"]
 [ext_resource type="LabelSettings" uid="uid://da3ylqj7ctn0q" path="res://fonts/default_label_settings.tres" id="4_2r0b5"]
+[ext_resource type="Theme" uid="uid://b52id50jxytwb" path="res://ui/default_theme.tres" id="6_qstvw"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -27,7 +29,15 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 2
+texture = ExtResource("3_oktdo")
+expand_mode = 3
+
 [node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Rebel Eclipse"
 label_settings = ExtResource("3_q0grm")
@@ -38,3 +48,13 @@ layout_mode = 2
 text = "Press 'space' to play"
 label_settings = ExtResource("4_2r0b5")
 horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_qstvw")
+text = "Play"
+
+[node name="TrainingButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_qstvw")
+text = "FLEET"

@@ -1,0 +1,119 @@
+[gd_scene load_steps=19 format=3 uid="uid://5ttbpnspk6d"]
+
+[ext_resource type="Script" path="res://bonuses/power_up_laser/power_up_laser.gd" id="1_jr27g"]
+[ext_resource type="PackedScene" uid="uid://x1jwk23tuc00" path="res://bonuses/power_up_bullets/power_up_bullets_pickup_effect.tscn" id="2_jpocj"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="2_sym8x"]
+[ext_resource type="Resource" uid="uid://b4kyletkhp4if" path="res://weapons/laser_beam/laser_config.tres" id="3_vdhs0"]
+[ext_resource type="Script" path="res://components/move_sinusoidal_component.gd" id="3_yyat4"]
+[ext_resource type="Texture2D" uid="uid://dhffjxdpeynqn" path="res://assets/power_up_laser.png" id="6_37vw2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixkgw"]
+atlas = ExtResource("6_37vw2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xworj"]
+atlas = ExtResource("6_37vw2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5b80d"]
+atlas = ExtResource("6_37vw2")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssvgd"]
+atlas = ExtResource("6_37vw2")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qm0i2"]
+atlas = ExtResource("6_37vw2")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tpv6"]
+atlas = ExtResource("6_37vw2")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hv487"]
+atlas = ExtResource("6_37vw2")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tos1y"]
+atlas = ExtResource("6_37vw2")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuilq"]
+atlas = ExtResource("6_37vw2")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_levpc"]
+atlas = ExtResource("6_37vw2")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wadi0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixkgw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xworj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5b80d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssvgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qm0i2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tpv6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hv487")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tos1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuilq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_levpc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_76m2s"]
+radius = 18.0278
+
+[node name="PowerUpLaser" type="Node2D"]
+script = ExtResource("1_jr27g")
+pickup_effect_scene = ExtResource("2_jpocj")
+laser_config = ExtResource("3_vdhs0")
+
+[node name="State" type="Node" parent="."]
+
+[node name="MoveComponent" type="Node" parent="State" node_paths=PackedStringArray("actor")]
+script = ExtResource("2_sym8x")
+actor = NodePath("../..")
+
+[node name="MoveSinusoidalComponent" type="Node" parent="State" node_paths=PackedStringArray("move_component")]
+script = ExtResource("3_yyat4")
+move_component = NodePath("../MoveComponent")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wadi0")
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_76m2s")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.5, -1)
+scale = Vector2(1.75, 1.6)

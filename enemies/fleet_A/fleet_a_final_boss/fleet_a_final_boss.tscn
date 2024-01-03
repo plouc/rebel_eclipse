@@ -1,0 +1,118 @@
+[gd_scene load_steps=12 format=3 uid="uid://cp44u22yew8xe"]
+
+[ext_resource type="Script" path="res://enemies/fleet_A/fleet_a_final_boss/fleet_a_final_boss.gd" id="1_8mtfm"]
+[ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_5pm4r"]
+[ext_resource type="Script" path="res://components/lock_to_camera_component.gd" id="3_iypnu"]
+[ext_resource type="Texture2D" uid="uid://dse2bigqtn0pn" path="res://assets/fleet_a_final_boss_body.png" id="6_hkth7"]
+[ext_resource type="PackedScene" uid="uid://bxwtfsaavlcsk" path="res://enemies/fleet_A/fleet_a_final_boss/fleet_a_final_boss_head.tscn" id="10_se5m6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th4x0"]
+atlas = ExtResource("6_hkth7")
+region = Rect2(0, 0, 672, 672)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2egq8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th4x0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_ji5cb"]
+resource_name = "enter"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RootAnchor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(288, -200), Vector2(288, 200)]
+}
+
+[sub_resource type="Animation" id="Animation_fpna3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RootAnchor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(288, -288)]
+}
+
+[sub_resource type="Animation" id="Animation_kumql"]
+resource_name = "oscillate"
+length = 4.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RootAnchor:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Vector2(288, 200), Vector2(288, 376)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tg0vn"]
+_data = {
+"RESET": SubResource("Animation_fpna3"),
+"enter": SubResource("Animation_ji5cb"),
+"oscillate": SubResource("Animation_kumql")
+}
+
+[node name="FleetAFinalBoss" type="Node2D"]
+script = ExtResource("1_8mtfm")
+game_stats = ExtResource("2_5pm4r")
+
+[node name="State" type="Node" parent="."]
+
+[node name="LockToCameraComponent" type="Node" parent="State" node_paths=PackedStringArray("actor")]
+script = ExtResource("3_iypnu")
+actor = NodePath("../..")
+
+[node name="HeadsStartTimer" type="Timer" parent="State"]
+wait_time = 0.2
+
+[node name="RootAnchor" type="Node2D" parent="."]
+position = Vector2(288, -288)
+
+[node name="HeadsContainer" type="Node2D" parent="RootAnchor"]
+
+[node name="FleetAFinalBossHead" parent="RootAnchor/HeadsContainer" instance=ExtResource("10_se5m6")]
+
+[node name="FleetAFinalBossHead2" parent="RootAnchor/HeadsContainer" instance=ExtResource("10_se5m6")]
+rotation = 1.25664
+
+[node name="FleetAFinalBossHead3" parent="RootAnchor/HeadsContainer" instance=ExtResource("10_se5m6")]
+rotation = 2.51327
+
+[node name="FleetAFinalBossHead4" parent="RootAnchor/HeadsContainer" instance=ExtResource("10_se5m6")]
+rotation = -2.51327
+
+[node name="FleetAFinalBossHead5" parent="RootAnchor/HeadsContainer" instance=ExtResource("10_se5m6")]
+rotation = -1.25664
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RootAnchor"]
+sprite_frames = SubResource("SpriteFrames_2egq8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tg0vn")
+}
+autoplay = "enter"

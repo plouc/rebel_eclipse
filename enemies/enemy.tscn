@@ -14,8 +14,8 @@
 [ext_resource type="Script" path="res://components/destroyed_component.gd" id="12_i57v7"]
 [ext_resource type="Script" path="res://components/score_component.gd" id="13_dygf0"]
 [ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="14_tl8xg"]
-[ext_resource type="Script" path="res://bonuses/coin_grid.gd" id="15_w86x3"]
-[ext_resource type="PackedScene" uid="uid://dv4b11xyuwi7e" path="res://bonuses/coin.tscn" id="16_deiku"]
+[ext_resource type="Script" path="res://bonuses/coins/coin_grid.gd" id="15_w86x3"]
+[ext_resource type="PackedScene" uid="uid://dv4b11xyuwi7e" path="res://bonuses/coins/coin.tscn" id="16_deiku"]
 [ext_resource type="Script" path="res://components/health_bar_component.gd" id="17_4yttr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e2l5c"]

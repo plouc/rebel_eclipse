@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="LaserConfig" load_steps=2 format=3 uid="uid://b4kyletkhp4if"]
+
+[ext_resource type="Script" path="res://weapons/laser_beam/laser_config.gd" id="1_1stjw"]
+
+[resource]
+script = ExtResource("1_1stjw")
+level = 0

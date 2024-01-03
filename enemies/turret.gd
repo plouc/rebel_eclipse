@@ -27,7 +27,7 @@ func _ready():
 	)
 	
 	stats_component.no_health.connect(func():
-		SoundPlayer.play_sound(SoundPlayer.PLAYER_EXPLOSION)
+		SoundPlayer.play_sound(SoundPlayer.ENEMY_EXPLOSION)
 		
 		score_component.adjust_score()
 

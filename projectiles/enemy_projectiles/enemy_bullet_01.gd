@@ -2,7 +2,7 @@ class_name EnemyBullet01
 extends Node2D
 
 var direction: Vector2 = Vector2.RIGHT
-var speed: int = 200
+var speed: int = 350
 
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var hitbox_component: HitboxComponent = $HitboxComponent

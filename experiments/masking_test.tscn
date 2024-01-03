@@ -1,0 +1,176 @@
+[gd_scene load_steps=15 format=3 uid="uid://bjycwct5nkqfv"]
+
+[ext_resource type="Texture2D" uid="uid://crpjvy31e7fte" path="res://assets/level_00.png" id="1_nyujd"]
+[ext_resource type="Texture2D" uid="uid://cntag4208kjey" path="res://assets/laser_beam_blue_start_7_rays.png" id="2_lytrd"]
+[ext_resource type="Texture2D" uid="uid://bk5gf0tiynrxt" path="res://assets/laser_beam_mask_7_rays.png" id="3_gc36t"]
+[ext_resource type="Shader" path="res://weapons/laser_beam/laser_beam.gdshader" id="4_4ibq2"]
+[ext_resource type="Texture2D" uid="uid://onovotksvns4" path="res://assets/laser_beam_blue_7_rays_beam.png" id="5_uv66k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkr0p"]
+atlas = ExtResource("2_lytrd")
+region = Rect2(0, 0, 80, 112)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ldlu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkr0p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xboak"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ymsho"]
+blend_mode = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_81ukb"]
+shader = ExtResource("4_4ibq2")
+shader_parameter/speed = 3.0
+
+[sub_resource type="Animation" id="Animation_fo7lg"]
+resource_name = "new_animation"
+length = 0.3
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_ftbng"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_84rrj"]
+_data = {
+"RESET": SubResource("Animation_ftbng"),
+"new_animation": SubResource("Animation_fo7lg")
+}
+
+[sub_resource type="Curve" id="Curve_ku3yl"]
+min_value = 2.13163e-14
+_data = [Vector2(0, 2.13163e-14), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
+point_count = 2
+
+[node name="Node2D" type="Node2D"]
+clip_children = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-170, -376)
+texture = ExtResource("1_nyujd")
+centered = false
+offset = Vector2(2.08165e-12, -3456)
+
+[node name="Start2" type="AnimatedSprite2D" parent="."]
+visible = false
+clip_children = 1
+position = Vector2(64, 112)
+sprite_frames = SubResource("SpriteFrames_7ldlu")
+centered = false
+
+[node name="Start2" type="AnimatedSprite2D" parent="Start2"]
+material = SubResource("CanvasItemMaterial_xboak")
+position = Vector2(-23, 20)
+sprite_frames = SubResource("SpriteFrames_7ldlu")
+centered = false
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+visible = false
+
+[node name="Rays" type="Node2D" parent="CanvasGroup"]
+
+[node name="Line2D" type="Line2D" parent="CanvasGroup/Rays"]
+points = PackedVector2Array(2.08165e-12, 8, 300, 8)
+width = 16.0
+
+[node name="Line2D2" type="Line2D" parent="CanvasGroup/Rays"]
+position = Vector2(0, 16)
+points = PackedVector2Array(2.08165e-12, 8, 260, 8)
+width = 16.0
+
+[node name="Line2D3" type="Line2D" parent="CanvasGroup/Rays"]
+position = Vector2(0, 32)
+points = PackedVector2Array(2.08165e-12, 8, 240, 8)
+width = 16.0
+
+[node name="Line2D4" type="Line2D" parent="CanvasGroup/Rays"]
+position = Vector2(0, 48)
+points = PackedVector2Array(2.08165e-12, 8, 300, 8)
+width = 16.0
+
+[node name="Line2D5" type="Line2D" parent="CanvasGroup/Rays"]
+position = Vector2(0, 64)
+points = PackedVector2Array(2.08165e-12, 8, 300, 8)
+width = 16.0
+
+[node name="Line2D6" type="Line2D" parent="CanvasGroup/Rays"]
+position = Vector2(0, 80)
+points = PackedVector2Array(2.08165e-12, 8, 300, 8)
+width = 16.0
+
+[node name="Line2D7" type="Line2D" parent="CanvasGroup/Rays"]
+position = Vector2(0, 96)
+points = PackedVector2Array(2.08165e-12, 8, 200, 8)
+width = 16.0
+
+[node name="Masks" type="Node2D" parent="CanvasGroup"]
+material = SubResource("CanvasItemMaterial_ymsho")
+
+[node name="Mask" type="Sprite2D" parent="CanvasGroup/Masks"]
+use_parent_material = true
+texture = ExtResource("3_gc36t")
+centered = false
+
+[node name="Visuals" type="Node2D" parent="CanvasGroup"]
+
+[node name="Start" type="AnimatedSprite2D" parent="CanvasGroup"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+sprite_frames = SubResource("SpriteFrames_7ldlu")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_81ukb")
+texture = ExtResource("5_uv66k")
+centered = false
+vframes = 3
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 600, 384)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_84rrj")
+}
+autoplay = "new_animation"
+
+[node name="Line2D9" type="Line2D" parent="."]
+position = Vector2(2.08165e-12, -16)
+points = PackedVector2Array(2.08165e-12, 8, 300, 8)
+width = 16.0
+width_curve = SubResource("Curve_ku3yl")
+
+[node name="CanvasGroup2" type="CanvasGroup" parent="."]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="CanvasGroup2"]

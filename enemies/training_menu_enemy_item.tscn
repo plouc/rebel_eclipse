@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpxbhyuqh87jh"]
+
+[ext_resource type="Script" path="res://enemies/training_menu_enemy_item.gd" id="1_m7r81"]
+[ext_resource type="Texture2D" uid="uid://bt6e462yxwjls" path="res://assets/checker_small.png" id="2_elyxg"]
+[ext_resource type="Texture2D" uid="uid://v35ojlhdbj0q" path="res://assets/training_menu_item_selected.png" id="3_j6bsr"]
+[ext_resource type="Texture2D" uid="uid://bvxmma3yqa4gf" path="res://assets/training_menu_item_inactive.png" id="4_s1yl6"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y3uxc"]
+blend_mode = 3
+
+[node name="TrainingMenuEnemyItem" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -448.0
+offset_bottom = -448.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m7r81")
+
+[node name="Background" type="TextureRect" parent="."]
+self_modulate = Color(0.639216, 0.639216, 0.639216, 1)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("2_elyxg")
+stretch_mode = 1
+
+[node name="PreviewContainer" type="Container" parent="."]
+material = SubResource("CanvasItemMaterial_y3uxc")
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+
+[node name="InactiveOutline" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("4_s1yl6")
+
+[node name="SelectedOutline" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_j6bsr")

@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbno284m3aa54"]
+
+[ext_resource type="PackedScene" uid="uid://cpxbhyuqh87jh" path="res://enemies/training_menu_enemy_item.tscn" id="1_2use4"]
+[ext_resource type="Script" path="res://ui/training_menu.gd" id="1_6lmwa"]
+[ext_resource type="PackedScene" uid="uid://ci3sj1tbbhg7s" path="res://enemies/fleet_A/fleet_a_ship_01/fleet_a_ship_01_preview.tscn" id="2_nu0lr"]
+[ext_resource type="PackedScene" uid="uid://dclss2bx78nta" path="res://enemies/fleet_A/fleet_a_ship_02/fleet_a_ship_02_preview.tscn" id="3_7i77o"]
+[ext_resource type="PackedScene" uid="uid://1shintnfuvan" path="res://enemies/fleet_A/fleet_a_ship_00/fleet_a_ship_00_preview.tscn" id="5_ww0jk"]
+
+[node name="TrainingMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6lmwa")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.109804, 0.109804, 0.109804, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 4
+
+[node name="TrainingMenuEnemyItem" parent="MarginContainer/GridContainer" instance=ExtResource("1_2use4")]
+layout_mode = 2
+preview_scene = ExtResource("2_nu0lr")
+
+[node name="TrainingMenuEnemyItem2" parent="MarginContainer/GridContainer" instance=ExtResource("1_2use4")]
+layout_mode = 2
+preview_scene = ExtResource("3_7i77o")
+
+[node name="TrainingMenuEnemyItem3" parent="MarginContainer/GridContainer" instance=ExtResource("1_2use4")]
+layout_mode = 2
+preview_scene = ExtResource("5_ww0jk")

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://08q4l6md4xts"]
+
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="1_50t3p"]
+[ext_resource type="PackedScene" uid="uid://cp44u22yew8xe" path="res://enemies/fleet_A/fleet_a_final_boss/fleet_a_final_boss.tscn" id="2_c15b6"]
+[ext_resource type="Script" path="res://components/screen_enter_spawner_component.gd" id="3_42wvo"]
+
+[node name="FleetAFinalBossScreenEnterSpawner" type="Node2D"]
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("1_50t3p")
+scene = ExtResource("2_c15b6")
+layer_name = "%AerialEnemies"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(2.08165e-12, 2.08165e-12, 576, 20)
+
+[node name="ScreenEnterSpawnerComponent" type="Node2D" parent="." node_paths=PackedStringArray("notifier", "spawner")]
+script = ExtResource("3_42wvo")
+notifier = NodePath("../VisibleOnScreenNotifier2D")
+spawner = NodePath("../SpawnerComponent")

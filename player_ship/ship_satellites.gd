@@ -37,13 +37,13 @@ func adjust_satellites(level: int):
 
 	elif satellite_count > level:
 		var remove_count = satellite_count - level
-		print("should remove some")
+		print("should remove ", remove_count, " satellites")
 
 func position_satellites():
 	if satellites.size() == 0:
 		return
 
-	var angle_step = 360 / satellites.size()
+	var angle_step = 360.0 / float(satellites.size())
 	
 	for index in range(satellites.size()):
 		var angle = current_angle + index * angle_step

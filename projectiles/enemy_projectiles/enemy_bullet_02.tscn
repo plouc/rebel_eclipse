@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://pmuu7pwnjj81"]
+[gd_scene load_steps=9 format=3 uid="uid://pmuu7pwnjj81"]
 
 [ext_resource type="Texture2D" uid="uid://4cyisqkgls4u" path="res://assets/enemy_bullet_02.png" id="1_4p83r"]
 [ext_resource type="Script" path="res://projectiles/enemy_projectiles/enemy_bullet_02.gd" id="1_eygcb"]
 [ext_resource type="Script" path="res://components/flash_component.gd" id="3_2mabc"]
 [ext_resource type="Script" path="res://components/hitbox_component.gd" id="4_n2ey8"]
+[ext_resource type="Script" path="res://components/time_to_live_component.gd" id="5_aa3sp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rfif6"]
 atlas = ExtResource("1_4p83r")
@@ -44,3 +45,7 @@ script = ExtResource("4_n2ey8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_nif2q")
+
+[node name="TimeToLiveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("5_aa3sp")
+actor = NodePath("..")

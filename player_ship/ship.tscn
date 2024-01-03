@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cb6paql0x7iq5"]
+[gd_scene load_steps=37 format=3 uid="uid://cb6paql0x7iq5"]
 
 [ext_resource type="Script" path="res://player_ship/ship.gd" id="1_eoin8"]
 [ext_resource type="PackedScene" uid="uid://xuwlolvnfcpb" path="res://player_ship/ship_bullet_spawner.tscn" id="2_4h0rv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://bmm531rtxr18" path="res://weapons/bullets/bullets_config.tres" id="3_ei5v1"]
 [ext_resource type="Resource" uid="uid://mkkv7u3ygbf7" path="res://player_ship/ship_move_stats.tres" id="4_jbioj"]
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="7_krfut"]
+[ext_resource type="PackedScene" uid="uid://wlv2m8imfo0b" path="res://player_ship/player_laser_beam.tscn" id="8_jneuc"]
 [ext_resource type="Script" path="res://components/scale_component.gd" id="9_5l5ce"]
 [ext_resource type="Script" path="res://player_ship/ship_bullets_spawners.gd" id="9_22opm"]
 [ext_resource type="Texture2D" uid="uid://bevvf0coi8763" path="res://assets/ship_flame.png" id="10_6ooyi"]
@@ -135,7 +136,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w1iid"]
-size = Vector2(11, 10.75)
+size = Vector2(13.375, 15)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tjl0n"]
 radius = 18.0
@@ -152,6 +153,7 @@ actor = NodePath("../..")
 velocity = Vector2(2.08165e-12, 2.08165e-12)
 
 [node name="MoveInputComponent" type="Node" parent="Movement" node_paths=PackedStringArray("move_component")]
+editor_description = "360"
 script = ExtResource("3_3t6mj")
 move_stats = ExtResource("4_jbioj")
 move_component = NodePath("../MoveComponent")
@@ -165,12 +167,16 @@ sprite = NodePath("../../Anchor/AnimatedSprite2D")
 [node name="ShakeComponent" type="Node" parent="Effects" node_paths=PackedStringArray("node")]
 script = ExtResource("21_akh5v")
 node = NodePath("../../Anchor")
-shake_amount = 6.0
-shake_duration = 0.6
+shake_amount = 4.0
 
 [node name="ScaleComponent" type="Node" parent="Effects" node_paths=PackedStringArray("sprite")]
 script = ExtResource("9_5l5ce")
 sprite = NodePath("../../Anchor")
+scale_amount = Vector2(1.2, 1.2)
+scale_duration = 0.2
+
+[node name="PlayerLaserBeam" parent="." instance=ExtResource("8_jneuc")]
+position = Vector2(0, -32)
 
 [node name="ShipSatellites" parent="." instance=ExtResource("21_bms77")]
 position = Vector2(0, -11)
@@ -247,9 +253,10 @@ rotation = 1.5708
 bullet_scene = ExtResource("18_pefko")
 
 [node name="StatsComponent" type="Node" parent="."]
+editor_description = "6"
 script = ExtResource("11_qjrxx")
-max_health = 12
-health = 12
+max_health = 10.0
+health = 10.0
 
 [node name="ExplosionSpawnerComponent" type="Node2D" parent="."]
 script = ExtResource("7_krfut")
@@ -274,7 +281,7 @@ collision_mask = 4
 script = ExtResource("12_gi3iu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/HurtboxComponent"]
-position = Vector2(0, 5.375)
+position = Vector2(0.3125, 5.5)
 shape = SubResource("RectangleShape2D_w1iid")
 
 [node name="Area2D" type="Area2D" parent="Collision"]

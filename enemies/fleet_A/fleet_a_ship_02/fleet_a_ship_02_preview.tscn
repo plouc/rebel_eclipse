@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://dclss2bx78nta"]
+
+[ext_resource type="Script" path="res://animated_texture_rect.gd" id="1_d5860"]
+[ext_resource type="Texture2D" uid="uid://bl4aft036fo56" path="res://assets/fleet_a_ship_02.png" id="2_nk406"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idh6k"]
+atlas = ExtResource("2_nk406")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7arvm"]
+atlas = ExtResource("2_nk406")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae0s3"]
+atlas = ExtResource("2_nk406")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_totxe"]
+atlas = ExtResource("2_nk406")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3m5sl"]
+atlas = ExtResource("2_nk406")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm07c"]
+atlas = ExtResource("2_nk406")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8gah"]
+atlas = ExtResource("2_nk406")
+region = Rect2(1024, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mo655"]
+atlas = ExtResource("2_nk406")
+region = Rect2(1088, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ktw7"]
+atlas = ExtResource("2_nk406")
+region = Rect2(1152, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wolb1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idh6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7arvm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ae0s3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_totxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3m5sl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tm07c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8gah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mo655")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ktw7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="FleetAShip02Preview" type="TextureRect"]
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_d5860")
+sprites = SubResource("SpriteFrames_wolb1")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=43 format=3 uid="uid://d03bpn14pl2wc"]
+[gd_scene load_steps=44 format=3 uid="uid://d03bpn14pl2wc"]
 
 [ext_resource type="Script" path="res://projectiles/player_bullet.gd" id="1_b76ib"]
 [ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_4jv2y"]
 [ext_resource type="PackedScene" uid="uid://ckk0sm33s6n1w" path="res://projectiles/laser_red_impact_effect.tscn" id="2_ddxox"]
 [ext_resource type="Texture2D" uid="uid://de6r40c5vjtj0" path="res://assets/player_bullet.png" id="3_dm83y"]
 [ext_resource type="Script" path="res://components/hitbox_component.gd" id="4_g22n3"]
+[ext_resource type="Script" path="res://components/time_to_live_component.gd" id="6_iwxsu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vnpdm"]
 atlas = ExtResource("3_dm83y")
@@ -321,3 +322,7 @@ unique_name_in_owner = true
 position = Vector2(6.5, 0)
 shape = SubResource("RectangleShape2D_bsspj")
 disabled = true
+
+[node name="time_to_live_component" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("6_iwxsu")
+actor = NodePath("..")

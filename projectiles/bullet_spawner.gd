@@ -3,7 +3,11 @@ extends Node2D
 
 @export var bullet_scene: PackedScene
 @export var layer_name: String = "%EnemiesBullets"
-@export var interval: float = 1
+@export var interval: float = 1.0:
+	set(value):
+		interval = value
+		if firing_timer:
+			firing_timer.wait_time = interval
 @export var firing_effect_scene: PackedScene
 @export var is_active: bool = true
 

@@ -1,7 +1,17 @@
 class_name GameStats
 extends Resource
 
+enum Difficulty { EASY, NORMAL, HARD, HELL }
+
+signal difficulty_update(new_difficulty: Difficulty)
+
+@export var difficulty: Difficulty = Difficulty.NORMAL:
+	set(value):
+		difficulty = value
+		difficulty_update.emit(difficulty)
+
 signal spawned_enemy_count_update(new_spawned_enemy_count: int)
+signal level_completed()
 
 var spawned_enemy_count: int = 0 :
 	set(value):
@@ -52,3 +62,11 @@ signal score_changed(new_score)
 		score_changed.emit(score)
 
 @export var highscore: int = 0
+
+func reset():
+	score = 0
+	hyper_level = 0
+	spawned_enemy_count = 0
+	killed_enemy_count = 0
+	chained_kills = 0
+	best_chained_kills = 0

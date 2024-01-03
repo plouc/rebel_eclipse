@@ -16,10 +16,10 @@
 [ext_resource type="Script" path="res://components/health_bar_component.gd" id="11_8wqae"]
 [ext_resource type="Script" path="res://components/move_sinusoidal_component.gd" id="13_uitnn"]
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="14_idwuw"]
-[ext_resource type="PackedScene" uid="uid://2ycduetncn5f" path="res://bonuses/power_up_bullets.tscn" id="15_v4j6f"]
+[ext_resource type="PackedScene" uid="uid://2ycduetncn5f" path="res://bonuses/power_up_bullets/power_up_bullets.tscn" id="15_v4j6f"]
 [ext_resource type="PackedScene" uid="uid://k4h04hchwd3r" path="res://effects/explosion_effect.tscn" id="16_ulx1v"]
-[ext_resource type="Script" path="res://bonuses/coin_grid.gd" id="19_xi65f"]
-[ext_resource type="PackedScene" uid="uid://dv4b11xyuwi7e" path="res://bonuses/coin.tscn" id="20_5tisq"]
+[ext_resource type="Script" path="res://bonuses/coins/coin_grid.gd" id="19_xi65f"]
+[ext_resource type="PackedScene" uid="uid://dv4b11xyuwi7e" path="res://bonuses/coins/coin.tscn" id="20_5tisq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2j4m"]
 radius = 16.0

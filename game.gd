@@ -4,8 +4,10 @@ extends Node2D
 @export var game_stats: GameStats
 @export var bullets_config: BulletsConfig
 @export var satellites_config: SatellitesConfig
+@export var laser_config: LaserConfig
 
-@onready var ship: Node2D = $Level/Ship
+@onready var camera: Camera2D = $Camera2D
+@onready var ship: Ship = $Level/Ship
 @onready var score_label: Label = %ScoreLabel
 @onready var health_progress_bar: TextureProgressBar = %HealthProgressBar
 @onready var bullets_level_progress_bar: TextureProgressBar = %BulletsLevelProgressBar
@@ -21,6 +23,7 @@ extends Node2D
 @onready var killed_enemies_completion_progress_bar: ProgressBar = %KilledEnemiesCompletionProgressBar
 @onready var hyper_level_label: Label = %HyperLevelLabel
 @onready var hyper_level_progress_bar: ProgressBar = %HyperLevelProgressBar
+@onready var difficulty_label: Label = %DifficultyLabel
 @onready var player_bullets: Node2D = %PlayerBullets
 @onready var player_bullets_stats_count: Label = %PlayerBulletsStatsCount
 @onready var enemies_bullets: Node2D = %EnemiesBullets
@@ -37,6 +40,9 @@ extends Node2D
 @onready var coins_stats_count: Label = %CoinsStatsCount
 @onready var explosions: Node2D = %Explosions
 @onready var explosions_stats_count: Label = %ExplosionsStatsCount
+@onready var level_complete_menu: LevelCompleteMenu = $CanvasLayer/LevelCompleteMenu
+
+var viewport_width = ProjectSettings.get_setting("display/window/size/viewport_width")
 
 signal toggle_game_paused(is_paused: bool)
 
@@ -47,8 +53,10 @@ var is_paused: bool = false:
 		toggle_game_paused.emit(is_paused)
 
 func _ready():
+	game_stats.reset()
 	bullets_config.reset_level()
 	satellites_config.reset_level()
+	laser_config.reset_level()
 
 	update_score_label(game_stats.score)
 	game_stats.score_changed.connect(update_score_label)
@@ -62,6 +70,9 @@ func _ready():
 	update_satellites_level(satellites_config.level)
 	satellites_config.level_changed.connect(update_satellites_level)
 	
+	update_difficulty(game_stats.difficulty)
+	game_stats.difficulty_update.connect(update_difficulty)
+
 	ship.tree_exiting.connect(func():
 		await get_tree().create_timer(1.0).timeout
 		get_tree().change_scene_to_file("res://ui/game_over.tscn")
@@ -80,12 +91,41 @@ func _ready():
 	
 	game_stats.hyper_level_update.connect(update_hyper_level)
 	game_stats.hyper_level = 0
+	
+	game_stats.level_completed.connect(func():
+		print("> LEVEL COMPLETE")
+		ship.process_mode = Node.PROCESS_MODE_DISABLED
+	)
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		is_paused = !is_paused
+		
+	elif event.is_action_pressed("ui_difficulty_next"):
+		if game_stats.difficulty < game_stats.Difficulty.HELL:
+			game_stats.difficulty += 1
+		else:
+			game_stats.difficulty = game_stats.Difficulty.EASY
 
 func _process(_delta):
+	_update_objects_stats()
+
+	#var half_viewport = viewport_width / 2
+	#var ship_x = ship.global_position.x - half_viewport
+	#var mult = -1 if ship_x < 0 else 1
+	#var ratio = min(abs(ship_x) / half_viewport, 1.0) * mult
+	
+	#var new_x = clamp(
+	#	camera.global_position.x + -ratio * 100.0 * delta,
+	#	-48, 48
+	#)
+
+	#camera.global_position = Vector2(
+	#	new_x,
+	#	camera.global_position.y,
+	#)
+	
+func _update_objects_stats() -> void:
 	player_bullets_stats_count.text = str(player_bullets.get_child_count())
 	enemy_bullets_stats_count.text = str(enemies_bullets.get_child_count())
 	terrestrial_enemies_stats_count.text = str(terrestrial_enemies.get_child_count())
@@ -98,7 +138,7 @@ func _process(_delta):
 func update_score_label(new_score: int) -> void:
 	score_label.text = str(new_score)
 
-func update_player_health_label(new_health: int) -> void:
+func update_player_health_label(new_health: float) -> void:
 	health_progress_bar.value = float(new_health) / float(ship.stats_component.max_health)
 	
 func update_bullets_level(level: int) -> void:
@@ -142,3 +182,13 @@ func update_killed_enemy_count_label(killed_enemy_count: int) -> void:
 func update_hyper_level(hyper_level: int) -> void:
 	hyper_level_label.text = str(hyper_level) + "/" + str(game_stats.max_hyper_level)
 	hyper_level_progress_bar.value = float(hyper_level) / float(game_stats.max_hyper_level)
+
+func update_difficulty(difficulty: GameStats.Difficulty) -> void:
+	if difficulty == GameStats.Difficulty.EASY:
+		difficulty_label.text = "Easy"
+	elif difficulty == GameStats.Difficulty.NORMAL:
+		difficulty_label.text = "Normal"
+	elif difficulty == GameStats.Difficulty.HARD:
+		difficulty_label.text = "Hard"
+	elif difficulty == GameStats.Difficulty.HELL:
+		difficulty_label.text = "Hell"

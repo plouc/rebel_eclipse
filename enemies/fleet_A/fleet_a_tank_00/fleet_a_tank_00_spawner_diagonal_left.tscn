@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://hvwe2a41q435"]
+
+[ext_resource type="PackedScene" uid="uid://bj6aevniymcpi" path="res://enemies/fleet_A/fleet_a_tank_00/fleet_a_tank_00_formation_diagonal_left.tscn" id="1_iv1mj"]
+[ext_resource type="Script" path="res://components/screen_enter_spawner_component.gd" id="2_7v7jv"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="3_v03qp"]
+[ext_resource type="Script" path="res://components/spawner_preview_component.gd" id="4_w22gy"]
+[ext_resource type="Texture2D" uid="uid://c4pgy6cfhc4r2" path="res://assets/fleet_a_tank_00.png" id="5_8dtrv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owmme"]
+atlas = ExtResource("5_8dtrv")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kxh2r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owmme")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FleetATank00SpawnerDiagonalLeft" type="Node2D"]
+
+[node name="ScreenEnterSpawnerComponent" type="Node2D" parent="." node_paths=PackedStringArray("notifier", "spawner")]
+script = ExtResource("2_7v7jv")
+notifier = NodePath("../VisibleOnScreenNotifier2D")
+spawner = NodePath("../SpawnerComponent")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(2.08165e-12, 2.08165e-12, 20, 20)
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("3_v03qp")
+scene = ExtResource("1_iv1mj")
+layer_name = "%TerrestrialEnemies"
+
+[node name="SpawnerPreviewComponent" type="Node" parent="."]
+script = ExtResource("4_w22gy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(62, 18)
+sprite_frames = SubResource("SpriteFrames_kxh2r")
+offset = Vector2(-107, -51)

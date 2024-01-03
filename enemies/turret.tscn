@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cmspuvcoceh7r" path="res://assets/turret_00_top.png" id="12_urtq8"]
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="14_dm5bl"]
 [ext_resource type="Script" path="res://components/move_component.gd" id="17_xm7p5"]
-[ext_resource type="PackedScene" uid="uid://2ycduetncn5f" path="res://bonuses/power_up_bullets.tscn" id="18_tafrv"]
+[ext_resource type="PackedScene" uid="uid://2ycduetncn5f" path="res://bonuses/power_up_bullets/power_up_bullets.tscn" id="18_tafrv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s6ys3"]
 atlas = ExtResource("2_y0c3e")

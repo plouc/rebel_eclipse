@@ -1,0 +1,88 @@
+[gd_scene load_steps=14 format=3 uid="uid://dv4b11xyuwi7e"]
+
+[ext_resource type="Script" path="res://bonuses/coins/coin.gd" id="1_u0yuy"]
+[ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_163x8"]
+[ext_resource type="Texture2D" uid="uid://c81dnxrd0u1al" path="res://assets/coin.png" id="3_3ng0t"]
+[ext_resource type="Script" path="res://components/flash_component.gd" id="3_145qu"]
+[ext_resource type="Script" path="res://components/scale_component.gd" id="4_ahrkv"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="5_wuqjt"]
+[ext_resource type="Script" path="res://components/time_to_live_component.gd" id="7_7gyd6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4iyih"]
+atlas = ExtResource("3_3ng0t")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wj37s"]
+atlas = ExtResource("3_3ng0t")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h52lp"]
+atlas = ExtResource("3_3ng0t")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcjwt"]
+atlas = ExtResource("3_3ng0t")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oylqp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4iyih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wj37s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h52lp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcjwt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hipgf"]
+radius = 4.0
+height = 14.0
+
+[node name="Coin" type="Node2D"]
+script = ExtResource("1_u0yuy")
+game_stats = ExtResource("2_163x8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_oylqp")
+autoplay = "default"
+frame_progress = 0.240792
+
+[node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("3_145qu")
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("4_ahrkv")
+sprite = NodePath("../AnimatedSprite2D")
+scale_amount = Vector2(2, 2)
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("5_wuqjt")
+actor = NodePath("..")
+velocity = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-8.9407e-08, -3.57628e-07)
+scale = Vector2(0.5, 0.8)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_hipgf")
+
+[node name="TimeToLiveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("7_7gyd6")
+actor = NodePath("..")
+lifetime = 12.0

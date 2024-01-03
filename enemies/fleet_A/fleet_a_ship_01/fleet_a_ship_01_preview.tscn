@@ -1,0 +1,93 @@
+[gd_scene load_steps=14 format=3 uid="uid://ci3sj1tbbhg7s"]
+
+[ext_resource type="Script" path="res://animated_texture_rect.gd" id="1_16obf"]
+[ext_resource type="Texture2D" uid="uid://bhrw3ptmlcims" path="res://assets/fleet_a_ship_01.png" id="2_k21j2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8ltm"]
+atlas = ExtResource("2_k21j2")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsegs"]
+atlas = ExtResource("2_k21j2")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgqij"]
+atlas = ExtResource("2_k21j2")
+region = Rect2(512, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a85ht"]
+atlas = ExtResource("2_k21j2")
+region = Rect2(640, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_td4tw"]
+atlas = ExtResource("2_k21j2")
+region = Rect2(768, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6ksf"]
+atlas = ExtResource("2_k21j2")
+region = Rect2(896, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwl3b"]
+atlas = ExtResource("2_k21j2")
+region = Rect2(640, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dme5v"]
+atlas = ExtResource("2_k21j2")
+region = Rect2(768, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsby8"]
+atlas = ExtResource("2_k21j2")
+region = Rect2(896, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_255bo"]
+atlas = ExtResource("2_k21j2")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jqw22"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8ltm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsegs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgqij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a85ht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td4tw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6ksf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwl3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dme5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsby8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_255bo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="FleetAShip01Preview" type="TextureRect"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+offset_right = 100.0
+offset_bottom = 100.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+expand_mode = 3
+script = ExtResource("1_16obf")
+sprites = SubResource("SpriteFrames_jqw22")
+auto_play = true

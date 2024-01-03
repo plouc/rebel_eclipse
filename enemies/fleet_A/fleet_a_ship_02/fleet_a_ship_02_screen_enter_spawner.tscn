@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://dg2ha2gdbc1gv"]
+
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="1_2iypx"]
+[ext_resource type="PackedScene" uid="uid://djbyrj2odpdpu" path="res://enemies/fleet_A/fleet_a_ship_02/fleet_a_ship_02.tscn" id="2_xcc2d"]
+[ext_resource type="Script" path="res://components/screen_enter_spawner_component.gd" id="3_ic4hy"]
+[ext_resource type="Texture2D" uid="uid://bl4aft036fo56" path="res://assets/fleet_a_ship_02.png" id="4_okgbh"]
+[ext_resource type="Script" path="res://components/spawner_preview_component.gd" id="5_a4but"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5g2m6"]
+atlas = ExtResource("4_okgbh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4in6i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5g2m6")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FleetAShip02ScreenEnterSpawner" type="Node2D"]
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("1_2iypx")
+scene = ExtResource("2_xcc2d")
+layer_name = "%Enemies"
+
+[node name="ScreenEnterSpawnerComponent" type="Node2D" parent="." node_paths=PackedStringArray("notifier", "spawner")]
+script = ExtResource("3_ic4hy")
+notifier = NodePath("../VisibleOnScreenNotifier2D")
+spawner = NodePath("../SpawnerComponent")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1, 8.5)
+scale = Vector2(2.7, 2.75)
+
+[node name="Preview" type="AnimatedSprite2D" parent="."]
+process_mode = 4
+position = Vector2(2.08165e-12, 10)
+sprite_frames = SubResource("SpriteFrames_4in6i")
+
+[node name="SpawnerPreviewComponent" type="Node" parent="." node_paths=PackedStringArray("preview")]
+script = ExtResource("5_a4but")
+preview = NodePath("../Preview")

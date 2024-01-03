@@ -10,14 +10,13 @@ var speed: int = 400
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
-
 func _ready():
 	rotation = direction.angle()
 	
 	visible_on_screen_notifier_2d.screen_exited.connect(queue_free)
 
 	hitbox_component.hit_hurtbox.connect(on_impact.unbind(1))
-	hitbox_component.damage = float(game_stats.hyper_level)
+	hitbox_component.damage = game_stats.hyper_level + 1
 
 	animated_sprite.play("level_" + str(game_stats.hyper_level))
 

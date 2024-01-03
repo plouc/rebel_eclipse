@@ -1,0 +1,590 @@
+[gd_scene load_steps=53 format=3 uid="uid://dqp7ihu5xdrkr"]
+
+[ext_resource type="Script" path="res://enemies/fleet_A/fleet_a_ship_01/fleet_a_ship_01.gd" id="1_8encn"]
+[ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_ld56i"]
+[ext_resource type="Script" path="res://components/stats_component.gd" id="3_k4jm4"]
+[ext_resource type="Script" path="res://components/hurt_component.gd" id="4_elny2"]
+[ext_resource type="Script" path="res://components/destroyed_component.gd" id="5_s72bq"]
+[ext_resource type="Script" path="res://components/score_component.gd" id="6_j8ycy"]
+[ext_resource type="Script" path="res://components/health_bar_component.gd" id="7_qx1jc"]
+[ext_resource type="Script" path="res://components/lock_to_camera_component.gd" id="8_pruku"]
+[ext_resource type="Script" path="res://components/shake_component.gd" id="9_bclvl"]
+[ext_resource type="Script" path="res://components/flash_component.gd" id="10_5imxr"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="11_y2f21"]
+[ext_resource type="PackedScene" uid="uid://k4h04hchwd3r" path="res://effects/explosion_effect.tscn" id="12_41qr7"]
+[ext_resource type="Texture2D" uid="uid://bhrw3ptmlcims" path="res://assets/fleet_a_ship_01.png" id="13_jvckf"]
+[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullet_spawner.tscn" id="14_0hwfe"]
+[ext_resource type="PackedScene" uid="uid://pmuu7pwnjj81" path="res://projectiles/enemy_projectiles/enemy_bullet_02.tscn" id="15_k7pxl"]
+[ext_resource type="PackedScene" uid="uid://dceehn6xo2ne1" path="res://weapons/laser_beam/laser_beam.tscn" id="16_r4l24"]
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="17_4eys8"]
+[ext_resource type="Script" path="res://bonuses/coins/coin_grid.gd" id="18_hnall"]
+[ext_resource type="PackedScene" uid="uid://dv4b11xyuwi7e" path="res://bonuses/coins/coin.tscn" id="19_d0cel"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmvwl"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(512, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shcyd"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(640, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wasa"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(768, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7222u"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(896, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8l63"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cikk"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(128, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fc0h5"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkt6h"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yinbo"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsaao"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w52y1"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ex85d"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7h4l0"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw7t0"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abnyh"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unn1p"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dbq6"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5w44r"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdesc"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6yk0"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(512, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njbjp"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(640, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0x110"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(768, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j37pd"]
+atlas = ExtResource("13_jvckf")
+region = Rect2(896, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8wlvu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmvwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shcyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wasa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7222u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8l63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cikk")
+}],
+"loop": false,
+"name": &"compact",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fc0h5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkt6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yinbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsaao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w52y1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ex85d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7h4l0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iw7t0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abnyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unn1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dbq6")
+}],
+"loop": false,
+"name": &"intro",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5w44r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdesc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6yk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njbjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0x110")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j37pd")
+}],
+"loop": false,
+"name": &"wide",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c7l7h"]
+radius = 20.025
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m80i2"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0, 0, 0, 0.301961)
+shadow_size = 1
+shadow_offset = Vector2(2.08165e-12, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4oqkt"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_gs0ob"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RootAnchor/Anchor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4ca2r"]
+resource_name = "floating"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RootAnchor/Anchor:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4itjx"]
+_data = {
+"RESET": SubResource("Animation_gs0ob"),
+"floating": SubResource("Animation_4ca2r")
+}
+
+[sub_resource type="Animation" id="Animation_y34b8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RootAnchor/Anchor/BulletSpawnerCenter:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 26)]
+}
+
+[sub_resource type="Animation" id="Animation_c68ja"]
+resource_name = "center_bullets"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RootAnchor/Anchor/BulletSpawnerCenter:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-40, 36), Vector2(40, 36)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hoipf"]
+_data = {
+"RESET": SubResource("Animation_y34b8"),
+"center_bullets": SubResource("Animation_c68ja")
+}
+
+[node name="FleetAShip01" type="Node2D"]
+script = ExtResource("1_8encn")
+game_stats = ExtResource("2_ld56i")
+switch_mode_interval = 4.0
+
+[node name="State" type="Node" parent="."]
+
+[node name="SwitchModeTimer" type="Timer" parent="State"]
+wait_time = 2.0
+
+[node name="StatsComponent" type="Node" parent="State"]
+script = ExtResource("3_k4jm4")
+max_health = 200.0
+health = 200.0
+
+[node name="HurtComponent" type="Node" parent="State" node_paths=PackedStringArray("stats_component", "hurtbox_component")]
+script = ExtResource("4_elny2")
+stats_component = NodePath("../StatsComponent")
+hurtbox_component = NodePath("../../RootAnchor/Anchor/HurtboxComponent")
+
+[node name="DestroyedComponent" type="Node" parent="State" node_paths=PackedStringArray("actor", "stats_component", "destroy_effect_spawner_component")]
+script = ExtResource("5_s72bq")
+actor = NodePath("../..")
+stats_component = NodePath("../StatsComponent")
+destroy_effect_spawner_component = NodePath("../../Effects/ExplosionSpawner")
+
+[node name="ScoreComponent" type="Node" parent="State"]
+script = ExtResource("6_j8ycy")
+game_stats = ExtResource("2_ld56i")
+adjust_amount = 500
+
+[node name="HealthBarComponent" type="Node" parent="State" node_paths=PackedStringArray("progress_bar", "stats_component")]
+script = ExtResource("7_qx1jc")
+progress_bar = NodePath("../../RootAnchor/Anchor/UI/ProgressBar")
+color = Color(0.313726, 0.658824, 0.709804, 1)
+stats_component = NodePath("../StatsComponent")
+
+[node name="LockToCameraComponent" type="Node" parent="State" node_paths=PackedStringArray("actor")]
+script = ExtResource("8_pruku")
+actor = NodePath("../..")
+
+[node name="AttackTimer" type="Timer" parent="State"]
+
+[node name="Effects" type="Node" parent="."]
+
+[node name="ShakeComponent" type="Node" parent="Effects" node_paths=PackedStringArray("node")]
+script = ExtResource("9_bclvl")
+node = NodePath("../../RootAnchor/Anchor/ShipAnimatedSprite")
+shake_duration = 0.2
+
+[node name="FlashComponent" type="Node" parent="Effects" node_paths=PackedStringArray("sprite")]
+script = ExtResource("10_5imxr")
+sprite = NodePath("../../RootAnchor/Anchor/ShipAnimatedSprite")
+flash_duration = 0.1
+
+[node name="ExplosionSpawner" type="Node2D" parent="Effects"]
+script = ExtResource("11_y2f21")
+scene = ExtResource("12_41qr7")
+
+[node name="RootAnchor" type="Node2D" parent="."]
+
+[node name="Anchor" type="Node2D" parent="RootAnchor"]
+
+[node name="ShipAnimatedSprite" type="AnimatedSprite2D" parent="RootAnchor/Anchor"]
+sprite_frames = SubResource("SpriteFrames_8wlvu")
+animation = &"wide"
+frame = 5
+
+[node name="BulletSpawnerCenter" parent="RootAnchor/Anchor" instance=ExtResource("14_0hwfe")]
+position = Vector2(-40, 26)
+rotation = 1.5708
+bullet_scene = ExtResource("15_k7pxl")
+interval = 0.1
+is_active = false
+
+[node name="LaserBeamLeft" parent="RootAnchor/Anchor" instance=ExtResource("16_r4l24")]
+position = Vector2(-57, 31)
+angle = 100.0
+damage = 0.5
+ray_count = 2
+is_paused = true
+
+[node name="LaserBeamCenter" parent="RootAnchor/Anchor" instance=ExtResource("16_r4l24")]
+position = Vector2(0, 29)
+damage = 0.5
+ray_count = 3
+is_paused = true
+
+[node name="LaserBeamRight" parent="RootAnchor/Anchor" instance=ExtResource("16_r4l24")]
+position = Vector2(58, 31)
+angle = 80.0
+damage = 0.5
+ray_count = 2
+is_paused = true
+
+[node name="HurtboxComponent" type="Area2D" parent="RootAnchor/Anchor"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("17_4eys8")
+
+[node name="HurtBoxCollisionShape" type="CollisionShape2D" parent="RootAnchor/Anchor/HurtboxComponent"]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_c7l7h")
+
+[node name="CoinGrid" type="Node2D" parent="RootAnchor/Anchor"]
+script = ExtResource("18_hnall")
+coin = ExtResource("19_d0cel")
+position_randomness = 3
+
+[node name="Marker2D3" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, 20)
+
+[node name="Marker2D53" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(16, 20)
+
+[node name="Marker2D4" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-8, 20)
+
+[node name="Marker2D52" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-16, 20)
+
+[node name="Marker2D31" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-8, 28)
+
+[node name="Marker2D32" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, 28)
+
+[node name="Marker2D33" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(16, 28)
+
+[node name="Marker2D34" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(24, 28)
+
+[node name="Marker2D49" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(24, 20)
+
+[node name="Marker2D50" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(24, 12)
+
+[node name="Marker2D51" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(24, 4)
+
+[node name="Marker2D35" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-16, 28)
+
+[node name="Marker2D36" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-24, 28)
+
+[node name="Marker2D37" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-32, 20)
+
+[node name="Marker2D38" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-32, 12)
+
+[node name="Marker2D46" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-24, 12)
+
+[node name="Marker2D47" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-24, 4)
+
+[node name="Marker2D48" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-24, 20)
+
+[node name="Marker2D43" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-40, 12)
+
+[node name="Marker2D39" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-32, 4)
+
+[node name="Marker2D40" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(32, 4)
+
+[node name="Marker2D41" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(32, 12)
+
+[node name="Marker2D44" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(40, 12)
+
+[node name="Marker2D42" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(32, 20)
+
+[node name="Marker2D5" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-8, 12)
+
+[node name="Marker2D6" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-16, 12)
+
+[node name="Marker2D7" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-16, 4)
+
+[node name="Marker2D8" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-16, -4)
+
+[node name="Marker2D30" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-24, -4)
+
+[node name="Marker2D9" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-8, -12)
+
+[node name="Marker2D10" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, -12)
+
+[node name="Marker2D11" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(16, -4)
+
+[node name="Marker2D29" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(24, -4)
+
+[node name="Marker2D12" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(16, 4)
+
+[node name="Marker2D13" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(16, 12)
+
+[node name="Marker2D14" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, 12)
+
+[node name="Marker2D15" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, 12)
+
+[node name="Marker2D16" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, 4)
+
+[node name="Marker2D17" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, -4)
+
+[node name="Marker2D28" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, -12)
+
+[node name="Marker2D18" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-8, -4)
+
+[node name="Marker2D19" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-8, 4)
+
+[node name="Marker2D20" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, 4)
+
+[node name="Marker2D21" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, -4)
+
+[node name="Marker2D22" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, -12)
+
+[node name="Marker2D23" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, -20)
+
+[node name="Marker2D24" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, -20)
+
+[node name="Marker2D45" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, -28)
+
+[node name="Marker2D25" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-8, -20)
+
+[node name="Marker2D26" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, 20)
+
+[node name="Marker2D27" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, 28)
+
+[node name="UI" type="Control" parent="RootAnchor/Anchor"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="RootAnchor/Anchor/UI"]
+custom_minimum_size = Vector2(80, 6)
+layout_mode = 0
+offset_left = -40.0
+offset_top = -48.0
+offset_right = 40.0
+offset_bottom = -42.0
+theme_override_styles/background = SubResource("StyleBoxFlat_m80i2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4oqkt")
+value = 50.0
+show_percentage = false
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="RootAnchor"]
+position = Vector2(-1.90735e-06, 18.5)
+scale = Vector2(6.6, 5.95)
+
+[node name="ShipAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4itjx")
+}
+
+[node name="CenterBulletsAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hoipf")
+}
+autoplay = "center_bullets"

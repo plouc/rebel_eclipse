@@ -7,6 +7,6 @@ extends Node
 func _ready() -> void:
 	# Connect the hurt signal on the hurtbox component to an anonymous function
 	# that removes health equal to the damage from the hitbox
-	hurtbox_component.hurt.connect(func(hitbox_component: HitboxComponent):
+	hurtbox_component.hurt.connect(func(hitbox_component):
 		stats_component.health -= hitbox_component.damage
 	)

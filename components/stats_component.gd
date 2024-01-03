@@ -1,9 +1,9 @@
 class_name StatsComponent
 extends Node
 
-@export var max_health: int = 1
+@export var max_health: float = 1
 
-@export var health: int = max_health:
+@export var health: float = max_health:
 	set(value):
 		health = max(0, value)
 
@@ -12,7 +12,7 @@ extends Node
 		if health == 0: no_health.emit()
 
 func percentage() -> float:
-	return float(health) / float(max_health) * 100
+	return health / max_health * 100
 
 signal health_changed(health)
 signal no_health()
