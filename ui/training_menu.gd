@@ -7,7 +7,7 @@ extends Control
 		if value == selected_item_index:
 			return
 
-		SoundPlayer.play_sound(SoundPlayer.UI_ACTION)
+		SoundPlayer.play(SoundPlayer.UI_ACTION)
 		selected_item_index = value
 		_adjust_selected_item()
 

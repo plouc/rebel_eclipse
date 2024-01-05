@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://u7ggr5h1i34d"]
+[gd_scene load_steps=33 format=3 uid="uid://u7ggr5h1i34d"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_c4p4s"]
 [ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_314oq"]
@@ -11,9 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://che2n2xlysax4" path="res://camera_velocity_screen_enter_adjuster.tscn" id="7_xgwsv"]
 [ext_resource type="Texture2D" uid="uid://b58e3oyjb33s" path="res://assets/weapon_icon_bullets.png" id="8_ynh51"]
 [ext_resource type="FontFile" uid="uid://kr1cdn3t5a0o" path="res://fonts/kenney_mini_square.ttf" id="9_ya62o"]
-[ext_resource type="AudioStream" uid="uid://v8v7ddlmjmh7" path="res://sounds/level_01_loop.wav" id="10_1o2lp"]
 [ext_resource type="Texture2D" uid="uid://cpeetsw6x8swq" path="res://assets/weapon_progress_bullets_background.png" id="10_rx45a"]
+[ext_resource type="PackedScene" uid="uid://nvsch5n4povy" path="res://ui/danger_ahead_screen_enter_trigger.tscn" id="10_strpj"]
 [ext_resource type="Texture2D" uid="uid://curtditydvr42" path="res://assets/weapon_progress_bullets_fill.png" id="11_snk8b"]
+[ext_resource type="PackedScene" uid="uid://c81gc0ub40ja0" path="res://ui/danger_ahead.tscn" id="11_sr2ea"]
 [ext_resource type="Texture2D" uid="uid://bmymugw3nv01p" path="res://assets/weapon_icon_satellites.png" id="12_v3ndf"]
 [ext_resource type="Texture2D" uid="uid://c7meaelotprwf" path="res://assets/weapon_progress_satellites_background.png" id="13_d0xd4"]
 [ext_resource type="Texture2D" uid="uid://cgktnncik748c" path="res://assets/weapon_progress_satellites_fill.png" id="14_f1ue5"]
@@ -35,7 +36,8 @@ glow_intensity = 1.1
 glow_strength = 1.1
 glow_bloom = 0.01
 glow_blend_mode = 1
-adjustment_brightness = 1.2
+adjustment_enabled = true
+adjustment_brightness = 0.8
 adjustment_contrast = 1.1
 adjustment_saturation = 1.1
 
@@ -170,6 +172,11 @@ camera = NodePath("../../Camera2D")
 [node name="ProjectilesEffects" type="Node2D" parent="Level"]
 unique_name_in_owner = true
 z_index = 11
+
+[node name="DangerAheadScreenEnterTrigger" parent="Level" node_paths=PackedStringArray("layer") instance=ExtResource("10_strpj")]
+position = Vector2(0, -6472)
+danger_ahead_scene = ExtResource("11_sr2ea")
+layer = NodePath("../../CanvasLayer")
 
 [node name="ChainedKillsTimerComponent" type="Node" parent="Level" node_paths=PackedStringArray("progress_bar")]
 script = ExtResource("21_nsdcx")
@@ -734,7 +741,3 @@ game = NodePath("../..")
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(2.08165e-12, 2.08165e-12)
 anchor_mode = 0
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_1o2lp")
-autoplay = true

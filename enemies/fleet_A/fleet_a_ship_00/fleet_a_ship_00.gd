@@ -17,6 +17,7 @@ extends Node2D
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $Anchor/VisibleOnScreenNotifier2D
 @onready var score_component: ScoreComponent = $State/ScoreComponent
 @onready var coin_grid: CoinGrid = $Anchor/CoinGrid
+@onready var collision_box_component: CollisionBoxComponent = $Anchor/CollisionBoxComponent
 
 var bullets_spawn_interval_per_difficulty = {
 	GameStats.Difficulty.EASY: 0.8,
@@ -34,6 +35,7 @@ func _ready():
 	
 	hurtbox_component.hurt.connect(_hit.unbind(1))
 	hurtbox_component.process_mode = Node.PROCESS_MODE_DISABLED
+	collision_box_component.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	stats_component.no_health.connect(_die)
 
@@ -54,6 +56,7 @@ func _intro_completed():
 	thruster_animated_sprite.play("playing")
 	
 	hurtbox_component.process_mode = Node.PROCESS_MODE_INHERIT
+	collision_box_component.process_mode = Node.PROCESS_MODE_INHERIT
 	
 	# move_sinusoidal_component.speed = sinusoidal_movement_speed
 
@@ -65,7 +68,7 @@ func _hit():
 	shake_component.tween_shake()
 
 func _die():
-	SoundPlayer.play_sound(SoundPlayer.ENEMY_EXPLOSION)
+	SoundPlayer.play(SoundPlayer.ENEMY_EXPLOSION)
 	score_component.adjust_score()
 
 	game_stats.killed_enemy_count += 1

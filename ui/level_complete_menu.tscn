@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwmabteaaurpv"]
+[gd_scene load_steps=7 format=3 uid="uid://cwmabteaaurpv"]
 
 [ext_resource type="Script" path="res://ui/level_complete_menu.gd" id="1_2257c"]
 [ext_resource type="LabelSettings" uid="uid://i4b0m1n6dv1y" path="res://fonts/title_label_settings.tres" id="1_sk4e6"]
@@ -17,12 +17,6 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
-
-[sub_resource type="InputEventKey" id="InputEventKey_35w6c"]
-keycode = 77
-
-[sub_resource type="Shortcut" id="Shortcut_t3vye"]
-events = [SubResource("InputEventKey_35w6c")]
 
 [node name="LevelCompleteMenu" type="Control"]
 layout_mode = 3
@@ -79,5 +73,4 @@ custom_minimum_size = Vector2(140, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_m3a06")
-shortcut = SubResource("Shortcut_t3vye")
-text = " [M] Main Menu"
+text = " Main Menu"

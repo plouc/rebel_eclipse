@@ -14,5 +14,5 @@ var is_invincible = false :
 			# physics process
 			child.set_deferred("disabled", is_invincible)
 
-# Create a signal for when this hurtbox is hit by a hitbox
 signal hurt(hitbox)
+signal crashed(collision_box)

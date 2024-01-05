@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bs80j75gclh7s"]
+[gd_scene load_steps=18 format=3 uid="uid://bs80j75gclh7s"]
 
 [ext_resource type="Texture2D" uid="uid://dn77pihvmj63u" path="res://assets/combo_bar_fill.png" id="1_mupmq"]
 [ext_resource type="Texture2D" uid="uid://crpjvy31e7fte" path="res://assets/level_00.png" id="2_g8xr4"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dg2ha2gdbc1gv" path="res://enemies/fleet_A/fleet_a_ship_02/fleet_a_ship_02_screen_enter_spawner.tscn" id="13_yi4m4"]
 [ext_resource type="PackedScene" uid="uid://hvwe2a41q435" path="res://enemies/fleet_A/fleet_a_tank_00/fleet_a_tank_00_spawner_diagonal_left.tscn" id="14_d6ofo"]
 [ext_resource type="PackedScene" uid="uid://08q4l6md4xts" path="res://enemies/fleet_A/fleet_a_final_boss/fleet_a_final_boss_screen_enter_spawner.tscn" id="15_6macy"]
+[ext_resource type="PackedScene" uid="uid://knf4m7bwpg2m" path="res://bonuses/power_up_extravaganza.tscn" id="16_wi7j2"]
 
 [node name="FirstLevel" type="Node2D"]
 position = Vector2(2.08165e-12, 2.08165e-12)
@@ -34,7 +35,6 @@ position = Vector2(288, -1888)
 texture = ExtResource("2_g8xr4")
 
 [node name="GreenEnemies" type="Node2D" parent="."]
-process_mode = 4
 visible = false
 
 [node name="GreenEnemyScreenEnterSpawner45" parent="GreenEnemies" instance=ExtResource("7_kktk8")]
@@ -245,7 +245,6 @@ position = Vector2(444, -546)
 position = Vector2(132, -546)
 
 [node name="YellowEnemies" type="Node2D" parent="."]
-process_mode = 4
 visible = false
 
 [node name="YellowEnemyScreenEnterSpawner15" parent="YellowEnemies" instance=ExtResource("5_u06ye")]
@@ -330,7 +329,6 @@ position = Vector2(60, -848)
 position = Vector2(468, -848)
 
 [node name="Turrets" type="Node2D" parent="."]
-process_mode = 4
 visible = false
 
 [node name="TurretScreenEnterSpawner13" parent="Turrets" instance=ExtResource("6_nl7d0")]
@@ -385,7 +383,6 @@ position = Vector2(287, -1380)
 position = Vector2(275, -141)
 
 [node name="PinkEnemies" type="Node2D" parent="."]
-process_mode = 4
 visible = false
 
 [node name="PinkEnemyScreenEnterSpawner14" parent="PinkEnemies" instance=ExtResource("3_ss2kq")]
@@ -1085,140 +1082,12 @@ position = Vector2(432, -4244)
 [node name="FleetATank00SpawnerDiagonalLeft" parent="FleetATank00" instance=ExtResource("14_d6ofo")]
 position = Vector2(0, -1173)
 
-[node name="GetItAll" type="Node2D" parent="."]
-visible = false
-
-[node name="PowerUpEnterScreenSpawner19" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(240, 98)
-power_up_scene = ExtResource("8_xxe21")
-
-[node name="PowerUpEnterScreenSpawner21" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(192, 98)
-power_up_scene = ExtResource("8_xxe21")
-
-[node name="PowerUpEnterScreenSpawner23" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(144, 98)
-power_up_scene = ExtResource("8_xxe21")
-
-[node name="PowerUpEnterScreenSpawner18" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(336, 98)
-power_up_scene = ExtResource("8_xxe21")
-
-[node name="PowerUpEnterScreenSpawner20" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(384, 98)
-power_up_scene = ExtResource("8_xxe21")
-
-[node name="PowerUpEnterScreenSpawner22" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(432, 98)
-power_up_scene = ExtResource("8_xxe21")
-
-[node name="PowerUpEnterScreenSpawner16" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(240, 154)
-power_up_scene = ExtResource("9_p72wu")
-
-[node name="PowerUpEnterScreenSpawner24" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(192, 154)
-power_up_scene = ExtResource("9_p72wu")
-
-[node name="PowerUpEnterScreenSpawner25" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(144, 154)
-power_up_scene = ExtResource("9_p72wu")
-
-[node name="PowerUpEnterScreenSpawner14" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(336, 154)
-power_up_scene = ExtResource("9_p72wu")
-
-[node name="PowerUpEnterScreenSpawner17" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(384, 154)
-power_up_scene = ExtResource("9_p72wu")
-
-[node name="PowerUpEnterScreenSpawner26" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(432, 154)
-power_up_scene = ExtResource("9_p72wu")
-
-[node name="PowerUpEnterScreenSpawner8" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(335, 273)
-power_up_scene = ExtResource("8_pxoas")
-
-[node name="PowerUpEnterScreenSpawner11" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(383, 273)
-power_up_scene = ExtResource("8_pxoas")
-
-[node name="PowerUpEnterScreenSpawner15" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(431, 273)
-power_up_scene = ExtResource("8_pxoas")
-
-[node name="PowerUpEnterScreenSpawner12" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(239, 273)
-power_up_scene = ExtResource("8_pxoas")
-
-[node name="PowerUpEnterScreenSpawner13" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(191, 273)
-power_up_scene = ExtResource("8_pxoas")
-
-[node name="PowerUpEnterScreenSpawner27" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(143, 273)
-power_up_scene = ExtResource("8_pxoas")
-
-[node name="PowerUpEnterScreenSpawner6" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(240, 212)
-power_up_scene = ExtResource("10_af1gn")
-
-[node name="PowerUpEnterScreenSpawner9" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(192, 212)
-power_up_scene = ExtResource("10_af1gn")
-
-[node name="PowerUpEnterScreenSpawner10" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(144, 212)
-power_up_scene = ExtResource("10_af1gn")
-
-[node name="PowerUpEnterScreenSpawner28" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(96, 98)
-power_up_scene = ExtResource("8_xxe21")
-
-[node name="PowerUpEnterScreenSpawner29" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(96, 154)
-power_up_scene = ExtResource("9_p72wu")
-
-[node name="PowerUpEnterScreenSpawner30" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(95, 273)
-power_up_scene = ExtResource("8_pxoas")
-
-[node name="PowerUpEnterScreenSpawner31" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(96, 212)
-power_up_scene = ExtResource("10_af1gn")
-
-[node name="PowerUpEnterScreenSpawner5" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(336, 212)
-power_up_scene = ExtResource("10_af1gn")
-
-[node name="PowerUpEnterScreenSpawner7" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(384, 212)
-power_up_scene = ExtResource("10_af1gn")
-
-[node name="PowerUpEnterScreenSpawner32" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(432, 212)
-power_up_scene = ExtResource("10_af1gn")
-
-[node name="PowerUpEnterScreenSpawner33" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(480, 98)
-power_up_scene = ExtResource("8_xxe21")
-
-[node name="PowerUpEnterScreenSpawner34" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(480, 154)
-power_up_scene = ExtResource("9_p72wu")
-
-[node name="PowerUpEnterScreenSpawner35" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(479, 273)
-power_up_scene = ExtResource("8_pxoas")
-
-[node name="PowerUpEnterScreenSpawner36" parent="GetItAll" instance=ExtResource("8_v1li7")]
-position = Vector2(480, 212)
-power_up_scene = ExtResource("10_af1gn")
+[node name="PowerUpExtravaganza" parent="." instance=ExtResource("16_wi7j2")]
+position = Vector2(2.08165e-12, -14)
 
 [node name="FleetAFinalBossScreenEnterSpawner" parent="." instance=ExtResource("15_6macy")]
 position = Vector2(0, -6801)
 
 [node name="FleetAFinalBossScreenEnterSpawner2" parent="." instance=ExtResource("15_6macy")]
 visible = false
-position = Vector2(2.08165e-12, -30)
+position = Vector2(2.08165e-12, -366)

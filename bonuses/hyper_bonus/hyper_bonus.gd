@@ -15,7 +15,7 @@ func _ready():
 	move_component.velocity.y = randi_range(40, 80)
 
 func _on_pickup() -> void:
-	SoundPlayer.play_sound(SoundPlayer.HYPER_LEVEL_UP)
+	SoundPlayer.play(SoundPlayer.HYPER_LEVEL_UP)
 
 	game_stats.hyper_level += 1
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://d323frsh05j7h"]
+[gd_scene load_steps=44 format=3 uid="uid://d323frsh05j7h"]
 
 [ext_resource type="Script" path="res://enemies/fleet_A/fleet_a_ship_00/fleet_a_ship_00.gd" id="1_wpcfb"]
 [ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_hics5"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bij4k6fyywem7" path="res://projectiles/enemy_projectiles/enemy_bullet_01.tscn" id="16_33ax5"]
 [ext_resource type="PackedScene" uid="uid://36fid7fd3mho" path="res://projectiles/bullet_firing_effect.tscn" id="17_kaagi"]
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="18_ok500"]
+[ext_resource type="Script" path="res://components/collision_box_component.gd" id="19_86nj3"]
 [ext_resource type="Script" path="res://bonuses/coins/coin_grid.gd" id="19_c08ap"]
 [ext_resource type="PackedScene" uid="uid://dv4b11xyuwi7e" path="res://bonuses/coins/coin.tscn" id="20_le56v"]
 
@@ -164,6 +165,9 @@ animations = [{
 radius = 19.0
 height = 50.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvbjt"]
+size = Vector2(16, 19)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_lku0t"]
 radius = 151.476
 
@@ -195,10 +199,11 @@ script = ExtResource("5_m2ucy")
 max_health = 6.0
 health = 6.0
 
-[node name="HurtComponent" type="Node" parent="State" node_paths=PackedStringArray("stats_component", "hurtbox_component")]
+[node name="HurtComponent" type="Node" parent="State" node_paths=PackedStringArray("stats_component", "hurtbox_component", "collison_box_component")]
 script = ExtResource("6_sy5jn")
 stats_component = NodePath("../StatsComponent")
 hurtbox_component = NodePath("../../Anchor/HurtboxComponent")
+collison_box_component = NodePath("../../Anchor/CollisionBoxComponent")
 
 [node name="DestroyedComponent" type="Node" parent="State" node_paths=PackedStringArray("actor", "stats_component", "destroy_effect_spawner_component")]
 script = ExtResource("7_6cd0w")
@@ -256,13 +261,21 @@ firing_effect_scene = ExtResource("17_kaagi")
 is_active = false
 
 [node name="HurtboxComponent" type="Area2D" parent="Anchor"]
-visible = false
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("18_ok500")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/HurtboxComponent"]
 shape = SubResource("CapsuleShape2D_s21ut")
+
+[node name="CollisionBoxComponent" type="Area2D" parent="Anchor"]
+collision_layer = 16
+script = ExtResource("19_86nj3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/CollisionBoxComponent"]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_xvbjt")
+debug_color = Color(0.882353, 0.0901961, 0.776471, 0.419608)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Anchor"]
 position = Vector2(0.499999, -9.5)

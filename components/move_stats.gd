@@ -1,4 +1,4 @@
 class_name MoveStats
 extends Resource
 
-@export var speed: int = 80
+@export var speed: float = 80.0

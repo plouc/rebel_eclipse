@@ -3,7 +3,7 @@ extends Control
 
 @export var game_stats: GameStats
 
-@onready var MainMenuButton: Button = %MainMenuButton
+@onready var main_menu_button: Button = %MainMenuButton
 
 func _ready():
 	hide()
@@ -11,9 +11,10 @@ func _ready():
 	game_stats.level_completed.connect(func():
 		show()
 		_render_level_stats()
+		main_menu_button.grab_focus()
 	)
 
-	MainMenuButton.pressed.connect(_on_main_menu_button_pressed)
+	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
 
 func _render_level_stats():
 	pass

@@ -9,6 +9,7 @@ extends Node2D
 @onready var move_component: MoveComponent = $State/MoveComponent
 @onready var flash_component: FlashComponent = $Effects/FlashComponent
 @onready var hurtbox_component: HurtboxComponent = $Anchor/SubAnchor/HurtboxComponent
+@onready var collision_box_component: CollisionBoxComponent = $Anchor/SubAnchor/CollisionBoxComponent
 @onready var shake_component: ShakeComponent = $Effects/ShakeComponent
 @onready var stats_component: StatsComponent = $State/StatsComponent
 @onready var coin_grid: CoinGrid = $CoinGrid
@@ -37,6 +38,7 @@ func _ready():
 
 	hurtbox_component.hurt.connect(_hit.unbind(1))
 	hurtbox_component.process_mode = Node.PROCESS_MODE_DISABLED
+	collision_box_component.process_mode = Node.PROCESS_MODE_DISABLED
 
 	stats_component.no_health.connect(_die)
 
@@ -44,7 +46,10 @@ func _intro_completed():
 	animated_sprite_2d.play("spinning")
 	animation_player.play("new_animation")
 	move_component.velocity.y = 120
+
 	hurtbox_component.process_mode = Node.PROCESS_MODE_INHERIT
+	collision_box_component.process_mode = Node.PROCESS_MODE_INHERIT
+
 	bullet_spawner.is_active = true
 	thruster.visible = true
 	thruster.play()
@@ -54,11 +59,10 @@ func _hit():
 	shake_component.tween_shake()
 
 func _die():
-	SoundPlayer.play_sound(SoundPlayer.ENEMY_EXPLOSION)
+	SoundPlayer.play(SoundPlayer.ENEMY_EXPLOSION)
 	coin_grid.spawn()
 
 	score_component.adjust_score()
 	game_stats.killed_enemy_count += 1
 	
-	process_mode = Node.PROCESS_MODE_DISABLED
-
+	set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)

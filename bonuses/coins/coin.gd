@@ -42,6 +42,6 @@ func _physics_process(_delta):
 
 func on_pickup():
 	game_stats.score += points
-	SoundPlayer.play_sound(SoundPlayer.COIN, -15)
+	SoundPlayer.play(SoundPlayer.COIN, -15)
 	
 	queue_free()

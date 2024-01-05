@@ -8,12 +8,9 @@
 [ext_resource type="Shader" path="res://weapons/laser_beam/laser_beam.gdshader" id="5_bg4a6"]
 [ext_resource type="PackedScene" uid="uid://c8l4jg5n8i3h1" path="res://weapons/laser_beam/laser_beam_red_particles_shooting.tscn" id="7_7lfvw"]
 [ext_resource type="PackedScene" uid="uid://dc54tuvfhgex2" path="res://weapons/laser_beam/laser_beam_red_particles_hit.tscn" id="7_a18og"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_03bet"]
-blend_mode = 1
+[ext_resource type="Texture2D" uid="uid://dn77pihvmj63u" path="res://assets/combo_bar_fill.png" id="9_if777"]
 
 [node name="LaserBeam" type="Node2D"]
-material = SubResource("CanvasItemMaterial_03bet")
 script = ExtResource("1_wxso6")
 beam_texture_single = ExtResource("2_xvm6u")
 beam_texture_start = ExtResource("2_iybaf")
@@ -25,10 +22,19 @@ hit_particles_scene = ExtResource("7_a18og")
 
 [node name="Raycasts" type="Node2D" parent="."]
 
+[node name="Hitboxes" type="Node2D" parent="."]
+
 [node name="Beams" type="Node2D" parent="."]
 
-[node name="Emitters" type="Node2D" parent="."]
-
-[node name="Tips" type="Node2D" parent="."]
+[node name="ShootingParticles" type="Node2D" parent="."]
 
 [node name="HitParticles" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(1, 0, 0, 1)
+texture = ExtResource("9_if777")
+centered = false
+offset = Vector2(2.08165e-12, -40)
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 300, 80)

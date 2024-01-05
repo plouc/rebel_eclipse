@@ -10,6 +10,16 @@ signal difficulty_update(new_difficulty: Difficulty)
 		difficulty = value
 		difficulty_update.emit(difficulty)
 
+func difficulty_label(difficulty_member: Difficulty) -> String:
+	if difficulty_member == Difficulty.EASY:
+		return "Easy"
+	if difficulty_member == Difficulty.NORMAL:
+		return "Normal"
+	if difficulty_member == Difficulty.HARD:
+		return "Hard"
+
+	return "Hell"
+
 signal spawned_enemy_count_update(new_spawned_enemy_count: int)
 signal level_completed()
 
@@ -70,3 +80,10 @@ func reset():
 	killed_enemy_count = 0
 	chained_kills = 0
 	best_chained_kills = 0
+
+var min_ship_speed: float = 200.0
+var max_ship_speed: float = 400.0
+
+@export var ship_speed: float = 300.0
+
+@export var is_power_up_extravaganza_enabled: bool = false

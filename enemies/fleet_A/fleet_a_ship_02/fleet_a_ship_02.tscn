@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://djbyrj2odpdpu"]
+[gd_scene load_steps=53 format=3 uid="uid://djbyrj2odpdpu"]
 
 [ext_resource type="Script" path="res://enemies/fleet_A/fleet_a_ship_02/fleet_a_ship_02.gd" id="1_5ekkp"]
 [ext_resource type="Texture2D" uid="uid://bl4aft036fo56" path="res://assets/fleet_a_ship_02.png" id="1_6soq2"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cxvmb2ox8a5k7" path="res://assets/fleet_a_ship_02_thruster.png" id="14_7pq7i"]
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="14_ktb3r"]
 [ext_resource type="PackedScene" uid="uid://k4h04hchwd3r" path="res://effects/explosion_effect.tscn" id="15_ott5c"]
+[ext_resource type="Script" path="res://components/collision_box_component.gd" id="15_y8dnf"]
 [ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullet_spawner.tscn" id="16_chgi6"]
 
 [sub_resource type="Animation" id="Animation_86rgq"]
@@ -219,6 +220,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ier8y"]
 radius = 20.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vn63i"]
+radius = 9.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_q4efp"]
 atlas = ExtResource("14_7pq7i")
 region = Rect2(0, 0, 32, 32)
@@ -282,10 +286,11 @@ script = ExtResource("3_fkrob")
 max_health = 4
 health = 4
 
-[node name="HurtComponent" type="Node" parent="State" node_paths=PackedStringArray("stats_component", "hurtbox_component")]
+[node name="HurtComponent" type="Node" parent="State" node_paths=PackedStringArray("stats_component", "hurtbox_component", "collison_box_component")]
 script = ExtResource("5_q5tb8")
 stats_component = NodePath("../StatsComponent")
 hurtbox_component = NodePath("../../Anchor/SubAnchor/HurtboxComponent")
+collison_box_component = NodePath("../../Anchor/SubAnchor/CollisionBoxComponent")
 
 [node name="ScoreComponent" type="Node" parent="State"]
 script = ExtResource("6_jsg60")
@@ -333,6 +338,15 @@ script = ExtResource("4_8tpct")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/SubAnchor/HurtboxComponent"]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_ier8y")
+
+[node name="CollisionBoxComponent" type="Area2D" parent="Anchor/SubAnchor"]
+collision_layer = 16
+script = ExtResource("15_y8dnf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/SubAnchor/CollisionBoxComponent"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_vn63i")
+debug_color = Color(0.882353, 0.0901961, 0.776471, 0.419608)
 
 [node name="BulletSpawner" parent="Anchor/SubAnchor" instance=ExtResource("16_chgi6")]
 position = Vector2(-2.08165e-12, 21)

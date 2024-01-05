@@ -30,7 +30,7 @@ func _ready():
 
 	stats_component.no_health.connect(func():
 		score_component.adjust_score()
-		SoundPlayer.play_sound(SoundPlayer.ENEMY_EXPLOSION)
+		SoundPlayer.play(SoundPlayer.ENEMY_EXPLOSION)
 		coin_grid.spawn()
 
 		game_stats.killed_enemy_count += 1

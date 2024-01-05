@@ -1,7 +1,6 @@
 class_name LaserBeam
 extends Node2D
 
-@export var angle: float = 90
 @export var max_length: float = 800.0
 @export var damage: float = 1.0:
 	set(value):
@@ -38,31 +37,33 @@ extends Node2D
 			_resume()
 
 @onready var raycasts: Node2D = $Raycasts
+@onready var hitboxes: Node2D = $Hitboxes
 @onready var beams: Node2D = $Beams
-@onready var tips: Node2D = $Tips
+@onready var shooting_particles: Node2D = $ShootingParticles
 @onready var hit_particles: Node2D = $HitParticles
-@onready var emitters: Node2D = $Emitters
 
 var _is_ready: bool = false
 var _current_length: float = 0.0
-var _ray_casts: Array[RayCast2D] = []
-var _beams: Array[Line2D] = []
+# We cannot just rely on getting the children of a node
+# here, as hitboxes cannot be added in the middle of _physic_process,
+# so we also store a reference in a separate collection.
 var _hitboxes: Array[HitboxPersistentComponent] = []
-var _shooting_particles: Array[GPUParticles2D] = []
-var _hit_particles: Array[GPUParticles2D] = []
 
 func _ready():
 	_is_ready = true
 	is_paused = is_paused
+
 	_adjust_raycasts()
+	_set_hitboxes(not is_paused)
+	_adjust_damage(damage)
 	_set_shooting_particles(not is_paused)
 
 func _adjust_raycasts():
 	if not _is_ready:
 		return
 
-	var current_ray_count: int = _ray_casts.size()
-	
+	var current_ray_count: int = raycasts.get_child_count()
+
 	if current_ray_count < ray_count:
 		var create_count: int = ray_count - current_ray_count
 		
@@ -72,7 +73,6 @@ func _adjust_raycasts():
 			ray_cast.collide_with_areas = true
 			ray_cast.collision_mask = 0
 			raycasts.add_child(ray_cast)
-			_ray_casts.append(ray_cast)
 
 			var beam_material = ShaderMaterial.new()
 			beam_material.shader = beam_shader
@@ -86,13 +86,13 @@ func _adjust_raycasts():
 			beam.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 			beam.material = beam_material
 			beams.add_child(beam)
-			_beams.append(beam)
 
 			var collision = CollisionShape2D.new()
 			var collision_shape = CircleShape2D.new()
 			collision.shape = collision_shape
 
 			var hitbox = HitboxPersistentComponent.new()
+			hitbox.damage = damage
 			hitbox.collision_layer = 0
 			hitbox.collision_mask = 0
 
@@ -104,50 +104,48 @@ func _adjust_raycasts():
 				hitbox.set_collision_mask_value(1, true)
 
 			hitbox.add_child(collision)
-			add_child.call_deferred(hitbox)
+			hitboxes.add_child.call_deferred(hitbox)
 			_hitboxes.append(hitbox)
 
 			var ray_shooting_particles: GPUParticles2D = shooting_particles_scene.instantiate()
 			ray_shooting_particles.emitting = not is_paused
-			emitters.add_child(ray_shooting_particles)
-			_shooting_particles.append(ray_shooting_particles)
+			shooting_particles.add_child(ray_shooting_particles)
 
 			var ray_hit_particles: GPUParticles2D = hit_particles_scene.instantiate()
 			hit_particles.add_child(ray_hit_particles)
-			_hit_particles.append(ray_hit_particles)
 		
 	elif current_ray_count > ray_count:
 		var delete_count: int = current_ray_count - ray_count
 		
 		for ray_index in range(delete_count):
-			
-			var ray_cast: RayCast2D = _ray_casts[0]
+			var ray_cast: RayCast2D = raycasts.get_child(0)
+			raycasts.remove_child(ray_cast)
 			ray_cast.queue_free()
-			_ray_casts.remove_at(0)
 		
-			var beam: Line2D = _beams[0]
+			var beam: Line2D = beams.get_child(0)
+			beams.remove_child(beam)
 			beam.queue_free()
-			_beams.remove_at(0)
 
 			var hitbox: HitboxPersistentComponent = _hitboxes[0]
 			hitbox.queue_free()
 			_hitboxes.remove_at(0)
 
-			var ray_shooting_particles: GPUParticles2D = _shooting_particles[0]
+			var ray_shooting_particles: GPUParticles2D = shooting_particles.get_child(0)
+			shooting_particles.remove_child(ray_shooting_particles)
 			ray_shooting_particles.queue_free()
-			_shooting_particles.remove_at(0)
 
-			var ray_hit_particles: GPUParticles2D = _hit_particles[0]
+			var ray_hit_particles: GPUParticles2D = hit_particles.get_child(0)
+			hit_particles.remove_child(ray_hit_particles)
 			ray_hit_particles.queue_free()
-			_hit_particles.remove_at(0)
 	
 	var start_y: float = (ray_count - 1) * ray_width / 2 * -1
-	
-	for ray_index in range(_ray_casts.size()):
-		var ray_cast = _ray_casts[ray_index]
+
+	for ray_index in range(raycasts.get_child_count()):
+		var ray_cast = raycasts.get_child(ray_index)
 		ray_cast.position.y = start_y + ray_index * ray_width
 		
-		var beam: Line2D = _beams[ray_index]
+		var beam: Line2D = beams.get_child(ray_index)
+		beam.position = ray_cast.position
 		beam.width = ray_width
 		beam.material.set_shader_parameter("speed", beam_speed)
 		
@@ -161,70 +159,77 @@ func _adjust_raycasts():
 			beam.texture = beam_texture_middle
 
 		var hitbox: HitboxPersistentComponent = _hitboxes[ray_index]
-		hitbox.damage = damage
+		hitbox.position = ray_cast.position
 
 		var collision_shape: CircleShape2D = hitbox.get_child(0).shape
 		collision_shape.radius = ray_width / 2 + 1
-		
-		var ray_shooting_particles: GPUParticles2D = _shooting_particles[ray_index]
+	
+		var ray_shooting_particles: GPUParticles2D = shooting_particles.get_child(ray_index)
 		ray_shooting_particles.position = ray_cast.position
 
 func _adjust_damage(new_damage: float):
-	for ray_index in _hitboxes.size():
-		var hitbox: HitboxPersistentComponent = _hitboxes[ray_index]
+	for hitbox in _hitboxes:
 		hitbox.damage = new_damage
 
 func _adjust_length(new_length: float):
 	if !_is_ready:
 		return
+		
+	if new_length > 0:
+		_set_hitboxes(true)
+		_set_shooting_particles(true)
 
 	var tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "_current_length", new_length, pause_tween_duration).from_current()
 	await tween.finished
+	
+	if new_length == 0:
+		_set_hitboxes(false)
+		_set_shooting_particles(false)
 
 func _pause():
 	await _adjust_length(0.0)
-	_set_shooting_particles(false)
 
 func _resume():
 	_set_shooting_particles(true)
 	_adjust_length(max_length)
 
+func _set_hitboxes(enabled: bool):
+	var mode: ProcessMode = PROCESS_MODE_INHERIT if enabled else PROCESS_MODE_DISABLED
+
+	for hitbox in hitboxes.get_children():
+		hitbox.process_mode = mode
+
 func _set_shooting_particles(emitting: bool):
-	for ray_index in _shooting_particles.size():
-		var ray_shooting_particles: GPUParticles2D = _shooting_particles[ray_index]
-		ray_shooting_particles.emitting = emitting
+	for particles in shooting_particles.get_children():
+		particles.emitting = emitting
 
 func _physics_process(_delta):
-	raycasts.rotation = deg_to_rad(angle)
-	
-	if _ray_casts.size() == 0:
+	if raycasts.get_child_count() == 0:
 		return
 
 	var target_position = Vector2(_current_length, 0)
 
-	for ray_index in range(_ray_casts.size()):
-		var ray_cast: RayCast2D = _ray_casts[ray_index]
+	for ray_index in range(raycasts.get_child_count()):
+		var ray_cast: RayCast2D = raycasts.get_child(ray_index)
 		ray_cast.target_position = target_position
 
-		var ray_hit_particles: GPUParticles2D = _hit_particles[ray_index]
+		var ray_hit_particles: GPUParticles2D = hit_particles.get_child(ray_index)
 
-		var end_position: Vector2
+		var ray_vector: Vector2
 		if ray_cast.is_colliding():
-			end_position = ray_cast.get_collision_point()
+			ray_vector = ray_cast.get_collision_point() - ray_cast.global_position
 			ray_hit_particles.emitting = true
 		else:
-			end_position = ray_cast.global_position + ray_cast.target_position.rotated(deg_to_rad(angle))
+			ray_vector = ray_cast.target_position
 			ray_hit_particles.emitting = false
 
-		var beam: Line2D = _beams[ray_index]
-		beam.points[0] = ray_cast.global_position - global_position
-		beam.points[1] = end_position - global_position
+		var ray_length = ray_vector.length()
+
+		var beam: Line2D = beams.get_child(ray_index)
+		beam.points[1].x = ray_length
 
 		var hitbox: HitboxPersistentComponent = _hitboxes[ray_index]
-		hitbox.global_position = end_position
+		hitbox.position.x = ray_length
 
-		ray_hit_particles.global_position = end_position
-		ray_hit_particles.rotation_degrees = angle
-
-		emitters.rotation_degrees = angle
+		ray_hit_particles.position.x = ray_length

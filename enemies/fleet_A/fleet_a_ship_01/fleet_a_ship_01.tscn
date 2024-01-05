@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dqp7ihu5xdrkr"]
+[gd_scene load_steps=55 format=3 uid="uid://dqp7ihu5xdrkr"]
 
 [ext_resource type="Script" path="res://enemies/fleet_A/fleet_a_ship_01/fleet_a_ship_01.gd" id="1_8encn"]
 [ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_ld56i"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://pmuu7pwnjj81" path="res://projectiles/enemy_projectiles/enemy_bullet_02.tscn" id="15_k7pxl"]
 [ext_resource type="PackedScene" uid="uid://dceehn6xo2ne1" path="res://weapons/laser_beam/laser_beam.tscn" id="16_r4l24"]
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="17_4eys8"]
+[ext_resource type="Script" path="res://components/collision_box_component.gd" id="18_fy8ja"]
 [ext_resource type="Script" path="res://bonuses/coins/coin_grid.gd" id="18_hnall"]
 [ext_resource type="PackedScene" uid="uid://dv4b11xyuwi7e" path="res://bonuses/coins/coin.tscn" id="19_d0cel"]
 
@@ -200,7 +201,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c7l7h"]
-radius = 20.025
+radius = 25.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ikkj"]
+radius = 16.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m80i2"]
 bg_color = Color(0, 0, 0, 1)
@@ -297,7 +301,6 @@ _data = {
 [node name="FleetAShip01" type="Node2D"]
 script = ExtResource("1_8encn")
 game_stats = ExtResource("2_ld56i")
-switch_mode_interval = 4.0
 
 [node name="State" type="Node" parent="."]
 
@@ -371,20 +374,21 @@ is_active = false
 
 [node name="LaserBeamLeft" parent="RootAnchor/Anchor" instance=ExtResource("16_r4l24")]
 position = Vector2(-57, 31)
-angle = 100.0
+rotation = 1.74533
 damage = 0.5
 ray_count = 2
 is_paused = true
 
 [node name="LaserBeamCenter" parent="RootAnchor/Anchor" instance=ExtResource("16_r4l24")]
 position = Vector2(0, 29)
+rotation = 1.5708
 damage = 0.5
 ray_count = 3
 is_paused = true
 
 [node name="LaserBeamRight" parent="RootAnchor/Anchor" instance=ExtResource("16_r4l24")]
 position = Vector2(58, 31)
-angle = 80.0
+rotation = 1.39626
 damage = 0.5
 ray_count = 2
 is_paused = true
@@ -397,6 +401,15 @@ script = ExtResource("17_4eys8")
 [node name="HurtBoxCollisionShape" type="CollisionShape2D" parent="RootAnchor/Anchor/HurtboxComponent"]
 position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_c7l7h")
+
+[node name="CollisionBoxComponent" type="Area2D" parent="RootAnchor/Anchor"]
+collision_layer = 16
+script = ExtResource("18_fy8ja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RootAnchor/Anchor/CollisionBoxComponent"]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_3ikkj")
+debug_color = Color(0.905882, 0.0313726, 0.733333, 0.419608)
 
 [node name="CoinGrid" type="Node2D" parent="RootAnchor/Anchor"]
 script = ExtResource("18_hnall")

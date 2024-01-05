@@ -1,6 +1,7 @@
-[gd_scene load_steps=37 format=3 uid="uid://cb6paql0x7iq5"]
+[gd_scene load_steps=38 format=3 uid="uid://cb6paql0x7iq5"]
 
 [ext_resource type="Script" path="res://player_ship/ship.gd" id="1_eoin8"]
+[ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_1k6c3"]
 [ext_resource type="PackedScene" uid="uid://xuwlolvnfcpb" path="res://player_ship/ship_bullet_spawner.tscn" id="2_4h0rv"]
 [ext_resource type="Texture2D" uid="uid://cwjxcj4tplgy3" path="res://assets/ship_00.png" id="2_8np4s"]
 [ext_resource type="Script" path="res://components/move_component.gd" id="2_r0cmk"]
@@ -144,6 +145,8 @@ height = 54.0
 
 [node name="Ship" type="Node2D" groups=["player"]]
 script = ExtResource("1_eoin8")
+game_stats = ExtResource("2_1k6c3")
+move_stats = ExtResource("4_jbioj")
 
 [node name="Movement" type="Node" parent="."]
 

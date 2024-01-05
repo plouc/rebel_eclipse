@@ -1,0 +1,150 @@
+[gd_scene load_steps=12 format=3 uid="uid://rqkgir3b5ktf"]
+
+[ext_resource type="PackedScene" uid="uid://dceehn6xo2ne1" path="res://weapons/laser_beam/laser_beam.tscn" id="1_eh4sa"]
+[ext_resource type="Texture2D" uid="uid://dn77pihvmj63u" path="res://assets/combo_bar_fill.png" id="1_nxsqg"]
+[ext_resource type="Script" path="res://experiments/laser_experiment.gd" id="1_vhuq6"]
+[ext_resource type="Texture2D" uid="uid://itawric3liin" path="res://assets/enemy_pink.png" id="3_c2j6i"]
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="3_x84rp"]
+[ext_resource type="Script" path="res://components/collision_box_component.gd" id="4_fix3w"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_43uq0"]
+radius = 23.0
+height = 78.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fj6fe"]
+size = Vector2(153, 12)
+
+[sub_resource type="Animation" id="Animation_3p4vt"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(30, 180), Vector2(546, 180)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_pc71v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(30, 180)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qsabb"]
+_data = {
+"RESET": SubResource("Animation_pc71v"),
+"new_animation": SubResource("Animation_3p4vt")
+}
+
+[node name="LaserExperiment" type="Node2D"]
+script = ExtResource("1_vhuq6")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_nxsqg")
+centered = false
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 576, 576)
+
+[node name="State" type="Node" parent="."]
+
+[node name="LasersTimer" type="Timer" parent="State"]
+wait_time = 3.0
+autostart = true
+
+[node name="FakeEnemy" type="Node2D" parent="."]
+position = Vector2(30, 180)
+
+[node name="Sprite2D" type="Sprite2D" parent="FakeEnemy"]
+texture = ExtResource("3_c2j6i")
+
+[node name="HurtboxComponent" type="Area2D" parent="FakeEnemy"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("3_x84rp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FakeEnemy/HurtboxComponent"]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_43uq0")
+
+[node name="CollisionBoxComponent" type="Area2D" parent="FakeEnemy"]
+collision_layer = 16
+script = ExtResource("4_fix3w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FakeEnemy/CollisionBoxComponent"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_fj6fe")
+debug_color = Color(0.764706, 0.168627, 1, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FakeEnemy"]
+libraries = {
+"": SubResource("AnimationLibrary_qsabb")
+}
+autoplay = "new_animation"
+
+[node name="Lasers" type="Node2D" parent="."]
+
+[node name="LaserBeamTopLeft" parent="Lasers" instance=ExtResource("1_eh4sa")]
+clip_children = 1
+position = Vector2(50, 50)
+rotation = 1.13446
+max_length = 500.0
+pause_tween_duration = 2.0
+ray_count = 3
+is_player_laser = true
+
+[node name="LaserBeamTop" parent="Lasers" instance=ExtResource("1_eh4sa")]
+position = Vector2(288, 526)
+rotation = -1.5708
+max_length = 500.0
+pause_tween_duration = 2.0
+ray_count = 5
+is_player_laser = true
+
+[node name="LaserBeamTopRight" parent="Lasers" instance=ExtResource("1_eh4sa")]
+position = Vector2(526, 526)
+rotation = -2.00713
+max_length = 500.0
+pause_tween_duration = 2.0
+ray_count = 3
+is_player_laser = true

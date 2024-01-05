@@ -1,0 +1,157 @@
+[gd_scene load_steps=8 format=3 uid="uid://knf4m7bwpg2m"]
+
+[ext_resource type="Script" path="res://bonuses/power_up_extravaganza.gd" id="1_5dpnh"]
+[ext_resource type="PackedScene" uid="uid://b7wfunuogdhvf" path="res://bonuses/power_up_enter_screen_spawner.tscn" id="1_lgxlx"]
+[ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_cktf4"]
+[ext_resource type="PackedScene" uid="uid://2ycduetncn5f" path="res://bonuses/power_up_bullets/power_up_bullets.tscn" id="2_mmex7"]
+[ext_resource type="PackedScene" uid="uid://d2or4anhpa0tu" path="res://bonuses/hyper_bonus/hyper_bonus.tscn" id="3_c043w"]
+[ext_resource type="PackedScene" uid="uid://cr2ugwmpm6wdj" path="res://bonuses/power_up_satellites/power_up_satellites.tscn" id="3_dkcxh"]
+[ext_resource type="PackedScene" uid="uid://5ttbpnspk6d" path="res://bonuses/power_up_laser/power_up_laser.tscn" id="3_r02gu"]
+
+[node name="PowerUpExtravaganza" type="Node2D"]
+script = ExtResource("1_5dpnh")
+game_stats = ExtResource("2_cktf4")
+
+[node name="Bullets" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(288, -23)
+power_up_scene = ExtResource("2_mmex7")
+
+[node name="Bullets6" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(232, -23)
+power_up_scene = ExtResource("2_mmex7")
+
+[node name="Bullets7" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(176, -23)
+power_up_scene = ExtResource("2_mmex7")
+
+[node name="Bullets8" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(120, -23)
+power_up_scene = ExtResource("2_mmex7")
+
+[node name="Bullets9" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(64, -23)
+power_up_scene = ExtResource("2_mmex7")
+
+[node name="Bullets2" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(344, -23)
+power_up_scene = ExtResource("2_mmex7")
+
+[node name="Bullets3" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(400, -23)
+power_up_scene = ExtResource("2_mmex7")
+
+[node name="Bullets4" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(456, -23)
+power_up_scene = ExtResource("2_mmex7")
+
+[node name="Bullets5" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(512, -23)
+power_up_scene = ExtResource("2_mmex7")
+
+[node name="Satellites" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(64, -191)
+power_up_scene = ExtResource("3_dkcxh")
+
+[node name="Satellites2" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(120, -191)
+power_up_scene = ExtResource("3_dkcxh")
+
+[node name="Satellites3" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(176, -191)
+power_up_scene = ExtResource("3_dkcxh")
+
+[node name="Satellites4" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(232, -191)
+power_up_scene = ExtResource("3_dkcxh")
+
+[node name="Satellites5" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(288, -191)
+power_up_scene = ExtResource("3_dkcxh")
+
+[node name="Satellites6" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(344, -191)
+power_up_scene = ExtResource("3_dkcxh")
+
+[node name="Satellites7" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(400, -191)
+power_up_scene = ExtResource("3_dkcxh")
+
+[node name="Satellites8" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(456, -191)
+power_up_scene = ExtResource("3_dkcxh")
+
+[node name="Satellites9" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(512, -191)
+power_up_scene = ExtResource("3_dkcxh")
+
+[node name="Hyper" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(64, -135)
+power_up_scene = ExtResource("3_c043w")
+
+[node name="Hyper2" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(120, -135)
+power_up_scene = ExtResource("3_c043w")
+
+[node name="Hyper3" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(176, -135)
+power_up_scene = ExtResource("3_c043w")
+
+[node name="Hyper4" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(232, -135)
+power_up_scene = ExtResource("3_c043w")
+
+[node name="Hyper5" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(288, -135)
+power_up_scene = ExtResource("3_c043w")
+
+[node name="Hyper6" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(344, -135)
+power_up_scene = ExtResource("3_c043w")
+
+[node name="Hyper7" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(400, -135)
+power_up_scene = ExtResource("3_c043w")
+
+[node name="Hyper8" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(456, -135)
+power_up_scene = ExtResource("3_c043w")
+
+[node name="Hyper9" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(512, -135)
+power_up_scene = ExtResource("3_c043w")
+
+[node name="Laser" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(64, -79)
+power_up_scene = ExtResource("3_r02gu")
+
+[node name="Laser2" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(120, -79)
+power_up_scene = ExtResource("3_r02gu")
+
+[node name="Laser3" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(176, -79)
+power_up_scene = ExtResource("3_r02gu")
+
+[node name="Laser4" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(232, -79)
+power_up_scene = ExtResource("3_r02gu")
+
+[node name="Laser5" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(288, -79)
+power_up_scene = ExtResource("3_r02gu")
+
+[node name="Laser6" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(344, -79)
+power_up_scene = ExtResource("3_r02gu")
+
+[node name="Laser7" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(400, -79)
+power_up_scene = ExtResource("3_r02gu")
+
+[node name="Laser8" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(456, -79)
+power_up_scene = ExtResource("3_r02gu")
+
+[node name="Laser9" parent="." instance=ExtResource("1_lgxlx")]
+position = Vector2(512, -79)
+power_up_scene = ExtResource("3_r02gu")

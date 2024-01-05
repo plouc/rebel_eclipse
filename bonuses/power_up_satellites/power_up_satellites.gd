@@ -14,7 +14,7 @@ func _ready():
 	move_component.velocity.y = randi_range(40, 80)
 
 func on_pickup():
-	SoundPlayer.play_sound(SoundPlayer.POWER_UP_BULLETS, -10)
+	SoundPlayer.play(SoundPlayer.POWER_UP_BULLETS, -10)
 
 	satellites_config.bump_level()
 	

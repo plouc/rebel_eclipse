@@ -1,6 +1,8 @@
 class_name Game
 extends Node2D
 
+const AUDIO_LOOP_MAIN = preload("res://sounds/level_01_loop.wav")
+
 @export var game_stats: GameStats
 @export var bullets_config: BulletsConfig
 @export var satellites_config: SatellitesConfig
@@ -53,6 +55,9 @@ var is_paused: bool = false:
 		toggle_game_paused.emit(is_paused)
 
 func _ready():
+	SoundPlayer.stop_all()
+	SoundPlayer.play_named("main", AUDIO_LOOP_MAIN)
+
 	game_stats.reset()
 	bullets_config.reset_level()
 	satellites_config.reset_level()
@@ -74,7 +79,7 @@ func _ready():
 	game_stats.difficulty_update.connect(update_difficulty)
 
 	ship.tree_exiting.connect(func():
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(3.0).timeout
 		get_tree().change_scene_to_file("res://ui/game_over.tscn")
 	)
 	
@@ -91,40 +96,20 @@ func _ready():
 	
 	game_stats.hyper_level_update.connect(update_hyper_level)
 	game_stats.hyper_level = 0
-	
-	game_stats.level_completed.connect(func():
-		print("> LEVEL COMPLETE")
-		ship.process_mode = Node.PROCESS_MODE_DISABLED
-	)
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		is_paused = !is_paused
 		
 	elif event.is_action_pressed("ui_difficulty_next"):
-		if game_stats.difficulty < game_stats.Difficulty.HELL:
-			game_stats.difficulty += 1
+		if game_stats.difficulty < GameStats.Difficulty.HELL:
+			game_stats.difficulty = (game_stats.difficulty + 1) as GameStats.Difficulty
 		else:
-			game_stats.difficulty = game_stats.Difficulty.EASY
+			game_stats.difficulty = GameStats.Difficulty.EASY
 
 func _process(_delta):
 	_update_objects_stats()
 
-	#var half_viewport = viewport_width / 2
-	#var ship_x = ship.global_position.x - half_viewport
-	#var mult = -1 if ship_x < 0 else 1
-	#var ratio = min(abs(ship_x) / half_viewport, 1.0) * mult
-	
-	#var new_x = clamp(
-	#	camera.global_position.x + -ratio * 100.0 * delta,
-	#	-48, 48
-	#)
-
-	#camera.global_position = Vector2(
-	#	new_x,
-	#	camera.global_position.y,
-	#)
-	
 func _update_objects_stats() -> void:
 	player_bullets_stats_count.text = str(player_bullets.get_child_count())
 	enemy_bullets_stats_count.text = str(enemies_bullets.get_child_count())

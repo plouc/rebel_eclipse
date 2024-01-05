@@ -27,7 +27,7 @@ func _ready():
 	)
 	
 	stats_component.no_health.connect(func():
-		SoundPlayer.play_sound(SoundPlayer.ENEMY_EXPLOSION)
+		SoundPlayer.play(SoundPlayer.ENEMY_EXPLOSION)
 		coin_grid.spawn()
 		power_up_bullets_spawner.spawn()
 

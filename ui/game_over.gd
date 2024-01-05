@@ -6,6 +6,8 @@ extends Control
 @onready var high_score_value: Label = %HighScoreValue
 
 func _ready():
+	SoundPlayer.stop_all()
+
 	if game_stats.score > game_stats.highscore:
 		game_stats.highscore = game_stats.score
 

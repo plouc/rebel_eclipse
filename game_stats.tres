@@ -9,3 +9,5 @@ chained_kills = 0
 hyper_level = 0
 score = 0
 highscore = 0
+ship_speed = 300.0
+is_power_up_extravaganza_enabled = false

@@ -27,7 +27,7 @@ func adjust_satellites(level: int):
 	var satellite_count: int = satellites.size()
 
 	if satellite_count < level:
-		var create_count = level - satellite_count
+		var create_count: int = level - satellite_count
 		
 		for _i in range(create_count):
 			var satellite = satellite_scene.instantiate()
@@ -36,15 +36,20 @@ func adjust_satellites(level: int):
 			satellites.append(satellite)
 
 	elif satellite_count > level:
-		var remove_count = satellite_count - level
-		print("should remove ", remove_count, " satellites")
+		var remove_count: int = satellite_count - level
+
+		for _i in range(remove_count):
+			var satellite = satellites[0]
+			
+			satellite.queue_free()
+			satellites.remove_at(0)
 
 func position_satellites():
 	if satellites.size() == 0:
 		return
 
 	var angle_step = 360.0 / float(satellites.size())
-	
+
 	for index in range(satellites.size()):
 		var angle = current_angle + index * angle_step
 		var satellite = satellites[index]

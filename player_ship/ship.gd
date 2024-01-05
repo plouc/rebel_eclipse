@@ -1,8 +1,10 @@
 class_name Ship
 extends Node2D
 
+@export var game_stats: GameStats
 @export var camera: Camera2D
 @export var position_margin: = 8
+@export var move_stats: MoveStats
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $Anchor/AnimatedSprite2D
 @onready var move_component: MoveComponent = $Movement/MoveComponent
@@ -17,10 +19,11 @@ var viewport_width = ProjectSettings.get_setting("display/window/size/viewport_w
 var viewport_height = ProjectSettings.get_setting("display/window/size/viewport_height")
 
 func _ready():
-	stats_component.no_health.connect(func():
-		SoundPlayer.play_sound(SoundPlayer.PLAYER_EXPLOSION)
-	)
+	stats_component.no_health.connect(_die)
 	hurtbox_component.hurt.connect(_hit.unbind(1))
+	hurtbox_component.crashed.connect(_die.unbind(1))
+	
+	move_stats.speed = game_stats.ship_speed
 
 func _process(_delta: float) -> void:
 	var edge_left = camera.global_position.x + position_margin
@@ -34,11 +37,15 @@ func _process(_delta: float) -> void:
 	animate_the_ship()
 
 func _hit():
-	SoundPlayer.play_sound(SoundPlayer.PLAYER_HIT)
+	SoundPlayer.play(SoundPlayer.PLAYER_HIT)
 	
 	flash_component.flash()
 	shake_component.tween_shake()
 	scale_component.tween_scale()
+
+func _die():
+	SoundPlayer.play(SoundPlayer.PLAYER_EXPLOSION)
+	queue_free()
 
 func animate_the_ship() -> void:
 	if move_component.velocity.x < 0:

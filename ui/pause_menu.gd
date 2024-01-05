@@ -16,6 +16,7 @@ func _ready():
 func _on_game_toggle_paused(is_paused: bool):
 	if is_paused:
 		show()
+		resume_button.grab_focus()
 	else:
 		hide()
 
@@ -23,4 +24,5 @@ func _on_resume_button_pressed():
 	game.is_paused = false
 
 func _on_exit_button_pressed():
+	game.is_paused = false
 	get_tree().change_scene_to_file("res://ui/main_menu.tscn")

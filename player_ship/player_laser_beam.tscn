@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://wlv2m8imfo0b"]
+[gd_scene load_steps=11 format=3 uid="uid://wlv2m8imfo0b"]
 
 [ext_resource type="Script" path="res://player_ship/player_laser_beam.gd" id="1_gryfl"]
 [ext_resource type="PackedScene" uid="uid://dceehn6xo2ne1" path="res://weapons/laser_beam/laser_beam.tscn" id="2_qinyh"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b1wtgaec2omvp" path="res://assets/laser_beam_blue_middle.png" id="6_80gbm"]
 [ext_resource type="Texture2D" uid="uid://bh8cyrnv4ag1u" path="res://assets/laser_beam_blue_end.png" id="7_f1iwy"]
 [ext_resource type="PackedScene" uid="uid://cauvlhr3x2ijp" path="res://weapons/laser_beam/laser_beam_blue_particles_shooting.tscn" id="8_xk0ts"]
+[ext_resource type="PackedScene" uid="uid://dswlf0dyotk6h" path="res://weapons/laser_beam/laser_beam_blue_particles_hit.tscn" id="10_i6y20"]
 
 [node name="PlayerLaserBeam" type="Node2D"]
 z_index = 5
@@ -18,7 +19,7 @@ laser_config = ExtResource("2_vwjk7")
 game_stats = ExtResource("3_asr1w")
 
 [node name="LaserBeam" parent="." instance=ExtResource("2_qinyh")]
-angle = -90.0
+rotation = -1.5708
 ray_width = 16.0
 beam_texture_single = ExtResource("5_0cd54")
 beam_texture_start = ExtResource("5_vaxnm")
@@ -26,4 +27,5 @@ beam_texture_middle = ExtResource("6_80gbm")
 beam_texture_end = ExtResource("7_f1iwy")
 beam_speed = 16.0
 shooting_particles_scene = ExtResource("8_xk0ts")
+hit_particles_scene = ExtResource("10_i6y20")
 is_player_laser = true

@@ -9,7 +9,7 @@ extends Node2D
 @export var attack_position_y: float = 140.0
 @export var exit_duration: float = 1.0
 @export var exit_position_y: float = 800.0
-@export var attack_duration: float = 12.0
+@export var attack_duration: float = 8.0
 
 @onready var root_anchor: Node2D = $RootAnchor
 @onready var ship_animated_sprite: AnimatedSprite2D = $RootAnchor/Anchor/ShipAnimatedSprite
@@ -175,7 +175,7 @@ func _hit():
 
 func _die():
 	score_component.adjust_score()
-	SoundPlayer.play_sound(SoundPlayer.PLAYER_EXPLOSION)
+	SoundPlayer.play(SoundPlayer.PLAYER_EXPLOSION)
 	
 	coin_grid.spawn()
 	
