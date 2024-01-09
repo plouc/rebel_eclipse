@@ -1,11 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckk0sm33s6n1w"]
+[gd_scene load_steps=9 format=3 uid="uid://ckk0sm33s6n1w"]
 
 [ext_resource type="Texture2D" uid="uid://dotjgkldfqar" path="res://assets/laser_red_fire_effect.png" id="2_0at70"]
 [ext_resource type="Script" path="res://projectiles/laser_red_impact_effect.gd" id="2_u353d"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dsk1e"]
-atlas = ExtResource("2_0at70")
-region = Rect2(0, 0, 14, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_47wke"]
 atlas = ExtResource("2_0at70")
@@ -31,9 +27,6 @@ region = Rect2(70, 0, 14, 14)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dsk1e")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_47wke")
 }, {
 "duration": 1.0,
@@ -50,7 +43,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 10.0
+"speed": 5.0
 }]
 
 [node name="LaserRedFireEffect" type="Node2D"]
@@ -59,7 +52,8 @@ script = ExtResource("2_u353d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = -1.5708
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_5g574")
 autoplay = "default"
-frame = 5
+frame = 4
 frame_progress = 1.0

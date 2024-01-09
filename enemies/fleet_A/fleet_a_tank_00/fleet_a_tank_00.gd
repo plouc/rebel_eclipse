@@ -17,7 +17,7 @@ extends Node2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var coin_grid: CoinGrid = $CoinGrid
 
-var bullets_spawn_interval_by_difficulty = {
+const bullets_spawn_interval_by_difficulty = {
 	GameStats.Difficulty.EASY: 1.0,
 	GameStats.Difficulty.NORMAL: 0.5,
 	GameStats.Difficulty.HARD: 0.25,
@@ -50,7 +50,7 @@ func _ready():
 	)
 
 	var bullet_spawner_interval: float = bullets_spawn_interval_by_difficulty[game_stats.difficulty]
-	bullet_spawner.interval = bullet_spawner_interval
+	bullet_spawner.firing_interval = bullet_spawner_interval
 
 func _intro_completed() -> void:
 	var velocity = Vector2(40, 40)

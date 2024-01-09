@@ -7,6 +7,7 @@ const AUDIO_LOOP_MAIN = preload("res://sounds/level_01_loop.wav")
 @export var bullets_config: BulletsConfig
 @export var satellites_config: SatellitesConfig
 @export var laser_config: LaserConfig
+@export var auto_screenshots: bool = false
 
 @onready var camera: Camera2D = $Camera2D
 @onready var ship: Ship = $Level/Ship
@@ -43,6 +44,7 @@ const AUDIO_LOOP_MAIN = preload("res://sounds/level_01_loop.wav")
 @onready var explosions: Node2D = %Explosions
 @onready var explosions_stats_count: Label = %ExplosionsStatsCount
 @onready var level_complete_menu: LevelCompleteMenu = $CanvasLayer/LevelCompleteMenu
+@onready var screenshot_timer: Timer = $ScreenshotTimer
 
 var viewport_width = ProjectSettings.get_setting("display/window/size/viewport_width")
 
@@ -55,8 +57,10 @@ var is_paused: bool = false:
 		toggle_game_paused.emit(is_paused)
 
 func _ready():
-	SoundPlayer.stop_all()
 	SoundPlayer.play_named("main", AUDIO_LOOP_MAIN)
+	tree_exited.connect(func():
+		SoundPlayer.stop_named("main")
+	)
 
 	game_stats.reset()
 	bullets_config.reset_level()
@@ -79,7 +83,7 @@ func _ready():
 	game_stats.difficulty_update.connect(update_difficulty)
 
 	ship.tree_exiting.connect(func():
-		await get_tree().create_timer(3.0).timeout
+		await get_tree().create_timer(2.0).timeout
 		get_tree().change_scene_to_file("res://ui/game_over.tscn")
 	)
 	
@@ -96,6 +100,10 @@ func _ready():
 	
 	game_stats.hyper_level_update.connect(update_hyper_level)
 	game_stats.hyper_level = 0
+	
+	screenshot_timer.timeout.connect(take_screenshot)
+	if auto_screenshots:
+		screenshot_timer.start()
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -177,3 +185,9 @@ func update_difficulty(difficulty: GameStats.Difficulty) -> void:
 		difficulty_label.text = "Hard"
 	elif difficulty == GameStats.Difficulty.HELL:
 		difficulty_label.text = "Hell"
+
+func take_screenshot():
+	var capture = get_viewport().get_texture().get_image()
+	var _time = Time.get_datetime_string_from_system()
+	var filename = "user://screenshots/screenshot_{0}.png".format({"0":_time})
+	capture.save_png(filename)

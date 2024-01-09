@@ -1,19 +1,103 @@
-[gd_scene load_steps=3 format=3 uid="uid://mpvi8gl65x54"]
+[gd_scene load_steps=9 format=3 uid="uid://mpvi8gl65x54"]
 
+[ext_resource type="Script" path="res://enemies/fleet_A/fleet_a_final_boss/fleet_a_final_boss_demo.gd" id="1_6jy18"]
 [ext_resource type="Texture2D" uid="uid://crpjvy31e7fte" path="res://assets/level_00.png" id="1_ii7yw"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="2_542lr"]
 [ext_resource type="PackedScene" uid="uid://cp44u22yew8xe" path="res://enemies/fleet_A/fleet_a_final_boss/fleet_a_final_boss.tscn" id="2_i01yi"]
+[ext_resource type="PackedScene" uid="uid://ci8evpk7jurqt" path="res://ui/demo_generic_menu.tscn" id="4_cx4cr"]
+[ext_resource type="Theme" uid="uid://b52id50jxytwb" path="res://ui/default_theme.tres" id="6_1yjw2"]
+
+[sub_resource type="Environment" id="Environment_8qino"]
+background_mode = 3
+ssr_enabled = true
+glow_enabled = true
+glow_intensity = 1.4
+glow_strength = 1.4
+fog_density = 1.0
+volumetric_fog_density = 1.0
+adjustment_brightness = 1.4
+adjustment_contrast = 1.3
+adjustment_saturation = 1.42
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c3pba"]
+bg_color = Color(0, 0, 0, 0.666667)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
 
 [node name="FleetAFinalBossDemo" type="Node2D"]
+script = ExtResource("1_6jy18")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-48, -4320)
+[node name="IntroDelayTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="DeathDelayTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("2_542lr")
+scene = ExtResource("2_i01yi")
+layer_name = "Boss"
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-48, -3711)
 texture = ExtResource("1_ii7yw")
 centered = false
+
+[node name="Boss" type="Node2D" parent="."]
+
+[node name="EnemiesBullets" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="ProjectilesEffects" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Explosions" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8qino")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(288, 288)
 
-[node name="FleetAFinalBoss" parent="." instance=ExtResource("2_i01yi")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="EnemiesBullets" type="Node2D" parent="."]
-unique_name_in_owner = true
+[node name="DemoGenericMenu" parent="CanvasLayer" instance=ExtResource("4_cx4cr")]
+demo_name = "Fleet A Final Boss"
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BreakPanel" type="Panel" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 0
+offset_left = -80.0
+offset_top = -52.0
+offset_right = 80.0
+offset_bottom = -12.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c3pba")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/BreakPanel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_1yjw2")
+text = "Press \"X\" to break stuff!"
+horizontal_alignment = 1

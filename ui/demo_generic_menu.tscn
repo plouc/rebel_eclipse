@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://ci8evpk7jurqt"]
+
+[ext_resource type="Script" path="res://ui/demo_generic_menu.gd" id="1_28hv3"]
+[ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_cn0j6"]
+[ext_resource type="Theme" uid="uid://b52id50jxytwb" path="res://ui/default_theme.tres" id="3_na8wt"]
+[ext_resource type="PackedScene" uid="uid://cdryh6ji63wc" path="res://ui/difficulty_option_button.tscn" id="4_cwqi2"]
+[ext_resource type="FontFile" uid="uid://kr1cdn3t5a0o" path="res://fonts/kenney_mini_square.ttf" id="5_pdv2t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6uqxg"]
+bg_color = Color(0, 0, 0, 0.666667)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
+[node name="DemoGenericMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_28hv3")
+game_stats = ExtResource("2_cn0j6")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 36)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6uqxg")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DifficultyLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_na8wt")
+text = "Difficulty"
+
+[node name="DifficultyOptionButton" parent="MarginContainer/Panel/MarginContainer/HBoxContainer" instance=ExtResource("4_cwqi2")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 8
+
+[node name="ExitMessage" type="Label" parent="MarginContainer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_na8wt")
+theme_override_colors/font_color = Color(0.213374, 0.423823, 0.480052, 1)
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("5_pdv2t")
+theme_override_font_sizes/font_size = 8
+text = "Press \"ESC\" to return
+to the selection menu"
+
+[node name="DemoNameLabel" type="Label" parent="MarginContainer/Panel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("3_na8wt")
+theme_type_variation = &"HeaderMedium"
+horizontal_alignment = 2

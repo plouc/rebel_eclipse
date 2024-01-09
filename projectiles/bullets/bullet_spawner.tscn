@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://drrfuw4nbvkxk"]
+
+[ext_resource type="Script" path="res://projectiles/bullets/bullet_spawner.gd" id="1_m1dli"]
+[ext_resource type="PackedScene" uid="uid://5f8785agjlvt" path="res://projectiles/bullets/bullet_00.tscn" id="2_g4v1s"]
+
+[node name="BulletSpawner" type="Node2D"]
+script = ExtResource("1_m1dli")
+bullet_scene = ExtResource("2_g4v1s")
+
+[node name="FiringTimer" type="Timer" parent="."]
+wait_time = 0.4

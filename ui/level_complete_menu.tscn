@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwmabteaaurpv"]
+[gd_scene load_steps=5 format=3 uid="uid://cwmabteaaurpv"]
 
 [ext_resource type="Script" path="res://ui/level_complete_menu.gd" id="1_2257c"]
-[ext_resource type="LabelSettings" uid="uid://i4b0m1n6dv1y" path="res://fonts/title_label_settings.tres" id="1_sk4e6"]
 [ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_33cv0"]
 [ext_resource type="Theme" uid="uid://b52id50jxytwb" path="res://ui/default_theme.tres" id="4_m3a06"]
-[ext_resource type="LabelSettings" uid="uid://da3ylqj7ctn0q" path="res://fonts/default_label_settings.tres" id="4_oovcc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prak1"]
 bg_color = Color(0, 0, 0, 0.494118)
@@ -44,33 +42,45 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_prak1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 30.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-theme_override_constants/separation = 16
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
-[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 24
+
+[node name="TitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 2
+theme = ExtResource("4_m3a06")
+theme_type_variation = &"HeaderMedium"
 text = "LEVEL COMPLETE"
-label_settings = ExtResource("1_sk4e6")
 horizontal_alignment = 1
 
-[node name="Message" type="Label" parent="Panel/VBoxContainer"]
+[node name="Message" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(240, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("4_m3a06")
+theme_type_variation = &"TooltipLabel"
 text = "Congratulations on completing this first level, this game is under development, and this is the only level available for now. Stay tuned!"
-label_settings = ExtResource("4_oovcc")
 autowrap_mode = 2
 
-[node name="MainMenuButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_m3a06")
+theme_type_variation = &"BigButton"
 text = " Main Menu"

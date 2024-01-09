@@ -9,15 +9,6 @@ extends Control
 @onready var power_up_extravaganza_check_button: CheckButton = %PowerUpExtravaganzaCheckButton
 
 func _ready():
-	for difficulty in game_stats.Difficulty.values():
-		difficulty_option_button.add_item(
-			game_stats.difficulty_label(difficulty as GameStats.Difficulty)
-		)
-
-	difficulty_option_button.selected = game_stats.difficulty
-	difficulty_option_button.item_selected.connect(func(index: int):
-		game_stats.difficulty = index as GameStats.Difficulty
-	)
 	difficulty_option_button.grab_focus()
 
 	ship_speed_slider.min_value = game_stats.min_ship_speed
@@ -27,15 +18,23 @@ func _ready():
 	ship_speed_value_label.text = str(int(game_stats.ship_speed))
 
 	ship_speed_slider.value_changed.connect(func(value: float):
+		SoundPlayer.play(SoundPlayer.UI_SLIDER_MOVE)
 		game_stats.ship_speed = value
 		ship_speed_value_label.text = str(int(value))
 	)
 
+	power_up_extravaganza_check_button.button_pressed = game_stats.is_power_up_extravaganza_enabled
 	power_up_extravaganza_check_button.toggled.connect(func(flag: bool):
+		SoundPlayer.play(SoundPlayer.UI_TOGGLE_ON if flag else SoundPlayer.UI_SLIDER_MOVE)
 		game_stats.is_power_up_extravaganza_enabled = flag
 	)
-	power_up_extravaganza_check_button.button_pressed = game_stats.is_power_up_extravaganza_enabled
 
-	done_button.pressed.connect(func():
+	done_button.pressed.connect(_on_done_button_pressed)
+
+func _input(event):
+	if event.is_action_pressed("ui_back"):
 		get_tree().change_scene_to_file("res://ui/main_menu.tscn")
-	)
+
+func _on_done_button_pressed():
+	SoundPlayer.play(SoundPlayer.UI_CONFIRM)
+	get_tree().change_scene_to_file("res://ui/main_menu.tscn")

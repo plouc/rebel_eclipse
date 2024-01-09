@@ -57,6 +57,8 @@ func _ready():
 	_set_hitboxes(not is_paused)
 	_adjust_damage(damage)
 	_set_shooting_particles(not is_paused)
+	
+	
 
 func _adjust_raycasts():
 	if not _is_ready:

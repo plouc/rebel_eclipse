@@ -44,23 +44,29 @@ horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 6
 
 [node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../MiscButton")
+focus_previous = NodePath("../MiscButton")
 theme = ExtResource("6_qstvw")
+theme_type_variation = &"BigButton"
 text = "Play"
 
 [node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("6_qstvw")
+theme_type_variation = &"BigButton"
 text = "Settings"
 
-[node name="TrainingButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="MiscButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../PlayButton")
+focus_next = NodePath("../PlayButton")
 theme = ExtResource("6_qstvw")
-text = "FLEET"
+theme_type_variation = &"BigButton"
+text = "Misc"

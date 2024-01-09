@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxldtuvfuljgf"]
+
+[ext_resource type="Script" path="res://ui/misc_menu.gd" id="1_s3s7l"]
+[ext_resource type="PackedScene" uid="uid://sdydv6n8gl2j" path="res://effects/space_background.tscn" id="2_6b34u"]
+[ext_resource type="Theme" uid="uid://b52id50jxytwb" path="res://ui/default_theme.tres" id="5_qihvj"]
+
+[node name="MiscMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s3s7l")
+
+[node name="SpaceBackground" parent="." instance=ExtResource("2_6b34u")]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BulletsDemoButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../FleetATank00DemoButton")
+focus_previous = NodePath("../FleetATank00DemoButton")
+theme = ExtResource("5_qihvj")
+theme_type_variation = &"BigButton"
+text = "Bullets Playground"
+alignment = 0
+
+[node name="FirstBossDemoButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_qihvj")
+theme_type_variation = &"BigButton"
+text = "Fleat A Final Boss"
+alignment = 0
+
+[node name="FleetAShip00DemoButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_qihvj")
+theme_type_variation = &"BigButton"
+text = "Fleet A Ship 00"
+alignment = 0
+
+[node name="FleetAShip01DemoButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_qihvj")
+theme_type_variation = &"BigButton"
+text = "Fleet A Ship 01"
+alignment = 0
+
+[node name="FleetAShip02DemoButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_qihvj")
+theme_type_variation = &"BigButton"
+text = "Fleet A Ship 02
+"
+alignment = 0
+
+[node name="FleetATank00DemoButton" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../BulletsDemoButton")
+theme = ExtResource("5_qihvj")
+theme_type_variation = &"BigButton"
+text = "Fleet A Tank 00"
+alignment = 0

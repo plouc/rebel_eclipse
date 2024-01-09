@@ -8,7 +8,10 @@ extends Node
 const FLASH_MATERIAL = preload("res://effects/white_flash_material.tres")
 
 # Export the sprite this compononet will be flashing
-@export var sprite: CanvasItem
+@export var sprite: CanvasItem:
+	set(value):
+		sprite = value
+		original_sprite_material = sprite.material
 
 # Export a duration for the flash
 @export var flash_duration: = 0.2
@@ -24,13 +27,17 @@ func _ready() -> void:
 	add_child(timer)
 	
 	# Store the original sprite material
-	original_sprite_material = sprite.material
+	if sprite:
+		original_sprite_material = sprite.material
 
 # This is the function we can use to activate this component
 func flash():
+	if not sprite:
+		return
+
 	# Set the sprite's material to the flash material
 	sprite.material = FLASH_MATERIAL
-	
+
 	# Start the timer (passing in the flash duration)
 	timer.start(flash_duration)
 	

@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://crtdm4i3oykb6"]
+
+[ext_resource type="Script" path="res://experiments/playground.gd" id="1_y487x"]
+[ext_resource type="Texture2D" uid="uid://bt6e462yxwjls" path="res://assets/checker_small.png" id="1_ym66h"]
+[ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_o0pab"]
+[ext_resource type="PackedScene" uid="uid://cb6paql0x7iq5" path="res://player_ship/ship.tscn" id="2_tkfa0"]
+[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullets/bullet_spawner.tscn" id="5_rl3nv"]
+
+[node name="Playground" type="Node2D"]
+script = ExtResource("1_y487x")
+game_stats = ExtResource("2_o0pab")
+
+[node name="Setup" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Setup"]
+texture_repeat = 2
+texture = ExtResource("1_ym66h")
+centered = false
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 576, 576)
+
+[node name="PlayerBullets" type="Node2D" parent="Setup"]
+unique_name_in_owner = true
+
+[node name="Ship" parent="Setup" node_paths=PackedStringArray("camera") instance=ExtResource("2_tkfa0")]
+position = Vector2(296, 480)
+camera = NodePath("../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="Setup"]
+anchor_mode = 0
+
+[node name="BulletSpawner" parent="." instance=ExtResource("5_rl3nv")]
+position = Vector2(288, 395)
+rotation = -1.5708
+is_player_bullet = true
+layer_name = "%PlayerBullets"
+firing_interval = 0.1
+bullet_speed = 200.0
+burst_amount = 12
+burst_spread = 90.0

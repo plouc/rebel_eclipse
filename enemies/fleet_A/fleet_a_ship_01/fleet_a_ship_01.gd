@@ -45,8 +45,8 @@ var center_laser_ray_count_per_difficulty = {
 var center_bullets_spawn_interval_by_difficulty = {
 	GameStats.Difficulty.EASY: 0.3,
 	GameStats.Difficulty.NORMAL: 0.2,
-	GameStats.Difficulty.HARD: 0.1,
-	GameStats.Difficulty.HELL: 0.05,
+	GameStats.Difficulty.HARD: 0.15,
+	GameStats.Difficulty.HELL: 0.1,
 }
 var current_mode: String = "compact"
 
@@ -82,7 +82,7 @@ func _adjust_difficulty(difficulty: GameStats.Difficulty = game_stats.difficulty
 	laser_beam_center.ray_count = center_laser_ray_count
 	
 	var bullet_spawner_center_interval: float = center_bullets_spawn_interval_by_difficulty[difficulty]
-	bullet_spawner_center.interval = bullet_spawner_center_interval
+	bullet_spawner_center.firing_interval = bullet_spawner_center_interval
 
 func _enter_screen() -> void:
 	var entering_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)

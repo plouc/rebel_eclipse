@@ -18,6 +18,33 @@ extends Node2D
 @onready var bullet_spawner: BulletSpawner = $Anchor/SubAnchor/BulletSpawner
 @onready var thruster: AnimatedSprite2D = $Anchor/SubAnchor/Thruster
 
+const weapons_config_by_difficulty = {
+	GameStats.Difficulty.EASY: {
+		"bullets_firing_interval": 1.4,
+		"bullets_speed": 300.0,
+		"bullets_burst_amount": 1,
+		"bullets_burst_speed_increment": 0.0,
+	},
+	GameStats.Difficulty.NORMAL: {
+		"bullets_firing_interval": 1.0,
+		"bullets_speed": 300.0,
+		"bullets_burst_amount": 1,
+		"bullets_burst_speed_increment": 0.0,
+	},
+	GameStats.Difficulty.HARD: {
+		"bullets_firing_interval": 0.8,
+		"bullets_speed": 300.0,
+		"bullets_burst_amount": 2,
+		"bullets_burst_speed_increment": 50.0,
+	},
+	GameStats.Difficulty.HELL: {
+		"bullets_firing_interval": 0.6,
+		"bullets_speed": 300.0,
+		"bullets_burst_amount": 3,
+		"bullets_burst_speed_increment": 50.0,
+	},
+}
+
 func _ready():
 	game_stats.spawned_enemy_count += 1
 
@@ -41,6 +68,17 @@ func _ready():
 	collision_box_component.process_mode = Node.PROCESS_MODE_DISABLED
 
 	stats_component.no_health.connect(_die)
+
+	game_stats.difficulty_update.connect(_adjust_difficulty)
+	_adjust_difficulty(game_stats.difficulty)
+
+func _adjust_difficulty(difficulty: GameStats.Difficulty):
+	var weapon_config = weapons_config_by_difficulty[difficulty]
+
+	bullet_spawner.firing_interval = weapon_config["bullets_firing_interval"]
+	bullet_spawner.bullet_speed = weapon_config["bullets_speed"]
+	bullet_spawner.burst_amount = weapon_config["bullets_burst_amount"]
+	bullet_spawner.burst_bullet_speed_increment = weapon_config["bullets_burst_speed_increment"]
 
 func _intro_completed():
 	animated_sprite_2d.play("spinning")

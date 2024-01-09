@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=3 uid="uid://bxwtfsaavlcsk"]
+[gd_scene load_steps=164 format=3 uid="uid://bxwtfsaavlcsk"]
 
 [ext_resource type="Script" path="res://enemies/fleet_A/fleet_a_final_boss/fleet_a_final_boss_head.gd" id="1_20vck"]
 [ext_resource type="Texture2D" uid="uid://cap32w66vskio" path="res://assets/fleet_a_final_boss_head.png" id="1_iy5tb"]
@@ -9,14 +9,14 @@
 [ext_resource type="Script" path="res://components/flash_component.gd" id="5_gyi3d"]
 [ext_resource type="Texture2D" uid="uid://i6ux3no21sji" path="res://assets/fleet_a_final_boss_head_shell.png" id="6_a2gf0"]
 [ext_resource type="Script" path="res://components/shake_component.gd" id="6_god1n"]
-[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullet_spawner.tscn" id="6_qunas"]
-[ext_resource type="PackedScene" uid="uid://bij4k6fyywem7" path="res://projectiles/enemy_projectiles/enemy_bullet_01.tscn" id="7_gjl38"]
+[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullets/bullet_spawner.tscn" id="6_qunas"]
 [ext_resource type="Texture2D" uid="uid://4j3qpjbvxish" path="res://assets/fleet_a_final_boss_head_intro.png" id="7_pgq3w"]
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="8_4vm20"]
 [ext_resource type="Texture2D" uid="uid://c7s8uk8y2l43j" path="res://assets/fleet_a_final_boss_head_cage.png" id="8_6qyy6"]
 [ext_resource type="Texture2D" uid="uid://cfn2xm2cfhhe5" path="res://assets/fleet_a_final_boss_head_skeleton.png" id="9_p2fgs"]
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="11_lpcar"]
 [ext_resource type="PackedScene" uid="uid://k4h04hchwd3r" path="res://effects/explosion_effect.tscn" id="12_mwnd3"]
+[ext_resource type="PackedScene" uid="uid://d1pw1sk2jfa83" path="res://projectiles/muzzle_flash_00.tscn" id="17_nq7wm"]
 [ext_resource type="Script" path="res://components/collision_box_component.gd" id="18_0khgb"]
 
 [sub_resource type="Animation" id="Animation_ysynx"]
@@ -48,6 +48,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_kn817"]
 resource_name = "twist"
+length = 1.3
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -57,7 +58,7 @@ tracks/0/path = NodePath("LaserBeamAnchor:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.75, 1),
+"times": PackedFloat32Array(0, 0.3, 1, 1.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [3.48787e-16, -0.349066, 0.349066, 3.48787e-16]
@@ -86,7 +87,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_n6f22"]
 resource_name = "expand"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -94,7 +95,7 @@ tracks/0/path = NodePath("LaserBeamAnchor:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
 "values": [Vector2(0, 119), Vector2(2.08165e-12, 157)]
@@ -102,7 +103,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_383ji"]
 resource_name = "retract"
-length = 0.5
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -110,7 +111,7 @@ tracks/0/path = NodePath("LaserBeamAnchor:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(0.4, 1),
 "update": 0,
 "values": [Vector2(2.08165e-12, 157), Vector2(2.08165e-12, 119)]
@@ -205,7 +206,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"intro",
-"speed": 20.0
+"speed": 15.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jv18m"]
@@ -228,10 +229,6 @@ region = Rect2(2016, 0, 672, 672)
 atlas = ExtResource("9_p2fgs")
 region = Rect2(2688, 0, 672, 672)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wiufs"]
-atlas = ExtResource("9_p2fgs")
-region = Rect2(3360, 0, 672, 672)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_r0pie"]
 atlas = ExtResource("9_p2fgs")
 region = Rect2(672, 2688, 672, 672)
@@ -251,10 +248,6 @@ region = Rect2(2688, 2688, 672, 672)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ldrxo"]
 atlas = ExtResource("9_p2fgs")
 region = Rect2(3360, 2688, 672, 672)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rl4lj"]
-atlas = ExtResource("9_p2fgs")
-region = Rect2(0, 3360, 672, 672)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mmlbh"]
 atlas = ExtResource("9_p2fgs")
@@ -336,10 +329,6 @@ region = Rect2(3360, 2016, 672, 672)
 atlas = ExtResource("9_p2fgs")
 region = Rect2(0, 2688, 672, 672)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_irvfs"]
-atlas = ExtResource("9_p2fgs")
-region = Rect2(672, 2688, 672, 672)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_7vgos"]
 animations = [{
 "frames": [{
@@ -357,13 +346,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rc1pm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wiufs")
 }],
 "loop": false,
 "name": &"expand",
-"speed": 20.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -380,13 +366,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ldrxo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rl4lj")
 }],
 "loop": false,
 "name": &"retract",
-"speed": 20.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -448,13 +431,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rb6o2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_irvfs")
 }],
 "loop": false,
 "name": &"twist",
-"speed": 20.0
+"speed": 15.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cgtco"]
@@ -477,10 +457,6 @@ region = Rect2(2016, 0, 672, 672)
 atlas = ExtResource("8_6qyy6")
 region = Rect2(2688, 0, 672, 672)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g4we4"]
-atlas = ExtResource("8_6qyy6")
-region = Rect2(3360, 0, 672, 672)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_qxi3o"]
 atlas = ExtResource("8_6qyy6")
 region = Rect2(672, 2688, 672, 672)
@@ -500,10 +476,6 @@ region = Rect2(2688, 2688, 672, 672)
 [sub_resource type="AtlasTexture" id="AtlasTexture_01upt"]
 atlas = ExtResource("8_6qyy6")
 region = Rect2(3360, 2688, 672, 672)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oniui"]
-atlas = ExtResource("8_6qyy6")
-region = Rect2(0, 3360, 672, 672)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ohey0"]
 atlas = ExtResource("8_6qyy6")
@@ -585,10 +557,6 @@ region = Rect2(3360, 2016, 672, 672)
 atlas = ExtResource("8_6qyy6")
 region = Rect2(0, 2688, 672, 672)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cj6c0"]
-atlas = ExtResource("8_6qyy6")
-region = Rect2(672, 2688, 672, 672)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_fcp15"]
 animations = [{
 "frames": [{
@@ -606,13 +574,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1jdx6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g4we4")
 }],
 "loop": false,
 "name": &"expand",
-"speed": 20.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -629,13 +594,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_01upt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oniui")
 }],
 "loop": false,
 "name": &"retract",
-"speed": 20.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -697,13 +659,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_od0hl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cj6c0")
 }],
 "loop": false,
 "name": &"twist",
-"speed": 20.0
+"speed": 15.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fj0gx"]
@@ -726,10 +685,6 @@ region = Rect2(2016, 0, 672, 672)
 atlas = ExtResource("1_iy5tb")
 region = Rect2(2688, 0, 672, 672)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_54yhn"]
-atlas = ExtResource("1_iy5tb")
-region = Rect2(3360, 0, 672, 672)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_3863n"]
 atlas = ExtResource("1_iy5tb")
 region = Rect2(672, 2688, 672, 672)
@@ -749,10 +704,6 @@ region = Rect2(2688, 2688, 672, 672)
 [sub_resource type="AtlasTexture" id="AtlasTexture_uomor"]
 atlas = ExtResource("1_iy5tb")
 region = Rect2(3360, 2688, 672, 672)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p322b"]
-atlas = ExtResource("1_iy5tb")
-region = Rect2(0, 3360, 672, 672)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dkcln"]
 atlas = ExtResource("1_iy5tb")
@@ -834,10 +785,6 @@ region = Rect2(3360, 2016, 672, 672)
 atlas = ExtResource("1_iy5tb")
 region = Rect2(0, 2688, 672, 672)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rot24"]
-atlas = ExtResource("1_iy5tb")
-region = Rect2(672, 2688, 672, 672)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_0itbr"]
 animations = [{
 "frames": [{
@@ -855,13 +802,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xf5o6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_54yhn")
 }],
 "loop": false,
 "name": &"expand",
-"speed": 20.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -878,13 +822,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uomor")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p322b")
 }],
 "loop": false,
 "name": &"retract",
-"speed": 20.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -946,13 +887,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dla0d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rot24")
 }],
 "loop": false,
 "name": &"twist",
-"speed": 20.0
+"speed": 15.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5dblr"]
@@ -975,10 +913,6 @@ region = Rect2(2016, 0, 672, 672)
 atlas = ExtResource("6_a2gf0")
 region = Rect2(2688, 0, 672, 672)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ns4t2"]
-atlas = ExtResource("6_a2gf0")
-region = Rect2(3360, 0, 672, 672)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_45w67"]
 atlas = ExtResource("6_a2gf0")
 region = Rect2(672, 2688, 672, 672)
@@ -998,10 +932,6 @@ region = Rect2(2688, 2688, 672, 672)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8g1fy"]
 atlas = ExtResource("6_a2gf0")
 region = Rect2(3360, 2688, 672, 672)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wp1xt"]
-atlas = ExtResource("6_a2gf0")
-region = Rect2(0, 3360, 672, 672)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qsof"]
 atlas = ExtResource("6_a2gf0")
@@ -1083,10 +1013,6 @@ region = Rect2(3360, 2016, 672, 672)
 atlas = ExtResource("6_a2gf0")
 region = Rect2(0, 2688, 672, 672)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kbb1u"]
-atlas = ExtResource("6_a2gf0")
-region = Rect2(672, 2688, 672, 672)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_2ilb3"]
 animations = [{
 "frames": [{
@@ -1104,13 +1030,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bj2co")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ns4t2")
 }],
 "loop": false,
 "name": &"expand",
-"speed": 20.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1127,13 +1050,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8g1fy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wp1xt")
 }],
 "loop": false,
 "name": &"retract",
-"speed": 20.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1195,13 +1115,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p2xhn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kbb1u")
 }],
 "loop": false,
 "name": &"twist",
-"speed": 20.0
+"speed": 15.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7n0vt"]
@@ -1265,13 +1182,11 @@ animation = &"intro"
 
 [node name="SkeletonBaseAnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7vgos")
-animation = &"retract"
-frame = 5
-frame_progress = 1.0
+animation = &"expand"
 
 [node name="SkeletonCageAnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fcp15")
-animation = &"twist"
+animation = &"expand"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0itbr")
@@ -1285,7 +1200,7 @@ animation = &"expand"
 position = Vector2(0, 119)
 
 [node name="LaserBeam" parent="LaserBeamAnchor" instance=ExtResource("2_w6bv8")]
-position = Vector2(0, 31)
+position = Vector2(0, 35)
 rotation = 1.5708
 max_length = 600.0
 is_paused = true
@@ -1309,28 +1224,44 @@ shape = SubResource("CircleShape2D_hdvqv")
 debug_color = Color(0.882353, 0.0901961, 0.776471, 0.419608)
 
 [node name="BulletSpawnerLefter" parent="LaserBeamAnchor" instance=ExtResource("6_qunas")]
-position = Vector2(-24, 12)
-rotation = 1.8326
-bullet_scene = ExtResource("7_gjl38")
-interval = 0.1
+position = Vector2(-26, -9)
+rotation = 1.5708
+is_active = false
+bullet_speed = 150.0
+firing_effect_scene = ExtResource("17_nq7wm")
+burst_amount = 7
+burst_bullet_speed_increment = 30.0
+burst_angle_increment = 8.0
 
 [node name="BulletSpawnerLeft" parent="LaserBeamAnchor" instance=ExtResource("6_qunas")]
-position = Vector2(-21, 16)
+position = Vector2(-21, -5)
 rotation = 1.5708
-bullet_scene = ExtResource("7_gjl38")
-interval = 0.1
+is_active = false
+bullet_speed = 200.0
+firing_effect_scene = ExtResource("17_nq7wm")
+burst_amount = 3
+burst_bullet_speed_increment = 50.0
+burst_angle_increment = -7.0
 
 [node name="BulletSpawnerRight" parent="LaserBeamAnchor" instance=ExtResource("6_qunas")]
-position = Vector2(21, 16)
+position = Vector2(21, -5)
 rotation = 1.5708
-bullet_scene = ExtResource("7_gjl38")
-interval = 0.1
+is_active = false
+bullet_speed = 200.0
+firing_effect_scene = ExtResource("17_nq7wm")
+burst_amount = 3
+burst_bullet_speed_increment = 50.0
+burst_angle_increment = 7.0
 
 [node name="BulletSpawnerRighter" parent="LaserBeamAnchor" instance=ExtResource("6_qunas")]
-position = Vector2(24, 12)
-rotation = 1.309
-bullet_scene = ExtResource("7_gjl38")
-interval = 0.1
+position = Vector2(26, -9)
+rotation = 1.5708
+is_active = false
+bullet_speed = 150.0
+firing_effect_scene = ExtResource("17_nq7wm")
+burst_amount = 7
+burst_bullet_speed_increment = 30.0
+burst_angle_increment = -8.0
 
 [node name="ExplosionSpawner" type="Node2D" parent="LaserBeamAnchor"]
 position = Vector2(2.08165e-12, 2.08165e-12)

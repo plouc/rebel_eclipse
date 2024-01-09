@@ -12,9 +12,9 @@
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="10_wkt0w"]
 [ext_resource type="PackedScene" uid="uid://k4h04hchwd3r" path="res://effects/explosion_effect.tscn" id="11_bq58g"]
 [ext_resource type="Texture2D" uid="uid://c4pgy6cfhc4r2" path="res://assets/fleet_a_tank_00.png" id="12_1nl6e"]
-[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullet_spawner.tscn" id="13_17ijl"]
-[ext_resource type="PackedScene" uid="uid://pmuu7pwnjj81" path="res://projectiles/enemy_projectiles/enemy_bullet_02.tscn" id="14_lldg4"]
-[ext_resource type="PackedScene" uid="uid://36fid7fd3mho" path="res://projectiles/bullet_firing_effect.tscn" id="15_1xem4"]
+[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullets/bullet_spawner.tscn" id="13_17ijl"]
+[ext_resource type="PackedScene" uid="uid://bossu8xv6yri4" path="res://projectiles/bullets/bullet_01.tscn" id="14_0bud2"]
+[ext_resource type="PackedScene" uid="uid://d1pw1sk2jfa83" path="res://projectiles/muzzle_flash_00.tscn" id="15_3d1l4"]
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="16_6gh26"]
 [ext_resource type="Script" path="res://bonuses/coins/coin_grid.gd" id="17_t33km"]
 [ext_resource type="PackedScene" uid="uid://dv4b11xyuwi7e" path="res://bonuses/coins/coin.tscn" id="18_rj8ct"]
@@ -425,10 +425,10 @@ rotation = -0.523599
 [node name="BulletSpawner" parent="BulletsSpawners" instance=ExtResource("13_17ijl")]
 position = Vector2(2.08165e-12, 28)
 rotation = 1.5708
-bullet_scene = ExtResource("14_lldg4")
-interval = 0.5
-firing_effect_scene = ExtResource("15_1xem4")
 is_active = false
+bullet_scene = ExtResource("14_0bud2")
+bullet_speed = 200.0
+firing_effect_scene = ExtResource("15_3d1l4")
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 2

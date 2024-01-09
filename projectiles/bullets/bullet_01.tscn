@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://bossu8xv6yri4"]
+
+[ext_resource type="PackedScene" uid="uid://dv3twnpi32w5f" path="res://projectiles/bullets/bullet.tscn" id="1_6l4tv"]
+[ext_resource type="Texture2D" uid="uid://bfbbtumyxcnsn" path="res://assets/pink_enemy_projectile.png" id="2_dw563"]
+[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullets/bullet_spawner.tscn" id="3_7v0xk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ofva"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1871x"]
+atlas = ExtResource("2_dw563")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0a600"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1871x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="Bullet01" instance=ExtResource("1_6l4tv")]
+lifetime = 0.8
+damage = 2.0
+should_activate_sub_spawners_on_expiration = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+shape = SubResource("CircleShape2D_0ofva")
+
+[node name="BulletAnimatedSprite" type="AnimatedSprite2D" parent="." index="3"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+scale = Vector2(1.6, 1.6)
+sprite_frames = SubResource("SpriteFrames_0a600")
+autoplay = "default"
+frame_progress = 0.399981
+
+[node name="BulletSpawner" parent="SubSpawners" index="0" instance=ExtResource("3_7v0xk")]
+is_active = false
+firing_interval = 0.1
+should_fire_only_once = true
+bullet_speed = 100.0
+burst_amount = 5
+burst_spread = 135.0

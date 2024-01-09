@@ -19,11 +19,23 @@ extends Node2D
 @onready var coin_grid: CoinGrid = $Anchor/CoinGrid
 @onready var collision_box_component: CollisionBoxComponent = $Anchor/CollisionBoxComponent
 
-var bullets_spawn_interval_per_difficulty = {
-	GameStats.Difficulty.EASY: 0.8,
-	GameStats.Difficulty.NORMAL: 0.6,
-	GameStats.Difficulty.HARD: 0.4,
-	GameStats.Difficulty.HELL: 0.3,
+const weapons_config_by_difficulty = {
+	GameStats.Difficulty.EASY: {
+		"bullets_firing_interval": 2,
+		"bullets_burst_amount": 3,
+	},
+	GameStats.Difficulty.NORMAL: {
+		"bullets_firing_interval": 1.6,
+		"bullets_burst_amount": 4,
+	},
+	GameStats.Difficulty.HARD: {
+		"bullets_firing_interval": 1.2,
+		"bullets_burst_amount": 5,
+	},
+	GameStats.Difficulty.HELL: {
+		"bullets_firing_interval": 0.8,
+		"bullets_burst_amount": 5,
+	},
 }
 
 var sinusoidal_movement_speed = 40
@@ -47,10 +59,9 @@ func _ready():
 	intro_animation_timer.timeout.connect(func():
 		ship_animated_sprite.play()
 	)
-	
-	var bullets_spawn_interval: float = bullets_spawn_interval_per_difficulty[game_stats.difficulty]
-	left_bullet_spawner.interval = bullets_spawn_interval
-	right_bullet_spawner.interval = bullets_spawn_interval
+
+	_adjust_difficulty(game_stats.difficulty)
+	game_stats.difficulty_update.connect(_adjust_difficulty)
 
 func _intro_completed():
 	thruster_animated_sprite.play("playing")
@@ -62,6 +73,17 @@ func _intro_completed():
 
 	left_bullet_spawner.is_active = true
 	right_bullet_spawner.is_active = true
+
+func _adjust_difficulty(difficulty: GameStats.Difficulty):
+	var weapon_config = weapons_config_by_difficulty[difficulty]
+
+	var firing_interval: float = weapon_config["bullets_firing_interval"]
+	left_bullet_spawner.firing_interval = firing_interval
+	right_bullet_spawner.firing_interval = firing_interval
+	
+	var burst_amount: int = weapon_config["bullets_burst_amount"]
+	left_bullet_spawner.burst_amount = burst_amount
+	right_bullet_spawner.burst_amount = burst_amount
 
 func _hit():
 	flash_component.flash()

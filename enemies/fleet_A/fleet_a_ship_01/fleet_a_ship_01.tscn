@@ -13,8 +13,8 @@
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="11_y2f21"]
 [ext_resource type="PackedScene" uid="uid://k4h04hchwd3r" path="res://effects/explosion_effect.tscn" id="12_41qr7"]
 [ext_resource type="Texture2D" uid="uid://bhrw3ptmlcims" path="res://assets/fleet_a_ship_01.png" id="13_jvckf"]
-[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullet_spawner.tscn" id="14_0hwfe"]
-[ext_resource type="PackedScene" uid="uid://pmuu7pwnjj81" path="res://projectiles/enemy_projectiles/enemy_bullet_02.tscn" id="15_k7pxl"]
+[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullets/bullet_spawner.tscn" id="14_0hwfe"]
+[ext_resource type="PackedScene" uid="uid://d1pw1sk2jfa83" path="res://projectiles/muzzle_flash_00.tscn" id="15_6wcl1"]
 [ext_resource type="PackedScene" uid="uid://dceehn6xo2ne1" path="res://weapons/laser_beam/laser_beam.tscn" id="16_r4l24"]
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="17_4eys8"]
 [ext_resource type="Script" path="res://components/collision_box_component.gd" id="18_fy8ja"]
@@ -368,9 +368,9 @@ frame = 5
 [node name="BulletSpawnerCenter" parent="RootAnchor/Anchor" instance=ExtResource("14_0hwfe")]
 position = Vector2(-40, 26)
 rotation = 1.5708
-bullet_scene = ExtResource("15_k7pxl")
-interval = 0.1
 is_active = false
+bullet_speed = 400.0
+firing_effect_scene = ExtResource("15_6wcl1")
 
 [node name="LaserBeamLeft" parent="RootAnchor/Anchor" instance=ExtResource("16_r4l24")]
 position = Vector2(-57, 31)
@@ -416,6 +416,111 @@ script = ExtResource("18_hnall")
 coin = ExtResource("19_d0cel")
 position_randomness = 3
 
+[node name="Marker2D10" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, -12)
+
+[node name="Marker2D45" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, -28)
+
+[node name="Marker2D23" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, -20)
+
+[node name="Marker2D24" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, -20)
+
+[node name="Marker2D25" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-8, -20)
+
+[node name="Marker2D9" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-8, -12)
+
+[node name="Marker2D28" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, -12)
+
+[node name="Marker2D22" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, -12)
+
+[node name="Marker2D8" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-16, -4)
+
+[node name="Marker2D30" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-24, -4)
+
+[node name="Marker2D11" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(16, -4)
+
+[node name="Marker2D29" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(24, -4)
+
+[node name="Marker2D17" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, -4)
+
+[node name="Marker2D18" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-8, -4)
+
+[node name="Marker2D21" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, -4)
+
+[node name="Marker2D51" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(24, 4)
+
+[node name="Marker2D47" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-24, 4)
+
+[node name="Marker2D39" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-32, 4)
+
+[node name="Marker2D40" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(32, 4)
+
+[node name="Marker2D7" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-16, 4)
+
+[node name="Marker2D12" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(16, 4)
+
+[node name="Marker2D16" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, 4)
+
+[node name="Marker2D19" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-8, 4)
+
+[node name="Marker2D20" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, 4)
+
+[node name="Marker2D50" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(24, 12)
+
+[node name="Marker2D38" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-32, 12)
+
+[node name="Marker2D46" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-24, 12)
+
+[node name="Marker2D43" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-40, 12)
+
+[node name="Marker2D41" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(32, 12)
+
+[node name="Marker2D44" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(40, 12)
+
+[node name="Marker2D5" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-8, 12)
+
+[node name="Marker2D6" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-16, 12)
+
+[node name="Marker2D13" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(16, 12)
+
+[node name="Marker2D14" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(8, 12)
+
+[node name="Marker2D15" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, 12)
+
 [node name="Marker2D3" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
 position = Vector2(8, 20)
 
@@ -427,6 +532,21 @@ position = Vector2(-8, 20)
 
 [node name="Marker2D52" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
 position = Vector2(-16, 20)
+
+[node name="Marker2D49" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(24, 20)
+
+[node name="Marker2D37" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-32, 20)
+
+[node name="Marker2D48" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(-24, 20)
+
+[node name="Marker2D42" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(32, 20)
+
+[node name="Marker2D26" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
+position = Vector2(0, 20)
 
 [node name="Marker2D31" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
 position = Vector2(-8, 28)
@@ -440,131 +560,11 @@ position = Vector2(16, 28)
 [node name="Marker2D34" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
 position = Vector2(24, 28)
 
-[node name="Marker2D49" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(24, 20)
-
-[node name="Marker2D50" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(24, 12)
-
-[node name="Marker2D51" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(24, 4)
-
 [node name="Marker2D35" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
 position = Vector2(-16, 28)
 
 [node name="Marker2D36" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
 position = Vector2(-24, 28)
-
-[node name="Marker2D37" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-32, 20)
-
-[node name="Marker2D38" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-32, 12)
-
-[node name="Marker2D46" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-24, 12)
-
-[node name="Marker2D47" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-24, 4)
-
-[node name="Marker2D48" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-24, 20)
-
-[node name="Marker2D43" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-40, 12)
-
-[node name="Marker2D39" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-32, 4)
-
-[node name="Marker2D40" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(32, 4)
-
-[node name="Marker2D41" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(32, 12)
-
-[node name="Marker2D44" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(40, 12)
-
-[node name="Marker2D42" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(32, 20)
-
-[node name="Marker2D5" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-8, 12)
-
-[node name="Marker2D6" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-16, 12)
-
-[node name="Marker2D7" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-16, 4)
-
-[node name="Marker2D8" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-16, -4)
-
-[node name="Marker2D30" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-24, -4)
-
-[node name="Marker2D9" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-8, -12)
-
-[node name="Marker2D10" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(8, -12)
-
-[node name="Marker2D11" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(16, -4)
-
-[node name="Marker2D29" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(24, -4)
-
-[node name="Marker2D12" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(16, 4)
-
-[node name="Marker2D13" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(16, 12)
-
-[node name="Marker2D14" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(8, 12)
-
-[node name="Marker2D15" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(0, 12)
-
-[node name="Marker2D16" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(0, 4)
-
-[node name="Marker2D17" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(0, -4)
-
-[node name="Marker2D28" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(0, -12)
-
-[node name="Marker2D18" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-8, -4)
-
-[node name="Marker2D19" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-8, 4)
-
-[node name="Marker2D20" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(8, 4)
-
-[node name="Marker2D21" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(8, -4)
-
-[node name="Marker2D22" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(8, -12)
-
-[node name="Marker2D23" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(8, -20)
-
-[node name="Marker2D24" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(0, -20)
-
-[node name="Marker2D45" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(0, -28)
-
-[node name="Marker2D25" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(-8, -20)
-
-[node name="Marker2D26" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
-position = Vector2(0, 20)
 
 [node name="Marker2D27" type="Marker2D" parent="RootAnchor/Anchor/CoinGrid"]
 position = Vector2(0, 28)

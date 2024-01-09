@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://wnur3soifwec"]
+
+[ext_resource type="Script" path="res://enemies/fleet_A/fleet_a_ship_01/fleet_a_ship_01_demo.gd" id="1_wkgll"]
+[ext_resource type="Texture2D" uid="uid://crpjvy31e7fte" path="res://assets/level_00.png" id="2_xtsh0"]
+[ext_resource type="PackedScene" uid="uid://dqp7ihu5xdrkr" path="res://enemies/fleet_A/fleet_a_ship_01/fleet_a_ship_01.tscn" id="3_ifd5x"]
+[ext_resource type="PackedScene" uid="uid://ci8evpk7jurqt" path="res://ui/demo_generic_menu.tscn" id="4_xgcxt"]
+
+[node name="FleetAShip01Demo" type="Node2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("1_wkgll")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, -3709)
+texture = ExtResource("2_xtsh0")
+centered = false
+offset = Vector2(-48, -48)
+
+[node name="FleetAShip01" parent="." instance=ExtResource("3_ifd5x")]
+position = Vector2(288, -100)
+attack_position_y = 160.0
+attack_duration = 9.22337e+18
+
+[node name="EnemiesBullets" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DemoGenericMenu" parent="CanvasLayer" instance=ExtResource("4_xgcxt")]
+demo_name = "Fleet A Ship 01"

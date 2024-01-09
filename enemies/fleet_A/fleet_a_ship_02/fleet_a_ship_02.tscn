@@ -13,12 +13,12 @@
 [ext_resource type="Script" path="res://components/destroyed_component.gd" id="7_6yq0t"]
 [ext_resource type="Script" path="res://bonuses/coins/coin_grid.gd" id="10_tme15"]
 [ext_resource type="PackedScene" uid="uid://dv4b11xyuwi7e" path="res://bonuses/coins/coin.tscn" id="11_f3i5o"]
-[ext_resource type="PackedScene" uid="uid://pmuu7pwnjj81" path="res://projectiles/enemy_projectiles/enemy_bullet_02.tscn" id="13_t5v4p"]
 [ext_resource type="Texture2D" uid="uid://cxvmb2ox8a5k7" path="res://assets/fleet_a_ship_02_thruster.png" id="14_7pq7i"]
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="14_ktb3r"]
+[ext_resource type="PackedScene" uid="uid://d1pw1sk2jfa83" path="res://projectiles/muzzle_flash_00.tscn" id="15_56tat"]
 [ext_resource type="PackedScene" uid="uid://k4h04hchwd3r" path="res://effects/explosion_effect.tscn" id="15_ott5c"]
 [ext_resource type="Script" path="res://components/collision_box_component.gd" id="15_y8dnf"]
-[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullet_spawner.tscn" id="16_chgi6"]
+[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullets/bullet_spawner.tscn" id="16_chgi6"]
 
 [sub_resource type="Animation" id="Animation_86rgq"]
 length = 0.001
@@ -349,11 +349,10 @@ shape = SubResource("CircleShape2D_vn63i")
 debug_color = Color(0.882353, 0.0901961, 0.776471, 0.419608)
 
 [node name="BulletSpawner" parent="Anchor/SubAnchor" instance=ExtResource("16_chgi6")]
-position = Vector2(-2.08165e-12, 21)
+position = Vector2(0, 29)
 rotation = 1.5708
-bullet_scene = ExtResource("13_t5v4p")
-interval = 0.6
 is_active = false
+firing_effect_scene = ExtResource("15_56tat")
 
 [node name="Thruster" type="AnimatedSprite2D" parent="Anchor/SubAnchor"]
 position = Vector2(0, -27)

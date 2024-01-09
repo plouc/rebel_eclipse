@@ -10,7 +10,7 @@ signal difficulty_update(new_difficulty: Difficulty)
 		difficulty = value
 		difficulty_update.emit(difficulty)
 
-func difficulty_label(difficulty_member: Difficulty) -> String:
+static func difficulty_label(difficulty_member: Difficulty) -> String:
 	if difficulty_member == Difficulty.EASY:
 		return "Easy"
 	if difficulty_member == Difficulty.NORMAL:
@@ -73,6 +73,9 @@ signal score_changed(new_score)
 
 @export var highscore: int = 0
 
+@export var spawned_coin_count: int = 0
+@export var collected_coin_count: int = 0
+
 func reset():
 	score = 0
 	hyper_level = 0
@@ -80,6 +83,8 @@ func reset():
 	killed_enemy_count = 0
 	chained_kills = 0
 	best_chained_kills = 0
+	spawned_coin_count = 0
+	collected_coin_count = 0
 
 var min_ship_speed: float = 200.0
 var max_ship_speed: float = 400.0

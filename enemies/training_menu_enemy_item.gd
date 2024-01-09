@@ -29,7 +29,7 @@ func _ready():
 func _selected():
 	_preview.play()
 	selected_outline.show()
-	
+
 func _inactive():
 	_preview.stop()
 	selected_outline.hide()

@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://2caqxnw462bj"]
+
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="1_etgay"]
+[ext_resource type="Texture2D" uid="uid://crpjvy31e7fte" path="res://assets/level_00.png" id="1_pchvk"]
+[ext_resource type="Script" path="res://enemies/fleet_A/fleet_a_tank_00/fleet_a_tank_00_demo.gd" id="1_sbwnq"]
+[ext_resource type="PackedScene" uid="uid://ctay6xbheuyys" path="res://enemies/fleet_A/fleet_a_tank_00/fleet_a_tank_00.tscn" id="2_io178"]
+[ext_resource type="PackedScene" uid="uid://ci8evpk7jurqt" path="res://ui/demo_generic_menu.tscn" id="5_wsudh"]
+
+[node name="FleetATank00Demo" type="Node2D"]
+script = ExtResource("1_sbwnq")
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("1_etgay")
+scene = ExtResource("2_io178")
+layer_name = "Tanks"
+
+[node name="SpawningTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, -1837)
+texture = ExtResource("1_pchvk")
+centered = false
+offset = Vector2(-48, -48)
+
+[node name="Tanks" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="EnemiesBullets" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DemoGenericMenu" parent="CanvasLayer" instance=ExtResource("5_wsudh")]
+demo_name = "Fleet A Tank 00"

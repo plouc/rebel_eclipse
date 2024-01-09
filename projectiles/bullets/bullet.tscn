@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dv3twnpi32w5f"]
+
+[ext_resource type="Script" path="res://projectiles/bullets/bullet.gd" id="1_8fqq6"]
+[ext_resource type="Script" path="res://components/flash_component.gd" id="2_i5qdb"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="2_jvc5n"]
+
+[node name="Bullet" type="Node2D"]
+script = ExtResource("1_8fqq6")
+
+[node name="Effects" type="Node" parent="."]
+
+[node name="FlashComponent" type="Node" parent="Effects"]
+script = ExtResource("2_i5qdb")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_jvc5n")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="SubSpawners" type="Node2D" parent="."]

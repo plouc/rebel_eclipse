@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b5fc6ci2ler17"]
+[gd_scene load_steps=6 format=3 uid="uid://b5fc6ci2ler17"]
 
 [ext_resource type="Script" path="res://ui/settings_menu.gd" id="1_uxpni"]
 [ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_cnkli"]
-[ext_resource type="LabelSettings" uid="uid://i4b0m1n6dv1y" path="res://fonts/title_label_settings.tres" id="2_qp0uc"]
+[ext_resource type="PackedScene" uid="uid://sdydv6n8gl2j" path="res://effects/space_background.tscn" id="3_umoe8"]
 [ext_resource type="Theme" uid="uid://b52id50jxytwb" path="res://ui/default_theme.tres" id="4_dv5rv"]
-[ext_resource type="LabelSettings" uid="uid://da3ylqj7ctn0q" path="res://fonts/default_label_settings.tres" id="5_0p5vb"]
-[ext_resource type="FontFile" uid="uid://kr1cdn3t5a0o" path="res://fonts/kenney_mini_square.ttf" id="5_ax1ft"]
+[ext_resource type="PackedScene" uid="uid://cdryh6ji63wc" path="res://ui/difficulty_option_button.tscn" id="5_8yfj2"]
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3
@@ -17,14 +16,7 @@ grow_vertical = 2
 script = ExtResource("1_uxpni")
 game_stats = ExtResource("2_cnkli")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
+[node name="SpaceBackground" parent="." instance=ExtResource("3_umoe8")]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -44,8 +36,9 @@ theme_override_constants/separation = 16
 
 [node name="SettingsTitle" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("4_dv5rv")
+theme_type_variation = &"HeaderLarge"
 text = "Settings"
-label_settings = ExtResource("2_qp0uc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -53,13 +46,13 @@ layout_mode = 2
 [node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(160, 2.08165e-12)
 layout_mode = 2
+theme = ExtResource("4_dv5rv")
+theme_type_variation = &"HeaderMedium"
 text = "Difficulty"
-label_settings = ExtResource("2_qp0uc")
 
-[node name="DifficultyOptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="DifficultyOptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_8yfj2")]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("4_dv5rv")
 
 [node name="ShipSpeed" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -68,8 +61,9 @@ layout_mode = 2
 custom_minimum_size = Vector2(160, 2.08165e-12)
 layout_mode = 2
 size_flags_vertical = 0
+theme = ExtResource("4_dv5rv")
+theme_type_variation = &"HeaderMedium"
 text = "Ship speed"
-label_settings = ExtResource("2_qp0uc")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ShipSpeed"]
 layout_mode = 2
@@ -88,25 +82,22 @@ layout_mode = 2
 [node name="ShipSpeedLabelSlow" type="Label" parent="MarginContainer/VBoxContainer/ShipSpeed/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.282353, 0.427451, 0.470588, 1)
-theme_override_fonts/font = ExtResource("5_ax1ft")
-theme_override_font_sizes/font_size = 8
+theme = ExtResource("4_dv5rv")
 text = "Slow"
 
 [node name="ShipSpeedValueLabel" type="Label" parent="MarginContainer/VBoxContainer/ShipSpeed/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("4_dv5rv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "100"
-label_settings = ExtResource("5_0p5vb")
 horizontal_alignment = 1
 
 [node name="ShipSpeedLabelFast" type="Label" parent="MarginContainer/VBoxContainer/ShipSpeed/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.282353, 0.427451, 0.470588, 1)
-theme_override_fonts/font = ExtResource("5_ax1ft")
-theme_override_font_sizes/font_size = 8
+theme = ExtResource("4_dv5rv")
 text = "Fast"
 horizontal_alignment = 2
 
@@ -117,8 +108,9 @@ layout_mode = 2
 custom_minimum_size = Vector2(160, 2.08165e-12)
 layout_mode = 2
 size_flags_vertical = 0
+theme = ExtResource("4_dv5rv")
+theme_type_variation = &"HeaderMedium"
 text = "CHEATING"
-label_settings = ExtResource("2_qp0uc")
 
 [node name="PowerUpExtravaganza" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Cheating"]
 layout_mode = 2
@@ -131,9 +123,11 @@ theme = ExtResource("4_dv5rv")
 text = "Power-Up Extravaganza"
 
 [node name="PowerUpExtravaganzaMessage" type="Label" parent="MarginContainer/VBoxContainer/Cheating/PowerUpExtravaganza"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
 layout_mode = 2
+theme = ExtResource("4_dv5rv")
+theme_type_variation = &"TooltipLabel"
 text = "Enable this to turn your ship into the ultimate powerhouse! It's not cheating; it's just making things a bit more... explosive."
-label_settings = ExtResource("5_0p5vb")
 autowrap_mode = 2
 
 [node name="DoneButton" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -143,4 +137,5 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 theme = ExtResource("4_dv5rv")
+theme_type_variation = &"BigButton"
 text = "Done"

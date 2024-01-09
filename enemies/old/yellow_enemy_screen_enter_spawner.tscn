@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd7aya0cfhpvb"]
+
+[ext_resource type="Script" path="res://components/screen_enter_spawner_component.gd" id="1_dvxan"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="2_8wi7p"]
+[ext_resource type="PackedScene" uid="uid://dg2sn41g1hepu" path="res://enemies/old/yellow_enemy.tscn" id="3_bc3jq"]
+
+[node name="YellowEnemyScreenEnterSpawner" type="Node2D"]
+
+[node name="ScreenEnterSpawnerComponent" type="Node2D" parent="." node_paths=PackedStringArray("notifier", "spawner")]
+script = ExtResource("1_dvxan")
+notifier = NodePath("../VisibleOnScreenNotifier2D")
+spawner = NodePath("../SpawnerComponent")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(4.76837e-07, 1.50001)
+scale = Vector2(2.4, 4.15)
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("2_8wi7p")
+scene = ExtResource("3_bc3jq")
+layer_name = "%AerialEnemies"

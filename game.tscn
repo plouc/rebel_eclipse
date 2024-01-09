@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://u7ggr5h1i34d"]
+[gd_scene load_steps=34 format=3 uid="uid://u7ggr5h1i34d"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_c4p4s"]
 [ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_314oq"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bs80j75gclh7s" path="res://levels/first_level.tscn" id="6_4ttpv"]
 [ext_resource type="PackedScene" uid="uid://cb6paql0x7iq5" path="res://player_ship/ship.tscn" id="7_oaau0"]
 [ext_resource type="PackedScene" uid="uid://che2n2xlysax4" path="res://camera_velocity_screen_enter_adjuster.tscn" id="7_xgwsv"]
+[ext_resource type="PackedScene" uid="uid://dx6va8hi7y8yn" path="res://levels/second_level.tscn" id="8_0f4an"]
 [ext_resource type="Texture2D" uid="uid://b58e3oyjb33s" path="res://assets/weapon_icon_bullets.png" id="8_ynh51"]
 [ext_resource type="FontFile" uid="uid://kr1cdn3t5a0o" path="res://fonts/kenney_mini_square.ttf" id="9_ya62o"]
 [ext_resource type="Texture2D" uid="uid://cpeetsw6x8swq" path="res://assets/weapon_progress_bullets_background.png" id="10_rx45a"]
@@ -30,13 +31,15 @@
 
 [sub_resource type="Environment" id="Environment_wn7o4"]
 background_mode = 3
+tonemap_mode = 3
+tonemap_exposure = 0.6
+tonemap_white = 1.2
 glow_enabled = true
 glow_levels/5 = 2.0
-glow_intensity = 1.1
-glow_strength = 1.1
+glow_intensity = 1.6
+glow_strength = 1.3
 glow_bloom = 0.01
 glow_blend_mode = 1
-adjustment_enabled = true
 adjustment_brightness = 0.8
 adjustment_contrast = 1.1
 adjustment_saturation = 1.1
@@ -61,6 +64,9 @@ bullets_config = ExtResource("3_bwg6c")
 satellites_config = ExtResource("4_dvqy5")
 laser_config = ExtResource("5_801h1")
 
+[node name="ScreenshotTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [node name="Level" type="Node2D" parent="."]
 process_mode = 1
 
@@ -71,6 +77,10 @@ actor = NodePath("../../Camera2D")
 velocity = Vector2(2.08165e-12, -60)
 
 [node name="FirstLevel" parent="Level" instance=ExtResource("6_4ttpv")]
+
+[node name="SecondLevel" parent="Level" node_paths=PackedStringArray("game") instance=ExtResource("8_0f4an")]
+visible = false
+game = NodePath("../..")
 
 [node name="CameraAdjusters" type="Node2D" parent="Level"]
 
@@ -145,33 +155,37 @@ unique_name_in_owner = true
 z_index = 4
 
 [node name="PlayerLaser" type="Node2D" parent="Level"]
-z_index = 3
+z_index = 5
 
-[node name="PlayerBullets" type="Node2D" parent="Level"]
+[node name="BulletsImpacts" type="Node2D" parent="Level"]
 unique_name_in_owner = true
 z_index = 6
 
-[node name="Explosions" type="Node2D" parent="Level"]
+[node name="PlayerBullets" type="Node2D" parent="Level"]
 unique_name_in_owner = true
 z_index = 7
 
-[node name="Bonuses" type="Node2D" parent="Level"]
+[node name="Explosions" type="Node2D" parent="Level"]
 unique_name_in_owner = true
 z_index = 8
 
-[node name="EnemiesBullets" type="Node2D" parent="Level"]
+[node name="Bonuses" type="Node2D" parent="Level"]
 unique_name_in_owner = true
 z_index = 9
 
-[node name="Ship" parent="Level" node_paths=PackedStringArray("camera") instance=ExtResource("7_oaau0")]
+[node name="EnemiesBullets" type="Node2D" parent="Level"]
 unique_name_in_owner = true
 z_index = 10
+
+[node name="Ship" parent="Level" node_paths=PackedStringArray("camera") instance=ExtResource("7_oaau0")]
+unique_name_in_owner = true
+z_index = 11
 position = Vector2(288, 530)
 camera = NodePath("../../Camera2D")
 
 [node name="ProjectilesEffects" type="Node2D" parent="Level"]
 unique_name_in_owner = true
-z_index = 11
+z_index = 12
 
 [node name="DangerAheadScreenEnterTrigger" parent="Level" node_paths=PackedStringArray("layer") instance=ExtResource("10_strpj")]
 position = Vector2(0, -6472)
@@ -577,6 +591,7 @@ size_flags_vertical = 8
 theme_override_constants/separation = 12
 
 [node name="ObjectsStats" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/BottomRight"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 3
 
@@ -733,10 +748,10 @@ text = "Normal"
 label_settings = ExtResource("23_gcrt7")
 horizontal_alignment = 2
 
+[node name="LevelCompleteMenu" parent="CanvasLayer" instance=ExtResource("25_8qphy")]
+
 [node name="PauseMenu" parent="CanvasLayer" node_paths=PackedStringArray("game") instance=ExtResource("22_ecp6w")]
 game = NodePath("../..")
-
-[node name="LevelCompleteMenu" parent="CanvasLayer" instance=ExtResource("25_8qphy")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(2.08165e-12, 2.08165e-12)

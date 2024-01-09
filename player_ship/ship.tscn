@@ -19,7 +19,7 @@
 [ext_resource type="Script" path="res://components/hurt_component.gd" id="13_tq8xb"]
 [ext_resource type="Script" path="res://components/destroyed_component.gd" id="15_rrc1k"]
 [ext_resource type="Texture2D" uid="uid://sx8m6i0fuwh8" path="res://assets/ship_thruster.png" id="16_onkmb"]
-[ext_resource type="PackedScene" uid="uid://d03bpn14pl2wc" path="res://projectiles/player_bullet.tscn" id="18_pefko"]
+[ext_resource type="PackedScene" uid="uid://d03bpn14pl2wc" path="res://projectiles/bullets/player_bullet.tscn" id="18_pefko"]
 [ext_resource type="Script" path="res://components/flash_component.gd" id="20_kfysw"]
 [ext_resource type="Script" path="res://components/shake_component.gd" id="21_akh5v"]
 [ext_resource type="PackedScene" uid="uid://b8517avovf7lk" path="res://player_ship/ship_satellites.tscn" id="21_bms77"]
@@ -148,6 +148,27 @@ script = ExtResource("1_eoin8")
 game_stats = ExtResource("2_1k6c3")
 move_stats = ExtResource("4_jbioj")
 
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hurtbox_component")]
+script = ExtResource("13_tq8xb")
+stats_component = NodePath("../StatsComponent")
+hurtbox_component = NodePath("../Collision/HurtboxComponent")
+
+[node name="StatsComponent" type="Node" parent="."]
+editor_description = "6"
+script = ExtResource("11_qjrxx")
+max_health = 12.0
+health = 12.0
+
+[node name="DestroyedComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "stats_component", "destroy_effect_spawner_component")]
+script = ExtResource("15_rrc1k")
+actor = NodePath("..")
+stats_component = NodePath("../StatsComponent")
+destroy_effect_spawner_component = NodePath("../ExplosionSpawnerComponent")
+
+[node name="ExplosionSpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("7_krfut")
+scene = ExtResource("13_64yjw")
+
 [node name="Movement" type="Node" parent="."]
 
 [node name="MoveComponent" type="Node" parent="Movement" node_paths=PackedStringArray("actor")]
@@ -166,16 +187,17 @@ move_component = NodePath("../MoveComponent")
 [node name="FlashComponent" type="Node" parent="Effects" node_paths=PackedStringArray("sprite")]
 script = ExtResource("20_kfysw")
 sprite = NodePath("../../Anchor/AnimatedSprite2D")
+flash_duration = 0.4
 
 [node name="ShakeComponent" type="Node" parent="Effects" node_paths=PackedStringArray("node")]
 script = ExtResource("21_akh5v")
 node = NodePath("../../Anchor")
-shake_amount = 4.0
+shake_amount = 6.0
 
 [node name="ScaleComponent" type="Node" parent="Effects" node_paths=PackedStringArray("sprite")]
 script = ExtResource("9_5l5ce")
 sprite = NodePath("../../Anchor")
-scale_amount = Vector2(1.2, 1.2)
+scale_amount = Vector2(1.4, 1.4)
 scale_duration = 0.2
 
 [node name="PlayerLaserBeam" parent="." instance=ExtResource("8_jneuc")]
@@ -254,27 +276,6 @@ bullet_scene = ExtResource("18_pefko")
 position = Vector2(-13, 17)
 rotation = 1.5708
 bullet_scene = ExtResource("18_pefko")
-
-[node name="StatsComponent" type="Node" parent="."]
-editor_description = "6"
-script = ExtResource("11_qjrxx")
-max_health = 10.0
-health = 10.0
-
-[node name="ExplosionSpawnerComponent" type="Node2D" parent="."]
-script = ExtResource("7_krfut")
-scene = ExtResource("13_64yjw")
-
-[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hurtbox_component")]
-script = ExtResource("13_tq8xb")
-stats_component = NodePath("../StatsComponent")
-hurtbox_component = NodePath("../Collision/HurtboxComponent")
-
-[node name="DestroyedComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "stats_component", "destroy_effect_spawner_component")]
-script = ExtResource("15_rrc1k")
-actor = NodePath("..")
-stats_component = NodePath("../StatsComponent")
-destroy_effect_spawner_component = NodePath("../ExplosionSpawnerComponent")
 
 [node name="Collision" type="Node2D" parent="."]
 

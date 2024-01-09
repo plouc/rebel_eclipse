@@ -3,34 +3,57 @@ extends Node
 const PLAYER_EXPLOSION = preload("res://sounds/player_explosion.wav")
 const ENEMY_EXPLOSION = preload("res://sounds/enemy_explosion.wav")
 const COIN = preload("res://sounds/coin_collect.wav")
+const COINS = preload("res://sounds/coins_pickup.wav")
 const PLAYER_HIT = preload("res://sounds/player_hit.wav")
 const POWER_UP_BULLETS = preload("res://sounds/bullets_power_up.wav")
 const HYPER_LEVEL_UP = preload("res://sounds/hyper_level_up.wav")
-const UI_ACTION = preload("res://sounds/ui_action.wav")
+const UI_CONFIRM = preload("res://sounds/ui_confirm.wav")
+const UI_ENTER_BUTTON = preload("res://sounds/ui_enter_button.ogg")
+const UI_SELECT = preload("res://sounds/ui_select.wav")
+const UI_TOGGLE_ON = preload("res://sounds/ui_toggle_on.wav")
+const UI_SLIDER_MOVE = preload("res://sounds/ui_slider_move.wav")
+const GAME_OVER_SCREEN = preload("res://sounds/game_over_screen.wav")
 
 const VOLUME_MUTED: float = -40.0
 
+@export var throttling: float = 0.05
+
 @onready var audio_players: Node = $AudioPlayers
 
+var time: float = 0
 var player_by_name = {}
+var latest_play_by_stream = {}
 
-func get_free_player():
+func _process(delta):
+	time += delta
+
+func _should_throttle(stream: AudioStream) -> bool:
+	if stream.resource_path not in latest_play_by_stream:
+		return false
+
+	var latest_play_time: float = latest_play_by_stream[stream.resource_path]
+	return (time - latest_play_time) < throttling
+
+func _get_free_player():
 	for audio_stream_player in audio_players.get_children() as Array[AudioStreamPlayer]:
 		if not audio_stream_player.playing:
 			return audio_stream_player
 
-	# print("No free audio player available")
-
 	return null
 
 func play(stream: AudioStream, volume: float = 0.0):
-	var player = get_free_player()
+	if _should_throttle(stream):
+		return
+
+	var player = _get_free_player()
 	if not player:
 		return
 	
 	player.stream = stream
 	player.volume_db = volume
 	player.play()
+	
+	latest_play_by_stream[stream.resource_path] = time
 	
 	return player
 
@@ -53,7 +76,7 @@ func play_for_duration(
 	fade_in_duration: float = 0.0,
 	fade_out_duration: float = 0.0
 ):
-	var player = get_free_player()
+	var player = _get_free_player()
 	if not player:
 		return
 
@@ -91,20 +114,32 @@ func fade_transition(
 	duration: float = 4.0,
 	volume: float = 0.0
 ):
-	if sound_name not in player_by_name:
-		# print("Player not found")
-		return
-
-	var player = player_by_name[sound_name]
+	var player: AudioStreamPlayer
+	if sound_name in player_by_name:
+		player = player_by_name[sound_name]
 	
-	await fade_out(player, duration / 2.0)
+		await fade_out(player, duration / 2.0)
 
-	player.stop()
+		player.stop()
+	else:
+		player = _get_free_player()
+		if not player:
+			return
+			
+		player_by_name[sound_name] = player
+
 	player.stream = stream
 	player.volume_db = -40.0
 	player.play()
 	
 	await fade_in(player, volume, duration / 2.0)
+
+func stop_named(sound_name: String):
+	if sound_name not in player_by_name:
+		return
+
+	var player = player_by_name[sound_name]
+	player.stop()
 
 func stop_all():
 	for audio_stream_player in audio_players.get_children() as Array[AudioStreamPlayer]:

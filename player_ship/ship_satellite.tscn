@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://diuwk3m0hpgl"]
 
-[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullet_spawner.tscn" id="1_s2hrc"]
-[ext_resource type="PackedScene" uid="uid://d03bpn14pl2wc" path="res://projectiles/player_bullet.tscn" id="2_ojjby"]
+[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullets/bullet_spawner.tscn" id="1_s2hrc"]
+[ext_resource type="PackedScene" uid="uid://d03bpn14pl2wc" path="res://projectiles/bullets/player_bullet.tscn" id="2_ojjby"]
 [ext_resource type="PackedScene" uid="uid://36fid7fd3mho" path="res://projectiles/bullet_firing_effect.tscn" id="3_bjmks"]
 [ext_resource type="Texture2D" uid="uid://bsc4njaq247xd" path="res://assets/satellite.png" id="4_1bov2"]
 
@@ -27,7 +27,8 @@ position = Vector2(0, -13)
 rotation = -1.5708
 bullet_scene = ExtResource("2_ojjby")
 layer_name = "%PlayerBullets"
-interval = 0.2
+firing_interval = 0.4
+bullet_speed = 500.0
 firing_effect_scene = ExtResource("3_bjmks")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

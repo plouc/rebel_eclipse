@@ -26,18 +26,27 @@ extends Node2D
 @onready var explosion_spawner:SpawnerComponent = $LaserBeamAnchor/ExplosionSpawner
 @onready var collision_box_component: CollisionBoxComponent = $LaserBeamAnchor/CollisionBoxComponent
 
-var laser_rays_by_difficulty = {
-	GameStats.Difficulty.EASY: 2,
-	GameStats.Difficulty.NORMAL: 3,
-	GameStats.Difficulty.HARD: 4,
-	GameStats.Difficulty.HELL: 5,
-}
-
-var firing_interval_by_difficulty = {
-	GameStats.Difficulty.EASY: 0.4,
-	GameStats.Difficulty.NORMAL: 0.3,
-	GameStats.Difficulty.HARD: 0.2,
-	GameStats.Difficulty.HELL: 0.1,
+var weapons_config_by_difficulty = {
+	GameStats.Difficulty.EASY: {
+		"laser_ray_count": 2,
+		"bullets_firing_interval": 1.2,
+		"bullets_outer_burst_amount": 3,
+	},
+	GameStats.Difficulty.NORMAL: {
+		"laser_ray_count": 3,
+		"bullets_firing_interval": 1.0,
+		"bullets_outer_burst_amount": 5,
+	},
+	GameStats.Difficulty.HARD: {
+		"laser_ray_count": 4,
+		"bullets_firing_interval": 0.6,
+		"bullets_outer_burst_amount": 7,
+	},
+	GameStats.Difficulty.HELL: {
+		"laser_ray_count": 5,
+		"bullets_firing_interval": 0.4,
+		"bullets_outer_burst_amount": 13,
+	},
 }
 
 var stage: int = 0
@@ -47,15 +56,15 @@ signal dead(head)
 
 func _ready():
 	laser_beam.is_paused = true
-	laser_beam.ray_count = laser_rays_by_difficulty[game_stats.difficulty]
-	
+	_adjust_laser_for_difficulty(game_stats.difficulty)
+
 	flash_effect = shell_flash_component
 
 	_switch_bullets(false)
 	_adjust_bullets_for_difficulty(game_stats.difficulty)
 	
 	game_stats.difficulty_update.connect(func(difficulty):
-		laser_beam.ray_count = laser_rays_by_difficulty[difficulty]
+		_adjust_laser_for_difficulty(difficulty)
 		_adjust_bullets_for_difficulty(difficulty)
 	)
 	
@@ -107,13 +116,23 @@ func _intro_completed():
 
 	_expand()
 
-func _adjust_bullets_for_difficulty(difficulty: GameStats.Difficulty):
-	var interval: float = firing_interval_by_difficulty[difficulty]
+func _adjust_laser_for_difficulty(difficulty: GameStats.Difficulty):
+	var ray_count: int = weapons_config_by_difficulty[difficulty]["laser_ray_count"]
+	
+	laser_beam.ray_count = ray_count
 
-	bullet_spawner_lefter.interval = interval
-	bullet_spawner_left.interval = interval
-	bullet_spawner_right.interval = interval
-	bullet_spawner_righter.interval = interval
+func _adjust_bullets_for_difficulty(difficulty: GameStats.Difficulty):
+	var weapons_config = weapons_config_by_difficulty[difficulty]
+
+	var firing_interval: float = weapons_config["bullets_firing_interval"]
+	bullet_spawner_lefter.firing_interval = firing_interval
+	bullet_spawner_left.firing_interval = firing_interval
+	bullet_spawner_right.firing_interval = firing_interval
+	bullet_spawner_righter.firing_interval = firing_interval
+	
+	var outer_burst_amount: int = weapons_config["bullets_outer_burst_amount"]
+	bullet_spawner_lefter.burst_amount = outer_burst_amount
+	bullet_spawner_righter.burst_amount = outer_burst_amount
 
 func _switch_bullets(is_active: bool):
 	bullet_spawner_lefter.is_active = is_active

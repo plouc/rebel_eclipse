@@ -1,0 +1,223 @@
+[gd_scene load_steps=30 format=3 uid="uid://rfl3jjj7fcrr"]
+
+[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullets/bullet_spawner.tscn" id="1_3ya2n"]
+[ext_resource type="Script" path="res://enemies/old/turret.gd" id="1_md5fj"]
+[ext_resource type="Script" path="res://components/flash_component.gd" id="2_bvmre"]
+[ext_resource type="Texture2D" uid="uid://hmcisghofp0u" path="res://assets/turret_00.png" id="2_y0c3e"]
+[ext_resource type="Script" path="res://components/shake_component.gd" id="3_nppll"]
+[ext_resource type="PackedScene" uid="uid://cagudumf4py40" path="res://projectiles/laser_red_fire_effect.tscn" id="4_gbhjg"]
+[ext_resource type="Script" path="res://components/destroyed_component.gd" id="5_5ktxe"]
+[ext_resource type="Script" path="res://components/health_bar_component.gd" id="6_ggt1t"]
+[ext_resource type="Script" path="res://components/scale_component.gd" id="7_cjlm2"]
+[ext_resource type="Script" path="res://components/stats_component.gd" id="7_djjus"]
+[ext_resource type="Script" path="res://components/score_component.gd" id="7_n0pix"]
+[ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="8_binb5"]
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="8_lr85f"]
+[ext_resource type="Script" path="res://components/hurt_component.gd" id="9_glo3f"]
+[ext_resource type="PackedScene" uid="uid://k4h04hchwd3r" path="res://effects/explosion_effect.tscn" id="10_se3jf"]
+[ext_resource type="Texture2D" uid="uid://cmspuvcoceh7r" path="res://assets/turret_00_top.png" id="12_urtq8"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="14_dm5bl"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="17_xm7p5"]
+[ext_resource type="PackedScene" uid="uid://2ycduetncn5f" path="res://bonuses/power_up_bullets/power_up_bullets.tscn" id="18_tafrv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6ys3"]
+atlas = ExtResource("2_y0c3e")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_equl8"]
+atlas = ExtResource("2_y0c3e")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifylh"]
+atlas = ExtResource("2_y0c3e")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqnxr"]
+atlas = ExtResource("2_y0c3e")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uvq1t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6ys3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_equl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifylh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqnxr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmlks"]
+atlas = ExtResource("12_urtq8")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p28gj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qmlks")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bt1b"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.529412, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_size = 3
+shadow_offset = Vector2(2.08165e-12, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmdjp"]
+bg_color = Color(1, 0.529412, 0, 1)
+shadow_offset = Vector2(2.08165e-12, 2.08165e-12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_twisu"]
+radius = 33.0
+
+[node name="Turret" type="Node2D"]
+script = ExtResource("1_md5fj")
+game_stats = ExtResource("8_binb5")
+
+[node name="State" type="Node" parent="."]
+
+[node name="MoveComponent" type="Node" parent="State" node_paths=PackedStringArray("actor")]
+script = ExtResource("17_xm7p5")
+actor = NodePath("../..")
+velocity = Vector2(2.08165e-12, 60)
+
+[node name="StatsComponent" type="Node" parent="State"]
+script = ExtResource("7_djjus")
+max_health = 80
+health = 80
+
+[node name="HurtComponent" type="Node" parent="State" node_paths=PackedStringArray("stats_component", "hurtbox_component")]
+script = ExtResource("9_glo3f")
+stats_component = NodePath("../StatsComponent")
+hurtbox_component = NodePath("../../HurtboxComponent")
+
+[node name="HealthBarComponent" type="Node" parent="State" node_paths=PackedStringArray("progress_bar", "stats_component")]
+script = ExtResource("6_ggt1t")
+progress_bar = NodePath("../../UI/ProgressBar")
+color = Color(1, 0.529412, 0, 1)
+stats_component = NodePath("../StatsComponent")
+
+[node name="DestroyedComponent" type="Node" parent="State" node_paths=PackedStringArray("actor", "stats_component", "destroy_effect_spawner_component")]
+script = ExtResource("5_5ktxe")
+actor = NodePath("../..")
+stats_component = NodePath("../StatsComponent")
+destroy_effect_spawner_component = NodePath("../../Effects/ExplosionSpawner")
+
+[node name="ScoreComponent" type="Node" parent="State"]
+script = ExtResource("7_n0pix")
+game_stats = ExtResource("8_binb5")
+adjust_amount = 100
+
+[node name="Effects" type="Node" parent="."]
+
+[node name="FlashComponent" type="Node" parent="Effects" node_paths=PackedStringArray("sprite")]
+script = ExtResource("2_bvmre")
+sprite = NodePath("../../RotatingAnchor/AnimatedSprite2D")
+flash_duration = 0.1
+
+[node name="ShakeComponent" type="Node" parent="Effects" node_paths=PackedStringArray("node")]
+script = ExtResource("3_nppll")
+node = NodePath("../../RotatingAnchor/AnimatedSprite2D")
+shake_amount = 4.0
+
+[node name="ScaleComponent" type="Node" parent="Effects" node_paths=PackedStringArray("sprite")]
+script = ExtResource("7_cjlm2")
+sprite = NodePath("../../RotatingAnchor/AnimatedSprite2D")
+scale_amount = Vector2(1.2, 1.2)
+scale_duration = 0.2
+
+[node name="ExplosionSpawner" type="Node2D" parent="Effects"]
+script = ExtResource("14_dm5bl")
+scene = ExtResource("10_se3jf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uvq1t")
+autoplay = "default"
+frame_progress = 0.816408
+
+[node name="RotatingAnchor" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RotatingAnchor"]
+sprite_frames = SubResource("SpriteFrames_p28gj")
+
+[node name="BulletsSpawners" type="Node2D" parent="RotatingAnchor"]
+
+[node name="BulletsSpawnersTimer" type="Timer" parent="RotatingAnchor/BulletsSpawners"]
+
+[node name="BulletSpawnerRight" parent="RotatingAnchor/BulletsSpawners" instance=ExtResource("1_3ya2n")]
+position = Vector2(44, 2.08165e-12)
+firing_effect_scene = ExtResource("4_gbhjg")
+
+[node name="BulletSpawnerBottom" parent="RotatingAnchor/BulletsSpawners" instance=ExtResource("1_3ya2n")]
+position = Vector2(0, 44)
+rotation = 1.5708
+firing_effect_scene = ExtResource("4_gbhjg")
+
+[node name="BulletSpawnerLeft" parent="RotatingAnchor/BulletsSpawners" instance=ExtResource("1_3ya2n")]
+position = Vector2(-44, 0)
+rotation = 3.14159
+firing_effect_scene = ExtResource("4_gbhjg")
+
+[node name="BulletSpawnerTop" parent="RotatingAnchor/BulletsSpawners" instance=ExtResource("1_3ya2n")]
+position = Vector2(0, -44)
+rotation = 4.71239
+firing_effect_scene = ExtResource("4_gbhjg")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="UI"]
+custom_minimum_size = Vector2(70, 6)
+layout_mode = 0
+offset_left = -35.0
+offset_top = -53.0
+offset_right = 35.0
+offset_bottom = -47.0
+theme_override_styles/background = SubResource("StyleBoxFlat_6bt1b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xmdjp")
+value = 50.0
+show_percentage = false
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("8_lr85f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_twisu")
+
+[node name="PowerUpBulletsSpawner" type="Node2D" parent="."]
+visible = false
+script = ExtResource("14_dm5bl")
+scene = ExtResource("18_tafrv")
+position_randomness = 30
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.13687e-13, -0.250001)
+scale = Vector2(4, 5.525)

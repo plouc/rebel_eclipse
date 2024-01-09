@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://d323frsh05j7h"]
+[gd_scene load_steps=43 format=3 uid="uid://d323frsh05j7h"]
 
 [ext_resource type="Script" path="res://enemies/fleet_A/fleet_a_ship_00/fleet_a_ship_00.gd" id="1_wpcfb"]
 [ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_hics5"]
@@ -14,9 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://k4h04hchwd3r" path="res://effects/explosion_effect.tscn" id="12_3phwk"]
 [ext_resource type="Texture2D" uid="uid://b0pdabmjm3tu6" path="res://assets/fleet_a_ship_00.png" id="13_rh44g"]
 [ext_resource type="Texture2D" uid="uid://dav287q3c5rm1" path="res://assets/fleet_a_ship_00_thruster.png" id="14_0uc7w"]
-[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullet_spawner.tscn" id="15_hb7ln"]
-[ext_resource type="PackedScene" uid="uid://bij4k6fyywem7" path="res://projectiles/enemy_projectiles/enemy_bullet_01.tscn" id="16_33ax5"]
-[ext_resource type="PackedScene" uid="uid://36fid7fd3mho" path="res://projectiles/bullet_firing_effect.tscn" id="17_kaagi"]
+[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullets/bullet_spawner.tscn" id="15_hb7ln"]
+[ext_resource type="PackedScene" uid="uid://d1pw1sk2jfa83" path="res://projectiles/muzzle_flash_00.tscn" id="17_i6is1"]
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="18_ok500"]
 [ext_resource type="Script" path="res://components/collision_box_component.gd" id="19_86nj3"]
 [ext_resource type="Script" path="res://bonuses/coins/coin_grid.gd" id="19_c08ap"]
@@ -236,8 +235,6 @@ layer_name = "%Explosions"
 [node name="ShipAnimatedSprite" type="AnimatedSprite2D" parent="Anchor"]
 position = Vector2(-1, 0)
 sprite_frames = SubResource("SpriteFrames_tm5sj")
-frame = 10
-frame_progress = 1.0
 
 [node name="ThrusterAnimatedSprite" type="AnimatedSprite2D" parent="Anchor"]
 material = SubResource("CanvasItemMaterial_1n8qf")
@@ -245,20 +242,24 @@ position = Vector2(0, -46)
 sprite_frames = SubResource("SpriteFrames_q4w75")
 
 [node name="LeftBulletSpawner" parent="Anchor" instance=ExtResource("15_hb7ln")]
-position = Vector2(-25, 22)
-rotation = 1.5708
-bullet_scene = ExtResource("16_33ax5")
-interval = 0.6
-firing_effect_scene = ExtResource("17_kaagi")
+position = Vector2(-24, 15)
+rotation = 1.74533
 is_active = false
+bullet_speed = 250.0
+cancellable_bullets = true
+firing_effect_scene = ExtResource("17_i6is1")
+burst_bullet_speed_increment = 60.0
+burst_angle_increment = -1.0
 
 [node name="RightBulletSpawner" parent="Anchor" instance=ExtResource("15_hb7ln")]
-position = Vector2(26, 22)
-rotation = 1.5708
-bullet_scene = ExtResource("16_33ax5")
-interval = 0.6
-firing_effect_scene = ExtResource("17_kaagi")
+position = Vector2(23, 15)
+rotation = 1.39626
 is_active = false
+bullet_speed = 250.0
+cancellable_bullets = true
+firing_effect_scene = ExtResource("17_i6is1")
+burst_bullet_speed_increment = 60.0
+burst_angle_increment = 1.0
 
 [node name="HurtboxComponent" type="Area2D" parent="Anchor"]
 collision_layer = 2

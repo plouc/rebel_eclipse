@@ -1,0 +1,102 @@
+[gd_scene load_steps=16 format=3 uid="uid://bi1168crjpw2"]
+
+[ext_resource type="Texture2D" uid="uid://cs3m8mwfxwbls" path="res://assets/player_bullet_00_level_00_impact.png" id="1_adgat"]
+[ext_resource type="Script" path="res://projectiles/bullets/player_bullet_impact.gd" id="1_f3fkr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nq1qc"]
+blend_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6kau"]
+atlas = ExtResource("1_adgat")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uajsi"]
+atlas = ExtResource("1_adgat")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oksuc"]
+atlas = ExtResource("1_adgat")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkfb0"]
+atlas = ExtResource("1_adgat")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqybg"]
+atlas = ExtResource("1_adgat")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7drl6"]
+atlas = ExtResource("1_adgat")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_witie"]
+atlas = ExtResource("1_adgat")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbhuq"]
+atlas = ExtResource("1_adgat")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mws4n"]
+atlas = ExtResource("1_adgat")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m4er"]
+atlas = ExtResource("1_adgat")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cp2p"]
+atlas = ExtResource("1_adgat")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t3qot"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6kau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uajsi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oksuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkfb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqybg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7drl6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_witie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbhuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mws4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5m4er")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cp2p")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="PlayerBulletImpact" type="Node2D"]
+script = ExtResource("1_f3fkr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_nq1qc")
+sprite_frames = SubResource("SpriteFrames_t3qot")
+autoplay = "default"
+frame = 10
+frame_progress = 1.0

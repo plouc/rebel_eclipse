@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbgq3ulgkdjtr"]
+
+[ext_resource type="Script" path="res://projectiles/homing_missile_demo.gd" id="1_3lsfl"]
+[ext_resource type="Texture2D" uid="uid://bt6e462yxwjls" path="res://assets/checker_small.png" id="1_dxtdg"]
+[ext_resource type="PackedScene" uid="uid://dr2h6v7lr0ndq" path="res://projectiles/homing_missile.tscn" id="2_3uv4x"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="2_pwobn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rxbpy"]
+radius = 146.003
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ka8x0"]
+radius = 106.231
+
+[node name="HomingMissileDemo" type="Node2D"]
+script = ExtResource("1_3lsfl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture_repeat = 2
+texture = ExtResource("1_dxtdg")
+centered = false
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 576, 576)
+
+[node name="SpawningTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="SpawnerComponent" type="Node2D" parent="Spawners"]
+position = Vector2(-40, 296)
+script = ExtResource("2_pwobn")
+scene = ExtResource("2_3uv4x")
+
+[node name="SpawnerComponent3" type="Node2D" parent="Spawners"]
+position = Vector2(-40, 224)
+script = ExtResource("2_pwobn")
+scene = ExtResource("2_3uv4x")
+
+[node name="SpawnerComponent4" type="Node2D" parent="Spawners"]
+position = Vector2(-40, 264)
+script = ExtResource("2_pwobn")
+scene = ExtResource("2_3uv4x")
+
+[node name="SpawnerComponent5" type="Node2D" parent="Spawners"]
+position = Vector2(-40, 344)
+script = ExtResource("2_pwobn")
+scene = ExtResource("2_3uv4x")
+
+[node name="SpawnerComponent2" type="Node2D" parent="Spawners"]
+position = Vector2(-40, 376)
+script = ExtResource("2_pwobn")
+scene = ExtResource("2_3uv4x")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(496, 288)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+shape = SubResource("CircleShape2D_rxbpy")
+
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2(392, 480)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+shape = SubResource("CircleShape2D_ka8x0")

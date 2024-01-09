@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqhx1l3ktwbyt"]
+
+[ext_resource type="Script" path="res://experiments/snake/snake.gd" id="1_b47nl"]
+[ext_resource type="PackedScene" uid="uid://duop6mr2xillt" path="res://experiments/snake/snake_head.tscn" id="2_g3pf6"]
+[ext_resource type="PackedScene" uid="uid://bdgt7a0jujxqp" path="res://experiments/snake/snake_part_a.tscn" id="3_no1kc"]
+
+[node name="Snake" type="Node2D"]
+script = ExtResource("1_b47nl")
+snake_parts = Array[PackedScene]([ExtResource("2_g3pf6"), ExtResource("3_no1kc"), ExtResource("3_no1kc"), ExtResource("3_no1kc"), ExtResource("3_no1kc"), ExtResource("3_no1kc")])
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+autostart = true

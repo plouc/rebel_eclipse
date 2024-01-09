@@ -1,0 +1,173 @@
+[gd_scene load_steps=18 format=3 uid="uid://bbu4uno27kaqr"]
+
+[ext_resource type="Script" path="res://projectiles/bullets/bullets_demo.gd" id="1_7ouu1"]
+[ext_resource type="Texture2D" uid="uid://crpjvy31e7fte" path="res://assets/level_00.png" id="1_ompmu"]
+[ext_resource type="Resource" uid="uid://t78c28dqsemr" path="res://game_stats.tres" id="2_qbmqn"]
+[ext_resource type="PackedScene" uid="uid://drrfuw4nbvkxk" path="res://projectiles/bullets/bullet_spawner.tscn" id="2_vm8ds"]
+[ext_resource type="PackedScene" uid="uid://d1pw1sk2jfa83" path="res://projectiles/muzzle_flash_00.tscn" id="3_4hsek"]
+[ext_resource type="PackedScene" uid="uid://d323frsh05j7h" path="res://enemies/fleet_A/fleet_a_ship_00/fleet_a_ship_00.tscn" id="4_lsoev"]
+[ext_resource type="PackedScene" uid="uid://djbyrj2odpdpu" path="res://enemies/fleet_A/fleet_a_ship_02/fleet_a_ship_02.tscn" id="4_vyfa0"]
+[ext_resource type="PackedScene" uid="uid://xuwlolvnfcpb" path="res://player_ship/ship_bullet_spawner.tscn" id="5_2kuj0"]
+[ext_resource type="PackedScene" uid="uid://d03bpn14pl2wc" path="res://projectiles/bullets/player_bullet.tscn" id="6_5wilm"]
+[ext_resource type="PackedScene" uid="uid://bossu8xv6yri4" path="res://projectiles/bullets/bullet_01.tscn" id="9_i0r56"]
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="11_hxdxg"]
+[ext_resource type="PackedScene" uid="uid://ci8evpk7jurqt" path="res://ui/demo_generic_menu.tscn" id="11_je5gx"]
+
+[sub_resource type="Curve2D" id="Curve2D_e72a2"]
+_data = {
+"points": PackedVector2Array(-75.1214, 47.1693, 75.1214, -47.1693, -21, 101, -154.811, -38.6607, 154.811, 38.6607, 265, 239, 35.511, 110.669, -35.511, -110.669, 526, 94, 62.8924, -39.5989, -62.8924, 39.5989, 324, 27, 52.9926, -87.3505, -52.9926, 87.3505, 168, 234, 159.56, 58.816, -159.56, -58.816, -50, 395)
+}
+point_count = 6
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5l1ho"]
+radius = 23.0
+height = 124.0
+
+[sub_resource type="Animation" id="Animation_vprct"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_emkoo"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i87u6"]
+_data = {
+"RESET": SubResource("Animation_vprct"),
+"new_animation": SubResource("Animation_emkoo")
+}
+
+[node name="BulletsDemo" type="Node2D"]
+script = ExtResource("1_7ouu1")
+game_stats = ExtResource("2_qbmqn")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, -4262)
+texture = ExtResource("1_ompmu")
+centered = false
+offset = Vector2(-48, -48)
+
+[node name="Coins" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Enemies" type="Node2D" parent="."]
+process_mode = 4
+
+[node name="FleetAShip02" parent="Enemies" instance=ExtResource("4_vyfa0")]
+position = Vector2(408, -37)
+
+[node name="FleetAShip00" parent="Enemies" instance=ExtResource("4_lsoev")]
+position = Vector2(488, -39)
+
+[node name="Spawners" type="Node2D" parent="."]
+position = Vector2(2.08165e-12, 560)
+
+[node name="ShipBulletSpawner" parent="Spawners" instance=ExtResource("5_2kuj0")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+rotation = -1.5708
+bullet_scene = ExtResource("6_5wilm")
+is_active = true
+
+[node name="BulletSpawner5" parent="Spawners" instance=ExtResource("2_vm8ds")]
+position = Vector2(186, -184)
+rotation = -1.5708
+bullet_scene = ExtResource("9_i0r56")
+bullet_speed = 160.0
+firing_effect_scene = ExtResource("3_4hsek")
+burst_amount = 4
+burst_spread = 270.0
+
+[node name="BulletSpawner4" parent="Spawners" instance=ExtResource("2_vm8ds")]
+position = Vector2(100, 2.08165e-12)
+rotation = -1.5708
+firing_effect_scene = ExtResource("3_4hsek")
+burst_amount = 5
+burst_spread = 30.0
+
+[node name="BulletSpawner" parent="Spawners" instance=ExtResource("2_vm8ds")]
+position = Vector2(150, 2.08165e-12)
+rotation = -1.5708
+firing_effect_scene = ExtResource("3_4hsek")
+
+[node name="BulletSpawner2" parent="Spawners" instance=ExtResource("2_vm8ds")]
+position = Vector2(200, 2.08165e-12)
+rotation = -1.5708
+firing_effect_scene = ExtResource("3_4hsek")
+
+[node name="BulletSpawner3" parent="Spawners" instance=ExtResource("2_vm8ds")]
+position = Vector2(250, 2.08165e-12)
+rotation = -1.5708
+firing_effect_scene = ExtResource("3_4hsek")
+burst_amount = 5
+burst_bullet_speed_increment = 50.0
+burst_angle_increment = 2.0
+
+[node name="BulletsImpacts" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="PlayerBullets" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="EnemiesBullets" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Explosions" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Hurtboxes" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="DemoGenericMenu" parent="CanvasLayer" instance=ExtResource("11_je5gx")]
+demo_name = "Bullets Playground"
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-18, 0)
+curve = SubResource("Curve2D_e72a2")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(429.075, 238.085)
+rotation = -0.295294
+progress = 496.972
+
+[node name="HurtboxComponent" type="Area2D" parent="Path2D/PathFollow2D"]
+position = Vector2(15.244, 9.57182)
+rotation = 0.560687
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("11_hxdxg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/HurtboxComponent"]
+rotation = 0.785398
+shape = SubResource("CapsuleShape2D_5l1ho")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D"]
+libraries = {
+"": SubResource("AnimationLibrary_i87u6")
+}
+autoplay = "new_animation"

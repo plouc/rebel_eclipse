@@ -8,7 +8,7 @@ const AUDIO_LOOP = preload("res://sounds/boss_loop.wav")
 @export var heads_deployment_initial_delay: float = 1.0
 @export var delay_between_head_deployment: float = 0.2
 @export var heads_deployment_shake_amount: float = 6.0
-@export var heads_deployment_shake_duration: float = 4.0
+@export var heads_deployment_shake_duration: float = 2.0
 @export var head_death_shake_amount: float = 10.0
 @export var head_death_shake_duration: float = 1.4
 
@@ -22,7 +22,7 @@ var rotation_by_difficulty = {
 	GameStats.Difficulty.EASY: 10.0,
 	GameStats.Difficulty.NORMAL: 20.0,
 	GameStats.Difficulty.HARD: 30.0,
-	GameStats.Difficulty.HELL: 40.0,
+	GameStats.Difficulty.HELL: 50.0,
 }
 
 var heads: Array[FleetAFinalBossHead] = []
@@ -30,6 +30,9 @@ var started_head_index: int = 0
 
 func _ready():
 	SoundPlayer.fade_transition("main", AUDIO_LOOP, 2.0, 5.0)
+	tree_exited.connect(func():
+		SoundPlayer.stop_named("main")
+	)
 
 	for child in heads_container.get_children():
 		heads.append(child as FleetAFinalBossHead)

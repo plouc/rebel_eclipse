@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://dn77pihvmj63u" path="res://assets/combo_bar_fill.png" id="1_mupmq"]
 [ext_resource type="Texture2D" uid="uid://crpjvy31e7fte" path="res://assets/level_00.png" id="2_g8xr4"]
-[ext_resource type="PackedScene" uid="uid://c4bje70uaiq8x" path="res://enemies/pink_enemy_screen_enter_spawner.tscn" id="3_ss2kq"]
-[ext_resource type="PackedScene" uid="uid://dd7aya0cfhpvb" path="res://enemies/yellow_enemy_screen_enter_spawner.tscn" id="5_u06ye"]
-[ext_resource type="PackedScene" uid="uid://cmmcq4kwg4sgr" path="res://enemies/turret_screen_enter_spawner.tscn" id="6_nl7d0"]
-[ext_resource type="PackedScene" uid="uid://d2yfyfytqfktr" path="res://enemies/green_enemy_screen_enter_spawner.tscn" id="7_kktk8"]
+[ext_resource type="PackedScene" uid="uid://c4bje70uaiq8x" path="res://enemies/old/pink_enemy_screen_enter_spawner.tscn" id="3_ss2kq"]
+[ext_resource type="PackedScene" uid="uid://dd7aya0cfhpvb" path="res://enemies/old/yellow_enemy_screen_enter_spawner.tscn" id="5_u06ye"]
+[ext_resource type="PackedScene" uid="uid://cmmcq4kwg4sgr" path="res://enemies/old/turret_screen_enter_spawner.tscn" id="6_nl7d0"]
+[ext_resource type="PackedScene" uid="uid://d2yfyfytqfktr" path="res://enemies/old/green_enemy_screen_enter_spawner.tscn" id="7_kktk8"]
 [ext_resource type="PackedScene" uid="uid://cr2ugwmpm6wdj" path="res://bonuses/power_up_satellites/power_up_satellites.tscn" id="8_pxoas"]
 [ext_resource type="PackedScene" uid="uid://b7wfunuogdhvf" path="res://bonuses/power_up_enter_screen_spawner.tscn" id="8_v1li7"]
 [ext_resource type="PackedScene" uid="uid://5ttbpnspk6d" path="res://bonuses/power_up_laser/power_up_laser.tscn" id="8_xxe21"]
@@ -545,12 +545,6 @@ power_up_scene = ExtResource("10_af1gn")
 
 [node name="FleetAShip00" type="Node2D" parent="."]
 
-[node name="FleetAShip00ScreenEnterSpawner" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(120, -44)
-
-[node name="FleetAShip00ScreenEnterSpawner2" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(456, -44)
-
 [node name="FleetAShip00ScreenEnterSpawner3" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(192, -128)
 
@@ -566,29 +560,14 @@ position = Vector2(136, -2372)
 [node name="FleetAShip00ScreenEnterSpawner17" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(431, -2372)
 
-[node name="FleetAShip00ScreenEnterSpawner18" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(200, -2460)
-
-[node name="FleetAShip00ScreenEnterSpawner19" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(287, -2508)
-
-[node name="FleetAShip00ScreenEnterSpawner32" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(288, -2828)
-
 [node name="FleetAShip00ScreenEnterSpawner34" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(208, -2876)
-
-[node name="FleetAShip00ScreenEnterSpawner37" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(128, -2924)
 
 [node name="FleetAShip00ScreenEnterSpawner38" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(48, -2972)
 
 [node name="FleetAShip00ScreenEnterSpawner33" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(368, -2876)
-
-[node name="FleetAShip00ScreenEnterSpawner35" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(448, -2924)
 
 [node name="FleetAShip00ScreenEnterSpawner39" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(128, -3020)
@@ -599,23 +578,14 @@ position = Vector2(448, -3020)
 [node name="FleetAShip00ScreenEnterSpawner36" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(528, -2972)
 
-[node name="FleetAShip00ScreenEnterSpawner48" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(288, -5364)
-
 [node name="FleetAShip00ScreenEnterSpawner49" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(208, -5412)
-
-[node name="FleetAShip00ScreenEnterSpawner50" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(128, -5460)
 
 [node name="FleetAShip00ScreenEnterSpawner51" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(48, -5508)
 
 [node name="FleetAShip00ScreenEnterSpawner52" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(368, -5412)
-
-[node name="FleetAShip00ScreenEnterSpawner53" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(448, -5460)
 
 [node name="FleetAShip00ScreenEnterSpawner54" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(128, -5556)
@@ -625,9 +595,6 @@ position = Vector2(448, -5556)
 
 [node name="FleetAShip00ScreenEnterSpawner56" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(528, -5508)
-
-[node name="FleetAShip00ScreenEnterSpawner41" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(288, -1900)
 
 [node name="FleetAShip00ScreenEnterSpawner42" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(208, -1948)
@@ -647,9 +614,6 @@ position = Vector2(448, -1996)
 [node name="FleetAShip00ScreenEnterSpawner47" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(528, -2044)
 
-[node name="FleetAShip00ScreenEnterSpawner20" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(367, -2460)
-
 [node name="FleetAShip00ScreenEnterSpawner24" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(136, -4428)
 
@@ -658,9 +622,6 @@ position = Vector2(431, -4428)
 
 [node name="FleetAShip00ScreenEnterSpawner26" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(200, -4516)
-
-[node name="FleetAShip00ScreenEnterSpawner27" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(287, -4564)
 
 [node name="FleetAShip00ScreenEnterSpawner28" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(367, -4516)
@@ -695,15 +656,6 @@ position = Vector2(504, -1270)
 [node name="FleetAShip00ScreenEnterSpawner30" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(368, -1270)
 
-[node name="FleetAShip00ScreenEnterSpawner13" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(192, -1756)
-
-[node name="FleetAShip00ScreenEnterSpawner14" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(384, -1756)
-
-[node name="FleetAShip00ScreenEnterSpawner15" parent="FleetAShip00" instance=ExtResource("11_todhd")]
-position = Vector2(288, -1800)
-
 [node name="FleetAShip00ScreenEnterSpawner21" parent="FleetAShip00" instance=ExtResource("11_todhd")]
 position = Vector2(216, -3740)
 
@@ -718,26 +670,14 @@ position = Vector2(288, -3792)
 [node name="FleetAShip01ScreenEnterSpawner" parent="FleetAShip01" instance=ExtResource("12_btyx8")]
 position = Vector2(288, -2096)
 
-[node name="FleetAShip01ScreenEnterSpawner2" parent="FleetAShip01" instance=ExtResource("12_btyx8")]
-position = Vector2(108, -3824)
-
 [node name="FleetAShip01ScreenEnterSpawner7" parent="FleetAShip01" instance=ExtResource("12_btyx8")]
-position = Vector2(288, -5888)
-
-[node name="FleetAShip01ScreenEnterSpawner9" parent="FleetAShip01" instance=ExtResource("12_btyx8")]
-position = Vector2(80, -5792)
-
-[node name="FleetAShip01ScreenEnterSpawner8" parent="FleetAShip01" instance=ExtResource("12_btyx8")]
-position = Vector2(496, -5792)
+position = Vector2(468, -5888)
 
 [node name="FleetAShip01ScreenEnterSpawner3" parent="FleetAShip01" instance=ExtResource("12_btyx8")]
 position = Vector2(491, -3824)
 
 [node name="FleetAShip01ScreenEnterSpawner5" parent="FleetAShip01" instance=ExtResource("12_btyx8")]
 position = Vector2(108, -5256)
-
-[node name="FleetAShip01ScreenEnterSpawner6" parent="FleetAShip01" instance=ExtResource("12_btyx8")]
-position = Vector2(491, -5256)
 
 [node name="FleetAShip01ScreenEnterSpawner4" parent="FleetAShip01" instance=ExtResource("12_btyx8")]
 position = Vector2(288, -4744)
@@ -1090,4 +1030,4 @@ position = Vector2(0, -6801)
 
 [node name="FleetAFinalBossScreenEnterSpawner2" parent="." instance=ExtResource("15_6macy")]
 visible = false
-position = Vector2(2.08165e-12, -366)
+position = Vector2(2.08165e-12, -1088)
